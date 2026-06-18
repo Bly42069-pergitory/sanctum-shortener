@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Master Sanctum Restoration · Protecting What Endures</title>
+    <meta name="description" content="Master Sanctum Restoration — premium stone and marble restoration. Short links for quotes, projects, and resources." />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = { theme: { extend: { colors: { marble: { dark: "#1c1c1e", mid: "#2c2c2e", light: "#3a3a3c" }, gold: { DEFAULT: "#c9a227", light: "#e8d48b", dark: "#8b6914" }, stone: { DEFAULT: "#e8e6e3", muted: "#9a9690" } }, fontFamily: { display: ["Cormorant Garamond", "Georgia", "serif"], sans: ["Inter", "system-ui", "sans-serif"] } } } };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      body { background: radial-gradient(ellipse at 50% 0%, #3a3a3c 0%, #1c1c1e 55%, #121214 100%); }
+      .marble-grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"); }
+      .gold-line { background: linear-gradient(90deg, transparent, #c9a227, #e8d48b, #c9a227, transparent); height: 1px; }
+      .shield-glow { filter: drop-shadow(0 0 24px rgba(201, 162, 39, 0.25)); }
+      .link-card { background: linear-gradient(135deg, rgba(44, 44, 46, 0.8) 0%, rgba(28, 28, 30, 0.9) 100%); border: 1px solid rgba(201, 162, 39, 0.2); }
+      .link-card:hover { border-color: rgba(201, 162, 39, 0.5); background: linear-gradient(135deg, rgba(58, 58, 60, 0.6) 0%, rgba(28, 28, 30, 0.95) 100%); }
+    </style>
+  </head>
+  <body class="min-h-screen text-stone font-sans antialiased marble-grain">
+    <main class="min-h-screen flex flex-col items-center justify-center px-6 py-16">
+      <header class="text-center mb-12">
+        <div class="shield-glow mb-8">
+          <svg class="mx-auto" width="96" height="96" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+            <defs><linearGradient id="gold-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#e8d48b"/><stop offset="50%" stop-color="#c9a227"/><stop offset="100%" stop-color="#8b6914"/></linearGradient></defs>
+            <path d="M32 4 L56 14 L56 34 C56 48 44 58 32 60 C20 58 8 48 8 34 L8 14 Z" fill="#2c2c2e" stroke="url(#gold-grad)" stroke-width="2"/>
+            <text x="32" y="38" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="700" fill="url(#gold-grad)">MSR</text>
+          </svg>
+        </div>
+        <h1 class="font-display text-4xl sm:text-5xl text-gold-light font-semibold tracking-wide leading-tight">Master Sanctum Restoration</h1>
+        <div class="gold-line w-48 mx-auto my-5"></div>
+        <p class="font-display text-xl text-stone-muted tracking-[0.2em] uppercase">Protecting What Endures</p>
+      </header>
+      <section class="w-full max-w-lg mb-12">
+        <p class="text-center text-stone-muted text-sm leading-relaxed mb-8">Stone, marble, and architectural surfaces restored with precision and permanence. Use the short links below — or append any configured slug to this URL.</p>
+        <div id="links-grid" class="space-y-3"><p class="text-center text-stone-muted/60 text-sm animate-pulse">Loading links…</p></div>
+      </section>
+      <footer class="text-center"><p class="text-stone-muted/50 text-xs tracking-widest uppercase">Craft · Conservation · Continuity</p></footer>
+    </main>
+    <script>
+      (function () {
+        var grid = document.getElementById("links-grid");
+        function getBasePath() { var path = window.location.pathname; if (path.endsWith("/")) return path; if (path.endsWith("index.html")) return path.replace(/index\.html$/, ""); return path + "/"; }
+        function isSlugEntry(key, value) { if (key.charAt(0) === "_") return false; if (typeof value === "string") return /^https?:\/\//.test(value); if (typeof value === "object" && value && value.url) return /^https?:\/\//.test(value.url); return false; }
+        function getLabel(key, value) { if (typeof value === "object" && value.title) return value.title; return key.charAt(0).toUpperCase() + key.slice(1); }
+        function getUrl(value) { return typeof value === "string" ? value : value.url; }
+        function renderLinks(links) {
+          var entries = Object.keys(links).filter(function (k) { return isSlugEntry(k, links[k]); });
+          if (!entries.length) { grid.innerHTML = '<p class="text-center text-stone-muted text-sm">No links configured yet. Edit <code class="text-gold/80">links.json</code>.</p>'; return; }
+          var base = getBasePath();
+          grid.innerHTML = entries.map(function (key) {
+            var dest = getUrl(links[key]); var short = base + key;
+            return '<a href="' + short + '" class="link-card block px-5 py-4 rounded-sm transition-all duration-300 group"><div class="flex items-center justify-between gap-4"><div class="min-w-0"><p class="font-display text-lg text-gold-light group-hover:text-gold transition-colors">/' + key + '</p><p class="text-stone-muted text-xs truncate mt-0.5">' + dest + '</p></div><span class="text-gold/40 group-hover:text-gold text-xl shrink-0" aria-hidden="true">→</span></div></a>';
+          }).join("");
+        }
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () { try { renderLinks(JSON.parse(xhr.response)); } catch (e) { grid.innerHTML = '<p class="text-center text-stone-muted text-sm">Could not load links.json</p>'; } };
+        xhr.onerror = function () { grid.innerHTML = '<p class="text-center text-stone-muted text-sm">Could not load links.json</p>'; };
+        xhr.open("GET", "links.json"); xhr.send();
+      })();
+    </script>
+  </body>
+</html>
