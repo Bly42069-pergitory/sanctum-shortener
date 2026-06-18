@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Redirecting… · Master Sanctum Restoration</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              marble: { dark: "#1c1c1e", mid: "#2c2c2e", light: "#3a3a3c" },
+              gold: { DEFAULT: "#c9a227", light: "#e8d48b", dark: "#8b6914" },
+              stone: { DEFAULT: "#e8e6e3", muted: "#9a9690" },
+            },
+            fontFamily: {
+              display: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        background: radial-gradient(ellipse at 50% 0%, #3a3a3c 0%, #1c1c1e 55%, #121214 100%);
+      }
+      .marble-grain {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      }
+      .gold-line {
+        background: linear-gradient(90deg, transparent, #c9a227, #e8d48b, #c9a227, transparent);
+        height: 1px;
+      }
+      @keyframes pulse-ring {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.05); }
+      }
+      .pulse-ring { animation: pulse-ring 2s ease-in-out infinite; }
+    </style>
+    <script>
+      var PATH_SEGMENTS_TO_SKIP = 1;
+      var LINKS_JSON_PATH = "links.json";
+      var SITE_NAME = "Master Sanctum Restoration";
+      function isUrl(url) {
+        return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,24}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)+$/.test(url);
+      }
+      function getPathSegments() { return window.location.pathname.split("/").filter(Boolean); }
+      function getSlug() { var segments = getPathSegments(); return segments[PATH_SEGMENTS_TO_SKIP] || ""; }
+      function getSiteBasePath() {
+        var segments = getPathSegments();
+        if (PATH_SEGMENTS_TO_SKIP === 0) return "/";
+        var base = segments.slice(0, PATH_SEGMENTS_TO_SKIP);
+        return base.length ? "/" + base.join("/") + "/" : "/";
+      }
+      function getHomepage() {
+        var loc = window.location;
+        return loc.protocol + "//" + loc.hostname + (loc.port ? ":" + loc.port : "") + getSiteBasePath();
+      }
+      function getLinksJsonUrl() {
+        var base = getSiteBasePath();
+        if (base === "/") return "/" + LINKS_JSON_PATH;
+        return base + LINKS_JSON_PATH;
+      }
+      function resolveDestination(links, slug) {
+        if (!slug || !links) return null;
+        var value = links[slug];
+        if (!value) return null;
+        if (typeof value === "string") return isUrl(value) ? value : null;
+        if (typeof value === "object" && value.url && isUrl(value.url)) return value.url;
+        return null;
+      }
+      function showMiss(slug) {
+        document.getElementById("redirect-state").classList.add("hidden");
+        document.getElementById("miss-state").classList.remove("hidden");
+        var slugEl = document.getElementById("miss-slug");
+        if (slugEl) slugEl.textContent = slug ? "/" + slug : "(empty)";
+      }
+      function redirect() {
+        var slug = getSlug();
+        var homepage = getHomepage();
+        if (!slug) { window.location.replace(homepage); return; }
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          try {
+            var links = JSON.parse(xhr.response);
+            var destination = resolveDestination(links, slug);
+            if (destination) {
+              var destHost = document.createElement("a");
+              destHost.href = destination;
+              if (destHost.hostname === window.location.hostname) { showMiss(slug); return; }
+              window.location.replace(destination);
+            } else { showMiss(slug); }
+          } catch (e) { showMiss(slug); }
+        };
+        xhr.onerror = function () { showMiss(slug); };
+        xhr.open("GET", getLinksJsonUrl());
+        xhr.send();
+      }
+      document.addEventListener("DOMContentLoaded", redirect);
+    </script>
+  </head>
+  <body class="min-h-screen text-stone font-sans antialiased marble-grain">
+    <div id="redirect-state" class="min-h-screen flex flex-col items-center justify-center px-6">
+      <div class="pulse-ring mb-8">
+        <svg width="72" height="72" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M32 4 L56 14 L56 34 C56 48 44 58 32 60 C20 58 8 48 8 34 L8 14 Z" fill="#2c2c2e" stroke="#c9a227" stroke-width="2"/>
+          <text x="32" y="38" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#c9a227">MSR</text>
+        </svg>
+      </div>
+      <p class="font-display text-2xl text-gold-light tracking-wide">Redirecting…</p>
+      <p class="mt-2 text-stone-muted text-sm">Master Sanctum Restoration</p>
+    </div>
+    <div id="miss-state" class="hidden min-h-screen flex flex-col items-center justify-center px-6">
+      <div class="w-full max-w-md text-center">
+        <svg class="mx-auto mb-6" width="80" height="80" viewBox="0 0 64 64" fill="none" aria-hidden="true">
+          <path d="M32 4 L56 14 L56 34 C56 48 44 58 32 60 C20 58 8 48 8 34 L8 14 Z" fill="#2c2c2e" stroke="#c9a227" stroke-width="2"/>
+          <text x="32" y="38" text-anchor="middle" font-family="Georgia, serif" font-size="18" font-weight="700" fill="#c9a227">MSR</text>
+        </svg>
+        <h1 class="font-display text-3xl text-gold-light font-semibold tracking-wide">Link Not Found</h1>
+        <div class="gold-line w-32 mx-auto my-4"></div>
+        <p class="text-stone-muted text-sm mb-1">No destination configured for</p>
+        <p id="miss-slug" class="font-mono text-gold text-lg mb-6">/…</p>
+        <p class="text-stone-muted text-sm leading-relaxed mb-8">This short link does not exist in <code class="text-gold/80">links.json</code>. Edit the file in your repository to add it.</p>
+        <a id="home-link" href="/" class="inline-block px-8 py-3 border border-gold/40 text-gold-light font-display text-lg tracking-wider hover:bg-gold/10 hover:border-gold transition-colors duration-300">Return Home</a>
+      </div>
+      <p class="mt-16 text-stone-muted/60 text-xs tracking-widest uppercase">Protecting What Endures</p>
+    </div>
+    <script>document.getElementById("home-link").href = getHomepage();</script>
+  </body>
+</html>
