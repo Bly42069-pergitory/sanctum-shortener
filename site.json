@@ -1,4 +1,8 @@
 {
+  "_meta": {
+    "updated": "2026-06-18",
+    "note": "business.url normalized at runtime from window.location"
+  },
   "business": {
     "name": "Master Sanctum Restoration",
     "tagline": "Protecting What Endures",

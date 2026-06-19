@@ -72,6 +72,36 @@
     return getBasePath() + slug.replace(/^\//, "");
   }
 
+  function canonicalSiteRoot() {
+    var base = getBasePath();
+    var origin = window.location.origin.replace(/\/$/, "");
+    if (base === "/") return origin;
+    return origin + base.replace(/\/$/, "");
+  }
+
+  function normalizeBusinessUrls(data) {
+    if (!data || !data.business) return data;
+    var root = canonicalSiteRoot();
+    var b = data.business;
+    b.url = root;
+    b.logo = root + "/assets/logo-msr.webp";
+    b.image = root + "/assets/guardian-marble.webp";
+    if (data.gatekeeper) data.gatekeeper.intakeUrl = root + "/intake";
+    return data;
+  }
+
+  function syncSocialMeta(b) {
+    var setMeta = function (sel, val) {
+      var el = document.querySelector(sel);
+      if (el && val) el.setAttribute("content", val);
+    };
+    setMeta('meta[property="og:url"]', b.url + "/");
+    setMeta('meta[property="og:image"]', b.image);
+    setMeta('meta[name="twitter:image"]', b.image);
+    var canon = document.querySelector('link[rel="canonical"]');
+    if (canon && b.url) canon.setAttribute("href", b.url + "/");
+  }
+
   function injectSchema(data) {
     var b = data.business;
     var ar = data.aggregateRating;
@@ -517,7 +547,9 @@
   }
 
   function initSite(data) {
+    data = normalizeBusinessUrls(data);
     siteData = data;
+    syncSocialMeta(data.business);
     injectSchema(data);
     renderTrustBar(data);
     renderMarmorax(data);

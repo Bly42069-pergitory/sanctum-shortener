@@ -11,3 +11,7 @@ push-args*.json
 index-only.json
 mcp-invoke.txt
 *.backup
+_push_args_only.json
+_push_result.json
+_deploy_html.json
+_deploy_githubio.json
