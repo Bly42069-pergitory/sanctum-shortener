@@ -37,3 +37,8 @@ marmorax:
   url: "#warden"
   title: Meet Marmorax
   description: The Eternal Warden of Sanctum — lore and legend
+
+intake:
+  url: https://sanctum-shortener.is-a.dev/assets/MSR-Client-Intake-Questionnaire.docx
+  title: Client Intake Questionnaire
+  description: Download the Gatekeeper intake form for your restoration project

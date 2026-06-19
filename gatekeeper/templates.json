@@ -1,0 +1,46 @@
+{
+  "_meta": {
+    "agent": "Master-Sanctum-Gatekeeper",
+    "version": "1.0",
+    "updated": "2026-06-19"
+  },
+  "hotLead": {
+    "id": "hot-lead",
+    "name": "Hot Lead — Ready to Book",
+    "subject": "Your marble restoration — next step: site assessment in {{city}}",
+    "body": "Hi {{name}},\n\nThank you for reaching out to Master Sanctum Restoration. From what you've described — {{stoneType}}, {{primaryIssue}}, and your {{timeline}} — this is exactly the kind of commission we assess and restore under conservation protocol.\n\nWhat I understood:\n• Surface: {{surface}}\n• Location: {{location}}\n• Main concern: {{primaryIssue}}\n• Your goal: {{goal}}\n\nRecommended next step: a brief on-site assessment (typically 30–45 minutes). We document substrate, veining, prior repairs, and exposure before any tool touches stone.\n\nTo confirm your visit, I need:\n1. Best date/time windows (2–3 options)\n2. Property address and access notes\n3. Photos of the surface if you have them (wide + close-up of worst areas)\n\nOnce confirmed, you'll receive a calendar invite and our intake questionnaire. After the visit, you'll get a written scope and estimate — no surprise shortcuts, no haste.\n\nWould {{slot1}} or {{slot2}} work for you?\n\nProtecting What Endures,\n{{gatekeeperName}}\nMaster Sanctum Restoration"
+  },
+  "coldInquiry": {
+    "id": "cold-inquiry",
+    "name": "Cold Inquiry — Education First",
+    "subject": "Re: your stone restoration question — happy to help",
+    "body": "Hi {{name}},\n\nThanks for contacting Master Sanctum. Even if you're still in the research phase, I'm glad to point you in the right direction.\n\nQuick context: most stone issues (etching, dullness, staining, minor scratches) can often be reversed with proper honing and sealing — but the right protocol depends on the stone type and what's already been done to it. Guessing from photos alone can lead to the wrong approach.\n\nA few questions so I can give you useful guidance:\n1. What type of stone is it? (marble, granite, travertine, etc.)\n2. Where is it located? (kitchen, bath, floor, exterior)\n3. What's bothering you most — appearance, feel, or a specific stain/etch?\n4. Approximate size or a photo of the area?\n\nNo pressure to book today. If it makes sense after that, we can schedule a no-obligation assessment. If it's a simple maintenance question, I'll tell you honestly.\n\nWhat would be most helpful — a quick call or email back with those details?\n\nBest,\n{{gatekeeperName}}\nMaster Sanctum Restoration"
+  },
+  "priceShopper": {
+    "id": "price-shopper",
+    "name": "Price Shopper — Set Expectations",
+    "subject": "Re: ballpark pricing for stone restoration",
+    "body": "Hi {{name}},\n\nI appreciate you asking upfront — restoration pricing isn't one-size-fits-all, and I want to give you an honest range instead of a number that misleads you.\n\nWhat drives cost:\n• Stone type and finish level (honed vs. polished)\n• Square footage and edge detail\n• Severity (light etch vs. deep damage, cracks, lippage)\n• Access, occupancy, and seal/cure time\n• Whether prior repairs need correction first\n\nTypical ranges (Florida residential, for context only — not a quote):\n• Single vanity / small countertop: often $800–$2,500\n• Full kitchen counter run: often $2,500–$6,500\n• Floor or multi-room architectural work: custom scope\n\nTo earn a real number, we start with assessment — documented condition, written scope, then estimate. That protects you from paying for work you don't need, or missing damage that would fail later.\n\nIf you're comparing bids, ask each provider:\n• Do they assess before quoting?\n• Hand-finish or machine-only pass?\n• What sealer and maintenance protocol do they document?\n\nIf you'd like a firm range for your project, send stone type, approximate size, 2–3 photos, and city — I'll tell you whether we're in range and if a visit makes sense.\n\nFair enough?\n\n{{gatekeeperName}}\nMaster Sanctum Restoration"
+  },
+  "siteVisitConfirmation": {
+    "id": "site-visit-confirmation",
+    "name": "Site Visit Confirmation",
+    "subject": "Confirmed — Master Sanctum site assessment · {{date}} at {{time}}",
+    "body": "Hi {{name}},\n\nYour on-site stone assessment is confirmed.\n\nDate: {{date}}\nTime: {{time}} {{timezone}}\nDuration: ~30–45 minutes\nAddress: {{address}}\nAssessor: {{assessor}}\nGatekeeper contact: {{phone}} · {{email}}\n\nWhat we'll do on site:\n• Document stone type, finish, and condition\n• Note etching, staining, cracks, lippage, and prior repairs\n• Discuss timeline, access, and realistic restoration outcomes\n• Outline next steps for written scope and estimate\n\nPlease before we arrive:\n• Clear the work area as much as practical\n• Have photos of damage handy if you took any earlier\n• Note any HOA, building, or pet access requirements\n\nIf you need to reschedule: reply or call at least 24 hours ahead.\n\nAttached: Client Intake Questionnaire (if not yet returned)\n\nWe look forward to meeting you and assessing what the stone remembers.\n\nProtecting What Endures,\n{{gatekeeperName}}\nMaster Sanctum Restoration\nGuarded by Marmorax"
+  },
+  "discoveryQuestions": [
+    "What surfaces need restoration? (countertop, vanity, floor, shower, monument, exterior)",
+    "Stone type — marble, granite, limestone, travertine, or unknown?",
+    "Primary concerns — etching, stains, scratches, dullness, cracks, lippage?",
+    "Approximate square footage or dimensions?",
+    "Property city and access notes?",
+    "Desired timeline or hard deadline?",
+    "Budget range (optional — helps scope correctly)?",
+    "Can you provide photos? (wide shot + worst-area close-up)"
+  ],
+  "routing": {
+    "qualifiedHandoff": "Architect agent",
+    "assessmentRequired": true,
+    "defaultCta": "/quote"
+  }
+}
