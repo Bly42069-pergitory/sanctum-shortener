@@ -67,7 +67,7 @@
       }
     }
     if (slug === "marmorax") return "#warden";
-    if (slug === "intake") return getBasePath() + "assets/MSR-Client-Intake-Questionnaire.docx";
+    if (slug === "intake") return getBasePath() + "intake.html";
     return getBasePath() + slug.replace(/^\//, "");
   }
 
@@ -364,6 +364,38 @@
     }).join("");
   }
 
+  function renderGatekeeper(data) {
+    var gk = data.gatekeeper;
+    if (!gk) return;
+    var headline = document.getElementById("gatekeeper-headline");
+    if (headline && gk.headline) headline.textContent = gk.headline;
+    var sub = document.getElementById("gatekeeper-subheadline");
+    if (sub && gk.subheadline) sub.textContent = gk.subheadline;
+    var teaser = document.getElementById("gatekeeper-teaser");
+    if (teaser && gk.teaser) teaser.textContent = gk.teaser;
+    var steps = document.getElementById("gatekeeper-steps");
+    if (steps && gk.steps) {
+      steps.innerHTML = gk.steps.map(function (s, i) {
+        return '<article class="reveal reveal-d' + (i + 1) + ' gatekeeper-step rounded-sm p-6 sm:p-7">' +
+          '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">' + esc(s.numeral) + ' · ' + esc(s.title) + '</p>' +
+          '<h3 class="font-display text-xl text-gold-light font-semibold mb-2">' + esc(s.title) + '</h3>' +
+          '<p class="text-stone-soft text-sm leading-relaxed">' + esc(s.desc) + '</p></article>';
+      }).join("");
+    }
+    var questions = document.getElementById("gatekeeper-questions");
+    if (questions && gk.discoveryQuestions) {
+      questions.innerHTML = gk.discoveryQuestions.map(function (q, i) {
+        return '<li class="discovery-item flex gap-3 py-3 text-stone-soft">' +
+          '<span class="text-gold/70 font-mono text-xs shrink-0 pt-0.5">' + String(i + 1).padStart(2, "0") + '</span>' +
+          '<span>' + esc(q) + '</span></li>';
+      }).join("");
+    }
+    var ctaIntake = document.getElementById("gatekeeper-cta-intake");
+    if (ctaIntake && gk.ctaIntake) ctaIntake.textContent = gk.ctaIntake;
+    var ctaQuote = document.getElementById("gatekeeper-cta-quote");
+    if (ctaQuote && gk.ctaQuote) ctaQuote.textContent = gk.ctaQuote;
+  }
+
   /* --- gallery --- */
   function isSlugEntry(k, v) {
     if (k.charAt(0) === "_") return false;
@@ -484,6 +516,7 @@
     renderReviews(data);
     renderFaqs(data);
     renderGuarantees(data);
+    renderGatekeeper(data);
     applyCallLinks();
     applyQuoteLinks();
     initReveal();
@@ -546,7 +579,7 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") { closeLightbox(); closeLegendModal(); }
     });
-    if (location.hash === "#gallery" || location.hash === "#sliders" || location.hash === "#warden" || location.hash === "#legend") {
+    if (location.hash === "#gallery" || location.hash === "#sliders" || location.hash === "#warden" || location.hash === "#legend" || location.hash === "#gatekeeper") {
       setTimeout(function () {
         var t = document.querySelector(location.hash);
         if (t) t.scrollIntoView({ behavior: "smooth" });
