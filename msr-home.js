@@ -93,8 +93,17 @@
     el.textContent = locality + " · Request callback via quote form";
   }
 
+  function suggestedTemplateKey(lead) {
+    var qual = scoreLead(lead);
+    if (qual.tier === "Hot") return "hotLead";
+    if (qual.tier === "Warm") return "coldInquiry";
+    if (/price|cost|how much|ballpark|\$/i.test(lead.message || "")) return "priceShopper";
+    return "coldInquiry";
+  }
+
   function formatLeadSummary(lead) {
     var root = canonicalSiteRoot();
+    var qual = scoreLead(lead);
     return [
       "Master Sanctum Restoration — Gatekeeper Lead",
       "----------------------------------------",
@@ -102,6 +111,8 @@
       lead.phone ? "Phone: " + lead.phone : "",
       lead.email ? "Email: " + lead.email : "",
       lead.message ? "Project: " + lead.message : "",
+      "Qualification: " + qual.tier + " (" + qual.score + "%)",
+      "Suggested template: " + suggestedTemplateKey(lead),
       "Source: " + root + "/#quote",
       "Submitted: " + (lead.ts ? new Date(lead.ts).toLocaleString() : "recent"),
       "",
@@ -961,7 +972,7 @@
       '<div class="gatekeeper-panel rounded-sm p-5 sm:p-6 text-left border border-gold/30">' +
       '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">Pending Lead — Gatekeeper Queue</p>' +
       '<p class="font-display text-xl text-gold-light font-semibold mb-1">' + esc(lead.name) + '</p>' +
-      '<p class="text-stone-muted text-xs mb-2">Qualification: <span class="text-gold-light/90 font-medium">' + esc(qual.tier) + '</span> (' + qual.score + '%)</p>' +
+      '<p class="text-stone-muted text-xs mb-2">Qualification: <span class="text-gold-light/90 font-medium">' + esc(qual.tier) + '</span> (' + qual.score + '%) · Suggested: <button type="button" id="gk-scroll-template" class="text-gold-light/80 hover:text-gold-light underline underline-offset-2">' + esc(suggestedTemplateKey(lead)) + '</button></p>' +
       '<ul class="text-stone-soft text-sm space-y-1">' +
       (lead.phone ? '<li>Phone: ' + esc(lead.phone) + '</li>' : '') +
       (lead.email ? '<li>Email: ' + esc(lead.email) + '</li>' : '') +
@@ -982,6 +993,7 @@
     var downloadBtn = document.getElementById("gk-download-lead");
     var downloadJsonBtn = document.getElementById("gk-download-json");
     var draftBtn = document.getElementById("gk-draft-hot");
+    var scrollTpl = document.getElementById("gk-scroll-template");
     var shareBtn = document.getElementById("gk-share-lead");
     var dismissBtn = document.getElementById("gk-dismiss-lead");
     var statusEl = document.getElementById("gk-copy-status");
@@ -1007,6 +1019,15 @@
       downloadJsonBtn.addEventListener("click", function () {
         downloadLeadJson(lead);
         showStatus("Lead JSON downloaded.");
+      });
+    }
+    if (scrollTpl) {
+      scrollTpl.addEventListener("click", function () {
+        var tplWrap = document.getElementById("gatekeeper-templates");
+        if (tplWrap) {
+          tplWrap.classList.remove("hidden");
+          tplWrap.scrollIntoView({ behavior: "smooth", block: "start" });
+        }
       });
     }
     if (draftBtn) {
