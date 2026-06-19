@@ -451,6 +451,50 @@
       var swflNote = document.getElementById("gatekeeper-swfl-note");
       if (swflNote && gk.serviceAreaNote) swflNote.textContent = gk.serviceAreaNote;
     }
+    renderPendingQuoteLead();
+  }
+
+  function renderPendingQuoteLead() {
+    var section = document.getElementById("gatekeeper");
+    if (!section) return;
+    var mount = document.getElementById("gatekeeper-pending");
+    if (!mount) {
+      mount = document.createElement("div");
+      mount.id = "gatekeeper-pending";
+      mount.className = "hidden reveal max-w-2xl mx-auto mb-8 px-0";
+      var steps = document.getElementById("gatekeeper-steps");
+      var inner = section.querySelector(".max-w-6xl");
+      if (inner && steps) inner.insertBefore(mount, steps);
+    }
+    var raw;
+    try { raw = sessionStorage.getItem("msr-quote-pending"); } catch (e) { raw = null; }
+    if (!raw) {
+      mount.classList.add("hidden");
+      return;
+    }
+    var lead;
+    try { lead = JSON.parse(raw); } catch (e) { return; }
+    if (!lead || !lead.name) {
+      mount.classList.add("hidden");
+      return;
+    }
+    if (lead.ts && Date.now() - lead.ts > 86400000) {
+      try { sessionStorage.removeItem("msr-quote-pending"); } catch (err) {}
+      mount.classList.add("hidden");
+      return;
+    }
+    mount.classList.remove("hidden");
+    mount.innerHTML =
+      '<div class="gatekeeper-panel rounded-sm p-5 sm:p-6 text-left border border-gold/30">' +
+      '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">Pending Lead — Gatekeeper Queue</p>' +
+      '<p class="font-display text-xl text-gold-light font-semibold mb-2">' + esc(lead.name) + '</p>' +
+      '<ul class="text-stone-soft text-sm space-y-1">' +
+      (lead.phone ? '<li>Phone: ' + esc(lead.phone) + '</li>' : '') +
+      (lead.email ? '<li>Email: ' + esc(lead.email) + '</li>' : '') +
+      (lead.message ? '<li class="pt-2 text-stone-muted leading-relaxed">' + esc(lead.message) + '</li>' : '') +
+      '</ul>' +
+      '<p class="text-stone-muted text-xs mt-4 italic">Next: download the intake questionnaire. When phone/email are configured, this lead routes to outbound follow-up automatically.</p>' +
+      '</div>';
   }
 
   /* --- gallery --- */
@@ -624,6 +668,7 @@
         var target = document.querySelector(dest) || document.getElementById("gatekeeper");
         if (target) target.scrollIntoView({ behavior: "smooth" });
         showQuoteConfirmation(form);
+        renderPendingQuoteLead();
         return;
       }
 

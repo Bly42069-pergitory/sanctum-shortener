@@ -1,7 +1,8 @@
 {
   "_meta": {
     "updated": "2026-06-19",
-    "note": "business.url normalized at runtime from window.location"
+    "note": "business.url normalized at runtime from window.location",
+    "contactPending": "Set business.phone, phoneDisplay, and email to enable Call Now + mailto quote routing"
   },
   "business": {
     "name": "Master Sanctum Restoration",
