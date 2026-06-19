@@ -206,12 +206,41 @@
     renderLeadArchive();
   }
 
+  function scoreLead(lead) {
+    if (!lead) return { score: 0, tier: "Cold" };
+    var score = 0;
+    if (lead.name) score += 10;
+    if (lead.phone) score += 25;
+    if (lead.email) score += 15;
+    if (lead.message) {
+      if (lead.message.length > 30) score += 20;
+      if (lead.message.length > 80) score += 10;
+      if (/marble|granite|travertine|limestone|counter|vanity|etch|stain|north port|venice|swfl|sarasota|fort myers/i.test(lead.message)) score += 20;
+    }
+    score = Math.min(100, score);
+    var tier = score >= 75 ? "Hot" : score >= 50 ? "Warm" : score >= 25 ? "Developing" : "Cold";
+    return { score: score, tier: tier };
+  }
+
   function updatePendingLeadBadge() {
-    var on = !!getPendingLead();
+    var lead = getPendingLead();
+    var on = !!lead;
     ["nav-pending-badge", "nav-pending-badge-mobile"].forEach(function (id) {
       var el = document.getElementById(id);
       if (el) el.classList.toggle("hidden", !on);
     });
+    var mobileQuote = document.querySelector(".mobile-bar [data-action='quote']");
+    if (mobileQuote) {
+      if (on) {
+        mobileQuote.href = "#gatekeeper";
+        mobileQuote.textContent = "Gatekeeper Queue";
+        mobileQuote.setAttribute("aria-label", "Open Gatekeeper queue for " + (lead.name || "pending lead"));
+      } else {
+        mobileQuote.textContent = "Request Quote";
+        mobileQuote.removeAttribute("aria-label");
+        applyQuoteLinks();
+      }
+    }
   }
 
   function downloadLeadTxt(lead) {
@@ -226,8 +255,8 @@
     URL.revokeObjectURL(url);
   }
 
-  function downloadTextFile(text, filename) {
-    var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+  function downloadTextFile(text, filename, mime) {
+    var blob = new Blob([text], { type: mime || "text/plain;charset=utf-8" });
     var url = URL.createObjectURL(blob);
     var a = document.createElement("a");
     a.href = url;
@@ -236,6 +265,14 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  }
+
+  function leadFilenameBase(lead) {
+    return "msr-lead-" + (lead.name || "inquiry").replace(/[^\w.-]+/g, "-").toLowerCase();
+  }
+
+  function downloadLeadJson(lead) {
+    downloadTextFile(JSON.stringify(lead, null, 2), leadFilenameBase(lead) + ".json", "application/json;charset=utf-8");
   }
 
   function clearQuoteDraft() {
@@ -417,6 +454,7 @@
       var url = getLinkUrlFromMap(map, slug);
       if (url) {
         if (url.charAt(0) === "#") return url;
+        if (url.charAt(0) === "?") return getBasePath() + url;
         if (url.indexOf("http") !== 0) return getBasePath() + url.replace(/^\//, "");
         if (slug === "portfolio" && url.indexOf("#") !== -1) {
           var hash = url.split("#")[1];
@@ -497,6 +535,13 @@
     };
     if (b.phone) ld["@graph"][0].telephone = b.phone;
     if (b.email) ld["@graph"][0].email = b.email;
+    if (b.address && b.address.addressLocality) {
+      ld["@graph"][0].geo = {
+        "@type": "GeoCoordinates",
+        latitude: 27.0442,
+        longitude: -82.2359
+      };
+    }
     data.reviews.forEach(function (r) {
       ld["@graph"].push({
         "@type": "Review",
@@ -820,6 +865,7 @@
       '<span class="text-gold/50 text-xs shrink-0">▼</span></summary>' +
       '<div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gold/10">' +
       '<button type="button" id="gk-export-all" class="btn-call min-h-[36px] px-4 text-xs text-gold-light font-display tracking-wide">Export All (.txt)</button>' +
+      '<button type="button" id="gk-export-all-json" class="btn-legend min-h-[36px] px-4 text-xs text-stone-soft font-display tracking-wide">Export All (.json)</button>' +
       '<button type="button" id="gk-clear-archive" class="btn-legend min-h-[36px] px-4 text-xs text-stone-soft font-display tracking-wide">Clear Archive</button>' +
       '</div>' +
       '<ul class="mt-4 space-y-3">' +
@@ -837,6 +883,7 @@
       }).join("") +
       '</ul></details>';
     var exportAll = document.getElementById("gk-export-all");
+    var exportAllJson = document.getElementById("gk-export-all-json");
     var clearAll = document.getElementById("gk-clear-archive");
     if (exportAll) {
       exportAll.addEventListener("click", function () {
@@ -845,6 +892,14 @@
         var body = all.map(formatLeadSummary).join("\n\n========================================\n\n");
         var stamp = new Date().toISOString().slice(0, 10);
         downloadTextFile(body, "msr-leads-export-" + stamp + ".txt");
+      });
+    }
+    if (exportAllJson) {
+      exportAllJson.addEventListener("click", function () {
+        var all = getLeadArchive();
+        if (!all.length) return;
+        var stamp = new Date().toISOString().slice(0, 10);
+        downloadTextFile(JSON.stringify(all, null, 2), "msr-leads-export-" + stamp + ".json", "application/json;charset=utf-8");
       });
     }
     if (clearAll) {
@@ -901,10 +956,12 @@
     }
     mount.classList.remove("hidden");
     var summary = formatLeadSummary(lead);
+    var qual = scoreLead(lead);
     mount.innerHTML =
       '<div class="gatekeeper-panel rounded-sm p-5 sm:p-6 text-left border border-gold/30">' +
       '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">Pending Lead — Gatekeeper Queue</p>' +
-      '<p class="font-display text-xl text-gold-light font-semibold mb-2">' + esc(lead.name) + '</p>' +
+      '<p class="font-display text-xl text-gold-light font-semibold mb-1">' + esc(lead.name) + '</p>' +
+      '<p class="text-stone-muted text-xs mb-2">Qualification: <span class="text-gold-light/90 font-medium">' + esc(qual.tier) + '</span> (' + qual.score + '%)</p>' +
       '<ul class="text-stone-soft text-sm space-y-1">' +
       (lead.phone ? '<li>Phone: ' + esc(lead.phone) + '</li>' : '') +
       (lead.email ? '<li>Email: ' + esc(lead.email) + '</li>' : '') +
@@ -914,6 +971,7 @@
       '<div class="flex flex-wrap gap-2 mt-4">' +
       '<button type="button" id="gk-copy-lead" class="btn-call min-h-[40px] px-5 text-sm text-gold-light font-display tracking-wide">Copy Lead Summary</button>' +
       '<button type="button" id="gk-download-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Download .txt</button>' +
+      '<button type="button" id="gk-download-json" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Download .json</button>' +
       '<button type="button" id="gk-draft-hot" class="btn-call min-h-[40px] px-5 text-sm text-gold-light font-display tracking-wide">Draft Hot Lead Reply</button>' +
       (navigator.share ? '<button type="button" id="gk-share-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Share</button>' : '') +
       '<button type="button" id="gk-dismiss-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Dismiss</button>' +
@@ -922,6 +980,7 @@
       '</div>';
     var copyBtn = document.getElementById("gk-copy-lead");
     var downloadBtn = document.getElementById("gk-download-lead");
+    var downloadJsonBtn = document.getElementById("gk-download-json");
     var draftBtn = document.getElementById("gk-draft-hot");
     var shareBtn = document.getElementById("gk-share-lead");
     var dismissBtn = document.getElementById("gk-dismiss-lead");
@@ -942,6 +1001,12 @@
       downloadBtn.addEventListener("click", function () {
         downloadLeadTxt(lead);
         showStatus("Lead summary downloaded.");
+      });
+    }
+    if (downloadJsonBtn) {
+      downloadJsonBtn.addEventListener("click", function () {
+        downloadLeadJson(lead);
+        showStatus("Lead JSON downloaded.");
       });
     }
     if (draftBtn) {
@@ -1043,7 +1108,7 @@
   function renderLinks(links) {
     var grid = document.getElementById("links-grid");
     if (!grid) return;
-    var featured = ["quote", "book", "portfolio", "contact", "memoir", "marmorax", "gatekeeper", "intake"];
+    var featured = ["quote", "book", "portfolio", "contact", "memoir", "marmorax", "gatekeeper", "intake", "north-port", "swfl"];
     var keys = Object.keys(links).filter(function (k) { return isSlugEntry(k, links[k]) && featured.indexOf(k) === -1; });
     var base = getBasePath();
     grid.innerHTML = keys.map(function (key) {

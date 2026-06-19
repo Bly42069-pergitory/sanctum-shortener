@@ -76,6 +76,7 @@
 
       function resolveRelativeUrl(url) {
         if (!url || url.charAt(0) === "#" || isUrl(url)) return url;
+        if (url.charAt(0) === "?") return getHomepage().replace(/\/$/, "") + url;
         var base = getSiteBasePath();
         return (base === "/" ? "/" : base) + url.replace(/^\//, "");
       }
@@ -109,7 +110,7 @@
       function renderMissLinksFromMap(links) {
         var el = document.getElementById("miss-links");
         if (!el || !links) return;
-        var featured = ["quote", "book", "gatekeeper", "intake", "portfolio", "contact", "marmorax"];
+        var featured = ["quote", "book", "gatekeeper", "intake", "north-port", "swfl", "portfolio", "contact", "marmorax"];
         var html = featured.map(function (key) {
           var value = links[key];
           if (!value) return "";

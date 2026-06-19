@@ -47,3 +47,13 @@ intake:
   url: intake.html
   title: Client Intake Questionnaire
   description: Gatekeeper intake — download the form and start your restoration project
+
+north-port:
+  url: "?message=North+Port+marble+or+stone+restoration+%E2%80%94+please+schedule+site+assessment"
+  title: North Port SWFL
+  description: Marble restoration in North Port — Gatekeeper intake
+
+swfl:
+  url: "#gatekeeper"
+  title: Southwest Florida
+  description: SWFL service area — begin under Gatekeeper protocol
