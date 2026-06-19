@@ -1,3 +1,13 @@
 sanctum-shortlinks-db/
 assets/raw/
 _push_payload.json
+*.b64
+deploy-*.json
+_deploy_*.json
+_args_only.json
+_mcp_*.json
+invoke-args-only.json
+push-args*.json
+index-only.json
+mcp-invoke.txt
+*.backup
