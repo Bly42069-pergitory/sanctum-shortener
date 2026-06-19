@@ -67,6 +67,7 @@
       }
     }
     if (slug === "marmorax") return "#warden";
+    if (slug === "intake") return getBasePath() + "assets/MSR-Client-Intake-Questionnaire.docx";
     return getBasePath() + slug.replace(/^\//, "");
   }
 
@@ -415,7 +416,7 @@
   function renderLinks(links) {
     var grid = document.getElementById("links-grid");
     if (!grid) return;
-    var featured = ["quote", "book", "portfolio", "contact", "memoir", "marmorax"];
+    var featured = ["quote", "book", "portfolio", "contact", "memoir", "marmorax", "intake"];
     var keys = Object.keys(links).filter(function (k) { return isSlugEntry(k, links[k]) && featured.indexOf(k) === -1; });
     var base = getBasePath();
     grid.innerHTML = keys.map(function (key) {
