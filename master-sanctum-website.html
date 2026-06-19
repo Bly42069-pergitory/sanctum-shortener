@@ -1045,10 +1045,24 @@
 
   function suggestedTemplateKey(lead) {
     var qual = scoreLead(lead);
+    if (/price|cost|how much|ballpark|\$/i.test(lead.message || "")) return "priceShopper";
     if (qual.tier === "Hot") return "hotLead";
     if (qual.tier === "Warm") return "coldInquiry";
-    if (/price|cost|how much|ballpark|\$/i.test(lead.message || "")) return "priceShopper";
     return "coldInquiry";
+  }
+
+  function templateLabel(key) {
+    var labels = {
+      hotLead: "Hot Lead",
+      coldInquiry: "Education First",
+      priceShopper: "Price Shopper",
+      siteVisitConfirmation: "Site Visit"
+    };
+    return labels[key] || key;
+  }
+
+  function isValidPhone(value) {
+    return String(value || "").replace(/\D/g, "").length >= 10;
   }
 
   function formatLeadSummary(lead) {
@@ -1933,7 +1947,7 @@
       '<button type="button" id="gk-copy-lead" class="btn-call min-h-[40px] px-5 text-sm text-gold-light font-display tracking-wide">Copy Lead Summary</button>' +
       '<button type="button" id="gk-download-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Download .txt</button>' +
       '<button type="button" id="gk-download-json" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Download .json</button>' +
-      '<button type="button" id="gk-draft-hot" class="btn-call min-h-[40px] px-5 text-sm text-gold-light font-display tracking-wide">Draft Hot Lead Reply</button>' +
+      '<button type="button" id="gk-draft-suggested" class="btn-call min-h-[40px] px-5 text-sm text-gold-light font-display tracking-wide">Draft ' + esc(templateLabel(suggestedTemplateKey(lead))) + ' Reply</button>' +
       (navigator.share ? '<button type="button" id="gk-share-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Share</button>' : '') +
       '<button type="button" id="gk-dismiss-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Dismiss</button>' +
       '</div>' +
@@ -1942,7 +1956,7 @@
     var copyBtn = document.getElementById("gk-copy-lead");
     var downloadBtn = document.getElementById("gk-download-lead");
     var downloadJsonBtn = document.getElementById("gk-download-json");
-    var draftBtn = document.getElementById("gk-draft-hot");
+    var draftBtn = document.getElementById("gk-draft-suggested");
     var scrollTpl = document.getElementById("gk-scroll-template");
     var shareBtn = document.getElementById("gk-share-lead");
     var dismissBtn = document.getElementById("gk-dismiss-lead");
@@ -1984,14 +1998,16 @@
       draftBtn.addEventListener("click", function () {
         var templates = window.__MSR_INLINE__ && window.__MSR_INLINE__.gatekeeperTemplates;
         function draftFrom(tpl) {
-          if (!tpl || !tpl.hotLead) {
-            showStatus("Templates loading — try Copy Body on Hot Lead below.");
+          var key = suggestedTemplateKey(lead);
+          var t = tpl && tpl[key];
+          if (!t) {
+            showStatus("Templates loading — try Copy Body below.");
             return;
           }
           var vars = leadTemplateVars(lead);
-          var text = "Subject: " + applyTemplateVars(tpl.hotLead.subject, vars) + "\n\n" + applyTemplateVars(tpl.hotLead.body, vars);
+          var text = "Subject: " + applyTemplateVars(t.subject, vars) + "\n\n" + applyTemplateVars(t.body, vars);
           copyToClipboard(text, function (ok) {
-            showStatus(ok ? "Hot lead reply copied — paste into your email client." : "Copy failed — use Hot Lead template below.");
+            showStatus(ok ? templateLabel(key) + " reply copied — paste into your email client." : "Copy failed — use template below.");
           });
         }
         if (templates) {
@@ -2224,6 +2240,17 @@
       e.preventDefault();
       var fd = new FormData(form);
       if ((fd.get("website") || "").trim()) return;
+      var phoneVal = fd.get("phone") || "";
+      if (!isValidPhone(phoneVal)) {
+        var phoneEl = document.getElementById("qf-phone");
+        if (phoneEl) {
+          phoneEl.focus();
+          phoneEl.setCustomValidity("Enter a valid phone number (at least 10 digits).");
+          phoneEl.reportValidity();
+          phoneEl.setCustomValidity("");
+        }
+        return;
+      }
       var payload = {
         name: fd.get("name") || "",
         phone: fd.get("phone") || "",
