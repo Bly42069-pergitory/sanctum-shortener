@@ -395,6 +395,16 @@
     if (ctaIntake && gk.ctaIntake) ctaIntake.textContent = gk.ctaIntake;
     var ctaQuote = document.getElementById("gatekeeper-cta-quote");
     if (ctaQuote && gk.ctaQuote) ctaQuote.textContent = gk.ctaQuote;
+    var swflWrap = document.getElementById("gatekeeper-swfl");
+    if (swflWrap && gk.swflCities && gk.swflCities.length) {
+      swflWrap.classList.remove("hidden");
+      var swflHead = document.getElementById("gatekeeper-swfl-headline");
+      if (swflHead && gk.serviceAreaHeadline) swflHead.textContent = gk.serviceAreaHeadline;
+      var swflCities = document.getElementById("gatekeeper-swfl-cities");
+      if (swflCities) swflCities.textContent = gk.swflCities.join(" · ");
+      var swflNote = document.getElementById("gatekeeper-swfl-note");
+      if (swflNote && gk.serviceAreaNote) swflNote.textContent = gk.serviceAreaNote;
+    }
   }
 
   /* --- gallery --- */
@@ -449,7 +459,7 @@
   function renderLinks(links) {
     var grid = document.getElementById("links-grid");
     if (!grid) return;
-    var featured = ["quote", "book", "portfolio", "contact", "memoir", "marmorax", "intake"];
+    var featured = ["quote", "book", "portfolio", "contact", "memoir", "marmorax", "gatekeeper", "intake"];
     var keys = Object.keys(links).filter(function (k) { return isSlugEntry(k, links[k]) && featured.indexOf(k) === -1; });
     var base = getBasePath();
     grid.innerHTML = keys.map(function (key) {

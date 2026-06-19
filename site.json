@@ -12,9 +12,20 @@
     "priceRange": "$$$",
     "yearsExperience": 20,
     "projectsCompleted": 500,
-    "serviceAreas": ["Florida", "Southeast United States", "Select nationwide commissions"],
+    "serviceAreas": [
+      "Southwest Florida",
+      "North Port",
+      "Venice",
+      "Port Charlotte",
+      "Punta Gorda",
+      "Fort Myers",
+      "Sarasota",
+      "Florida statewide",
+      "Select nationwide commissions"
+    ],
     "address": {
       "@type": "PostalAddress",
+      "addressLocality": "North Port",
       "addressRegion": "FL",
       "addressCountry": "US"
     }
@@ -237,7 +248,17 @@
       "Can you provide photos? (wide shot + worst-area close-up)"
     ],
     "ctaIntake": "Download Intake Questionnaire",
-    "ctaQuote": "Request Site Assessment"
+    "ctaQuote": "Request Site Assessment",
+    "serviceAreaHeadline": "Southwest Florida Service Area",
+    "serviceAreaNote": "On-site assessments across SWFL — humidity, salt air, and sun load are our daily cathedral.",
+    "swflCities": [
+      "North Port",
+      "Venice",
+      "Port Charlotte",
+      "Punta Gorda",
+      "Fort Myers",
+      "Sarasota"
+    ]
   },
   "faqs": [
     {
