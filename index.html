@@ -21,20 +21,21 @@
         theme: {
           extend: {
             colors: {
-              marble: { dark: "#0a0a0c", mid: "#161618", light: "#242426", vein: "#343436" },
-              gold: { DEFAULT: "#c9a227", light: "#e8d48b", dark: "#8b6914", brass: "#b5a642" },
-              stone: { DEFAULT: "#f5f3ef", soft: "#ddd8d0", muted: "#a4a098", dim: "#686460" },
+              marble: { dark: "#070709", mid: "#121214", light: "#1e1e22", vein: "#2e2e32" },
+              gold: { DEFAULT: "#c9a227", light: "#edd98a", dark: "#7a5c12", brass: "#b5a642" },
+              stone: { DEFAULT: "#f7f4ef", soft: "#e4dfd6", muted: "#b0aaa0", dim: "#6e6962" },
             },
             fontFamily: {
               display: ["Cormorant Garamond", "Georgia", "serif"],
-              sans: ["Inter", "system-ui", "sans-serif"],
+              sans: ["Inter", "system-ui", sans-serif"],
             },
             boxShadow: {
-              card: "0 20px 56px rgba(0,0,0,0.5)",
-              guardian: "0 0 130px rgba(201,162,39,0.3), 0 32px 88px rgba(0,0,0,0.58)",
+              card: "0 24px 64px rgba(0,0,0,0.55)",
+              guardian: "0 0 160px rgba(201,162,39,0.32), 0 40px 100px rgba(0,0,0,0.6)",
+              lift: "0 20px 50px rgba(0,0,0,0.45)",
             },
-            letterSpacing: { luxury: "0.28em", wide: "0.1em" },
-            spacing: { 18: "4.5rem", 22: "5.5rem" },
+            letterSpacing: { luxury: "0.32em", wide: "0.12em" },
+            spacing: { 18: "4.5rem", 22: "5.5rem", 26: "6.5rem" },
           },
         },
       };
@@ -43,155 +44,228 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <style>
-      :root { --gold: #c9a227; --gold-light: #e8d48b; --nav-h: 68px; scroll-padding-top: var(--nav-h); }
+      :root { --gold: #c9a227; --gold-light: #edd98a; --nav-h: 72px; scroll-padding-top: var(--nav-h); }
       html { scroll-behavior: smooth; }
       body {
-        background: radial-gradient(ellipse 145% 98% at 50% -18%, #363638 0%, #161618 34%, #08080a 100%);
-        color: #f5f3ef; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
+        background: radial-gradient(ellipse 150% 100% at 50% -20%, #2a2a2e 0%, #121214 38%, #070709 100%);
+        color: #f7f4ef; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
       }
       .marble-grain {
-        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
       }
-      .gold-line { background: linear-gradient(90deg, transparent, #8b6914, #e8d48b, #c9a227, #e8d48b, #8b6914, transparent); height: 1px; }
-      .section-pad { padding: 4.5rem 0; }
-      @media (min-width: 640px) { .section-pad { padding: 5.5rem 0; } }
-      @media (min-width: 1024px) { .section-pad { padding: 6.5rem 0; } }
+      .gold-line { background: linear-gradient(90deg, transparent, #7a5c12 15%, #edd98a 50%, #c9a227 85%, transparent); height: 1px; }
+      .section-pad { padding: 5rem 0; }
+      @media (min-width: 640px) { .section-pad { padding: 6rem 0; } }
+      @media (min-width: 1024px) { .section-pad { padding: 7.5rem 0; } }
 
       .glass-panel {
-        background: linear-gradient(165deg, rgba(36,36,38,0.48) 0%, rgba(8,8,10,0.95) 100%);
-        backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-        border-bottom: 1px solid rgba(201,162,39,0.1);
-        transition: box-shadow 0.35s ease;
+        background: linear-gradient(180deg, rgba(30,30,34,0.72) 0%, rgba(7,7,9,0.96) 100%);
+        backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+        border-bottom: 1px solid rgba(201,162,39,0.12);
+        transition: box-shadow 0.4s ease, border-color 0.4s ease;
       }
-      #site-header.is-scrolled { box-shadow: 0 10px 40px rgba(0,0,0,0.45); }
+      #site-header.is-scrolled { box-shadow: 0 12px 48px rgba(0,0,0,0.5); border-color: rgba(201,162,39,0.18); }
 
-      .nav-link { color: #ddd8d0; transition: color 0.2s ease; position: relative; }
+      .nav-link { color: #e4dfd6; transition: color 0.25s ease; position: relative; font-weight: 500; }
       .nav-link::after {
-        content: ""; position: absolute; left: 0; right: 0; bottom: -5px; height: 1px;
-        background: var(--gold-light); transform: scaleX(0); transition: transform 0.25s ease; opacity: 0.7;
+        content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px;
+        background: var(--gold-light); transform: scaleX(0); transition: transform 0.3s ease; opacity: 0.85;
       }
       .nav-link:hover, .nav-link.is-active { color: var(--gold-light); }
       .nav-link.is-active::after { transform: scaleX(1); }
 
-      .hero-shield {
-        display: inline-flex; align-items: center; gap: 1rem;
-        padding: 0.65rem 1.1rem 0.65rem 0.65rem;
-        border: 1px solid rgba(201,162,39,0.22);
-        background: linear-gradient(135deg, rgba(36,36,38,0.6), rgba(8,8,10,0.85));
-        margin-bottom: 1.75rem;
+      .hero-veil {
+        background:
+          radial-gradient(ellipse 55% 45% at 78% 28%, rgba(201,162,39,0.11), transparent 70%),
+          radial-gradient(ellipse 40% 35% at 12% 65%, rgba(201,162,39,0.05), transparent 65%);
       }
-      .hero-shield img { filter: drop-shadow(0 0 20px rgba(201,162,39,0.25)); }
+
+      .hero-lockup {
+        display: inline-flex; align-items: center; gap: 1.15rem;
+        padding: 0.85rem 1.35rem 0.85rem 0.85rem;
+        border: 1px solid rgba(201,162,39,0.28);
+        background: linear-gradient(135deg, rgba(30,30,34,0.75), rgba(7,7,9,0.92));
+        box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(237,217,138,0.08);
+      }
+      .hero-lockup img { filter: drop-shadow(0 0 28px rgba(201,162,39,0.35)); }
+
+      .hero-tagline {
+        font-size: clamp(2.25rem, 6.5vw, 4.25rem);
+        line-height: 1.02;
+        letter-spacing: 0.04em;
+        text-shadow: 0 0 80px rgba(201,162,39,0.22), 0 2px 24px rgba(0,0,0,0.4);
+      }
 
       .guardian-stage { position: relative; isolation: isolate; }
       .guardian-stage::before {
-        content: ""; position: absolute; left: 50%; bottom: -4%; transform: translateX(-50%);
-        width: 70%; height: 16%; background: radial-gradient(ellipse, rgba(201,162,39,0.24), transparent 70%);
-        filter: blur(16px);
+        content: ""; position: absolute; left: 50%; bottom: 2%; transform: translateX(-50%);
+        width: 75%; height: 20%; background: radial-gradient(ellipse, rgba(201,162,39,0.3), transparent 72%);
+        filter: blur(20px);
       }
       .guardian-pedestal {
-        position: absolute; left: 50%; bottom: 4%; transform: translateX(-50%); width: 55%; height: 2px;
-        background: linear-gradient(90deg, transparent, rgba(232,212,139,0.75), transparent); border-radius: 99px;
+        position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%); width: 60%; height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(237,217,138,0.85), transparent);
       }
+      .guardian-ring { position: relative; }
       .guardian-ring::before {
-        content: ""; position: absolute; inset: -14%; border-radius: 50%;
-        border: 1px solid rgba(201,162,39,0.26); animation: ring-pulse 5s ease-in-out infinite;
+        content: ""; position: absolute; inset: -16%; border-radius: 50%;
+        border: 1px solid rgba(201,162,39,0.3); animation: ring-pulse 6s ease-in-out infinite;
       }
       .guardian-ring::after {
-        content: ""; position: absolute; inset: -26%; border-radius: 50%;
-        background: radial-gradient(circle, rgba(201,162,39,0.14), transparent 65%);
+        content: ""; position: absolute; inset: -28%; border-radius: 50%;
+        background: radial-gradient(circle, rgba(201,162,39,0.16), transparent 68%);
       }
-      .guardian-float { animation: guardian-drift 10s ease-in-out infinite; }
+      .guardian-float { animation: guardian-drift 11s ease-in-out infinite; }
+      .guardian-badge {
+        position: absolute; bottom: 8%; left: 6%; z-index: 2;
+        padding: 0.5rem; border: 1px solid rgba(201,162,39,0.35);
+        background: rgba(7,7,9,0.88); backdrop-filter: blur(8px);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+      }
 
       .pillar-card {
-        position: relative; overflow: hidden;
-        background: linear-gradient(165deg, rgba(36,36,38,0.55), rgba(8,8,10,0.94));
-        border: 1px solid rgba(201,162,39,0.1);
-        transition: transform 0.35s ease, border-color 0.35s ease, box-shadow 0.35s ease;
+        position: relative; overflow: hidden; text-align: left;
+        background: linear-gradient(160deg, rgba(30,30,34,0.65) 0%, rgba(7,7,9,0.96) 100%);
+        border: 1px solid rgba(201,162,39,0.12);
+        transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease, box-shadow 0.4s ease;
       }
       .pillar-card::before {
-        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 2px;
-        background: linear-gradient(90deg, transparent, rgba(201,162,39,0.5), transparent); opacity: 0.6;
+        content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+        background: linear-gradient(180deg, transparent, rgba(201,162,39,0.55), transparent); opacity: 0.7;
       }
-      .pillar-card:hover { transform: translateY(-5px); border-color: rgba(201,162,39,0.28); box-shadow: 0 16px 48px rgba(0,0,0,0.42); }
-      .pillar-featured { border-color: rgba(201,162,39,0.24); }
-      .pillar-featured::before { opacity: 1; height: 3px; }
+      .pillar-card::after {
+        content: attr(data-numeral);
+        position: absolute; top: 1rem; right: 1.25rem;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 4.5rem; line-height: 1; color: rgba(201,162,39,0.07); pointer-events: none;
+      }
+      .pillar-card:hover { transform: translateY(-6px); border-color: rgba(201,162,39,0.32); box-shadow: var(--lift); }
+      .pillar-featured { border-color: rgba(201,162,39,0.28); }
+      .pillar-featured::before { opacity: 1; width: 4px; background: linear-gradient(180deg, #edd98a, #c9a227, #7a5c12); }
       .pillar-icon-wrap {
-        width: 3.25rem; height: 3.25rem; margin: 0 auto 1rem;
+        width: 3.5rem; height: 3.5rem; margin-bottom: 1.25rem;
         display: flex; align-items: center; justify-content: center;
-        border: 1px solid rgba(201,162,39,0.28); border-radius: 50%;
-        background: rgba(201,162,39,0.06); color: var(--gold-light);
+        border: 1px solid rgba(201,162,39,0.32); border-radius: 50%;
+        background: rgba(201,162,39,0.08); color: var(--gold-light);
       }
-      .pillar-icon { width: 1.35rem; height: 1.35rem; }
+      .pillar-icon { width: 1.4rem; height: 1.4rem; }
 
-      .pair-card { border: 1px solid rgba(201,162,39,0.12); background: rgba(8,8,10,0.5); }
-      .pair-header { border-bottom: 1px solid rgba(201,162,39,0.1); }
-      .pair-arrow { color: var(--gold); opacity: 0.6; }
-      .pair-card img { transition: transform 0.65s cubic-bezier(0.22,1,0.36,1); }
-      .pair-card:hover img { transform: scale(1.04); }
+      .pair-card {
+        border: 1px solid rgba(201,162,39,0.16);
+        background: linear-gradient(180deg, rgba(18,18,20,0.6), rgba(7,7,9,0.85));
+        box-shadow: var(--card);
+      }
+      .pair-header { border-bottom: 1px solid rgba(201,162,39,0.12); }
+      .pair-frame { padding: 0.35rem; background: linear-gradient(135deg, rgba(201,162,39,0.08), transparent); }
+      .pair-arrow { color: var(--gold); opacity: 0.7; }
+      .pair-figure { position: relative; overflow: hidden; border: 1px solid rgba(201,162,39,0.1); }
+      .pair-figure img { transition: transform 0.75s cubic-bezier(0.22,1,0.36,1), filter 0.4s ease; }
+      .pair-card:hover .pair-figure img { transform: scale(1.05); filter: brightness(1.08); }
+      .pair-caption {
+        position: absolute; inset-inline: 0; bottom: 0; padding: 2rem 0.75rem 0.65rem;
+        background: linear-gradient(transparent, rgba(7,7,9,0.92));
+        font-size: 0.65rem; color: #e4dfd6; line-height: 1.4; opacity: 0; transform: translateY(6px);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+      }
+      .pair-figure:hover .pair-caption { opacity: 1; transform: none; }
 
-      .filter-btn { border: 1px solid rgba(201,162,39,0.18); color: #a4a098; transition: all 0.25s ease; }
-      .filter-btn:hover { color: var(--gold-light); border-color: rgba(201,162,39,0.35); }
-      .filter-btn.is-active { background: rgba(201,162,39,0.12); border-color: rgba(232,212,139,0.4); color: var(--gold-light); }
+      .filter-btn {
+        border: 1px solid rgba(201,162,39,0.2); color: #b0aaa0;
+        transition: all 0.3s ease; font-weight: 500;
+      }
+      .filter-btn:hover { color: var(--gold-light); border-color: rgba(201,162,39,0.4); background: rgba(201,162,39,0.06); }
+      .filter-btn.is-active {
+        background: linear-gradient(135deg, rgba(201,162,39,0.18), rgba(122,92,18,0.22));
+        border-color: rgba(237,217,138,0.45); color: var(--gold-light);
+      }
 
-      .gallery-card { overflow: hidden; cursor: zoom-in; border: 1px solid rgba(201,162,39,0.1); }
+      .gallery-card { overflow: hidden; cursor: zoom-in; border: 1px solid rgba(201,162,39,0.12); }
       .gallery-card.is-hidden { display: none; }
-      .gallery-card img { transition: transform 0.7s ease, filter 0.4s ease; }
-      .gallery-card:hover img { transform: scale(1.05); filter: brightness(1.06); }
+      .gallery-card.is-featured { grid-column: span 2; aspect-ratio: 16/10; }
+      .gallery-card img { transition: transform 0.75s ease, filter 0.4s ease; }
+      .gallery-card:hover img { transform: scale(1.06); filter: brightness(1.08); }
+
+      .domain-bar {
+        display: flex; align-items: center; gap: 0;
+        border: 1px solid rgba(201,162,39,0.22);
+        background: rgba(7,7,9,0.75);
+        font-family: ui-monospace, monospace;
+        font-size: 0.8rem;
+      }
+      .domain-bar .host { padding: 0.65rem 1rem; color: #b0aaa0; border-right: 1px solid rgba(201,162,39,0.15); }
+      .domain-bar .slug { padding: 0.65rem 1rem; color: var(--gold-light); }
 
       .slug-featured {
-        background: linear-gradient(150deg, rgba(36,36,38,0.7), rgba(8,8,10,0.95));
-        border: 1px solid rgba(201,162,39,0.2);
-        transition: all 0.3s ease;
+        background: linear-gradient(155deg, rgba(30,30,34,0.8), rgba(7,7,9,0.97));
+        border: 1px solid rgba(201,162,39,0.22);
+        transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
       }
-      .slug-featured:hover { border-color: rgba(232,212,139,0.45); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.38); }
+      .slug-featured:hover {
+        border-color: rgba(237,217,138,0.5); transform: translateY(-4px);
+        box-shadow: 0 16px 44px rgba(0,0,0,0.42), 0 0 24px rgba(201,162,39,0.08);
+      }
+      .slug-icon {
+        width: 2rem; height: 2rem; margin: 0 auto 0.75rem;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 50%; border: 1px solid rgba(201,162,39,0.25);
+        color: var(--gold-light); background: rgba(201,162,39,0.06);
+      }
       .link-card {
-        background: linear-gradient(150deg, rgba(36,36,38,0.65), rgba(8,8,10,0.96));
+        background: linear-gradient(155deg, rgba(30,30,34,0.7), rgba(7,7,9,0.97));
         border: 1px solid rgba(201,162,39,0.14);
-        transition: all 0.3s ease;
+        transition: all 0.35s ease;
       }
-      .link-card:hover { border-color: rgba(232,212,139,0.4); transform: translateY(-2px); }
+      .link-card:hover { border-color: rgba(237,217,138,0.42); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.38); }
 
       .cta-primary {
-        background: linear-gradient(135deg, rgba(201,162,39,0.22), rgba(139,105,20,0.34));
-        box-shadow: 0 4px 24px rgba(201,162,39,0.1);
+        background: linear-gradient(135deg, rgba(201,162,39,0.28), rgba(122,92,18,0.38));
+        box-shadow: 0 6px 28px rgba(201,162,39,0.14);
+        transition: all 0.35s ease;
       }
-      .cta-primary:hover { box-shadow: 0 8px 32px rgba(201,162,39,0.2); }
+      .cta-primary:hover { box-shadow: 0 10px 40px rgba(201,162,39,0.26); transform: translateY(-1px); }
+      .cta-ghost { transition: all 0.35s ease; }
+      .cta-ghost:hover { border-color: rgba(201,162,39,0.4); color: var(--gold-light); }
 
-      .label-after { background: rgba(201,162,39,0.2); border: 1px solid rgba(232,212,139,0.45); color: #e8d48b; }
-      .label-before { background: rgba(8,8,10,0.88); border: 1px solid rgba(164,160,152,0.35); color: #ddd8d0; }
-      .label-detail, .label-process { background: rgba(36,36,38,0.9); border: 1px solid rgba(201,162,39,0.28); color: #c9a227; }
+      .label-after { background: rgba(201,162,39,0.24); border: 1px solid rgba(237,217,138,0.5); color: #edd98a; }
+      .label-before { background: rgba(7,7,9,0.9); border: 1px solid rgba(176,170,160,0.4); color: #e4dfd6; }
+      .label-detail, .label-process { background: rgba(30,30,34,0.92); border: 1px solid rgba(201,162,39,0.3); color: #c9a227; }
 
-      .reveal { opacity: 0; transform: translateY(22px); transition: opacity 0.7s ease, transform 0.7s ease; }
+      .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
       .reveal.is-visible { opacity: 1; transform: none; }
-      .reveal-d1 { transition-delay: 0.08s; }
-      .reveal-d2 { transition-delay: 0.16s; }
-      .reveal-d3 { transition-delay: 0.24s; }
+      .reveal-d1 { transition-delay: 0.1s; }
+      .reveal-d2 { transition-delay: 0.2s; }
+      .reveal-d3 { transition-delay: 0.3s; }
 
-      .tagline { text-shadow: 0 0 40px rgba(201,162,39,0.15); }
+      .scroll-hint { animation: scroll-hint 2.5s ease-in-out infinite; }
       .nav-open #mobile-menu { display: block; }
       .nav-open #menu-icon-open { display: none; }
       .nav-open #menu-icon-close { display: block; }
       #lightbox.open { display: flex; }
 
-      @keyframes guardian-drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-      @keyframes ring-pulse { 0%, 100% { opacity: 0.35; } 50% { opacity: 0.9; } }
+      .footer-brand { border-top: 1px solid rgba(201,162,39,0.1); background: rgba(7,7,9,0.5); }
+
+      @keyframes guardian-drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+      @keyframes ring-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.95; } }
+      @keyframes scroll-hint { 0%, 100% { opacity: 0.4; transform: translateY(0); } 50% { opacity: 1; transform: translateY(6px); } }
 
       @media (max-width: 767px) {
-        :root { --nav-h: 60px; }
+        :root { --nav-h: 64px; }
         .mobile-bar {
           position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
-          padding: 0.7rem 1rem calc(0.7rem + env(safe-area-inset-bottom));
-          background: rgba(8,8,10,0.96); border-top: 1px solid rgba(201,162,39,0.12);
-          backdrop-filter: blur(14px);
+          padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+          background: rgba(7,7,9,0.97); border-top: 1px solid rgba(201,162,39,0.14);
+          backdrop-filter: blur(16px);
         }
-        body { padding-bottom: 4.25rem; }
-        .hero-shield { margin-left: auto; margin-right: auto; }
+        body { padding-bottom: 4.5rem; }
+        .hero-lockup { margin-left: auto; margin-right: auto; }
+        .guardian-badge { display: none; }
+        .pillar-card::after { font-size: 3.5rem; }
       }
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
         .reveal { opacity: 1; transform: none; transition: none; }
-        .guardian-float, .guardian-ring::before { animation: none; }
-        .gallery-card img, .pillar-card, .link-card, .slug-featured, .pair-card img { transition: none; }
+        .guardian-float, .guardian-ring::before, .scroll-hint { animation: none; }
+        .gallery-card img, .pillar-card, .link-card, .slug-featured, .pair-figure img { transition: none; }
       }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
@@ -200,227 +274,264 @@
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-marble-dark focus:text-gold-light focus:border focus:border-gold/40">Skip to content</a>
 
     <header id="site-header" class="sticky top-0 z-50 glass-panel">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6 h-[var(--nav-h)] flex items-center justify-between">
-        <a href="/" class="flex items-center gap-2.5 group shrink-0">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8 h-[var(--nav-h)] flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 group shrink-0">
           <picture>
             <source srcset="assets/logo-msr.webp" type="image/webp" />
-            <img src="assets/logo-msr.png" alt="" width="40" height="40" class="group-hover:scale-105 transition-transform" />
+            <img src="assets/logo-msr.png" alt="" width="44" height="44" class="group-hover:scale-105 transition-transform duration-300" />
           </picture>
-          <span class="font-display text-gold-light text-base sm:text-lg leading-none hidden sm:block">MSR</span>
+          <div class="hidden sm:block leading-tight">
+            <span class="font-display text-gold-light text-lg">MSR</span>
+            <span class="block text-[9px] tracking-luxury uppercase text-stone-muted">Restoration</span>
+          </div>
         </a>
-        <nav class="hidden md:flex items-center gap-7 text-sm" aria-label="Primary">
+        <nav class="hidden md:flex items-center gap-8 text-sm" aria-label="Primary">
           <a href="#about" class="nav-link" data-section="about">Method</a>
-          <a href="#gallery" class="nav-link" data-section="gallery">Work</a>
+          <a href="#gallery" class="nav-link" data-section="gallery">Portfolio</a>
           <a href="#links" class="nav-link" data-section="links">Links</a>
-          <a id="nav-quote" href="quote" class="ml-1 px-4 py-2 border border-gold/30 text-gold-light font-display tracking-wide text-sm hover:bg-gold/10 transition-colors">Quote</a>
+          <a id="nav-quote" href="quote" class="ml-2 px-5 py-2.5 border border-gold/35 text-gold-light font-display tracking-wide text-sm cta-primary">Request Quote</a>
         </nav>
-        <button id="menu-toggle" type="button" class="md:hidden p-2 text-gold-light border border-gold/20 rounded-sm" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <button id="menu-toggle" type="button" class="md:hidden p-2.5 text-gold-light border border-gold/22 rounded-sm" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
           <svg id="menu-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
           <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18"/></svg>
         </button>
       </div>
-      <nav id="mobile-menu" class="hidden md:hidden border-t border-gold/8 glass-panel" aria-label="Mobile">
-        <div class="max-w-5xl mx-auto px-4 py-2 flex flex-col">
-          <a href="#about" class="nav-mobile-link nav-link py-3">Method</a>
-          <a href="#gallery" class="nav-mobile-link nav-link py-3">Work</a>
-          <a href="#links" class="nav-mobile-link nav-link py-3">Links</a>
-          <a id="mobile-quote" href="quote" class="my-2 py-3 text-center border border-gold/35 text-gold-light font-display cta-primary">Request a Quote</a>
+      <nav id="mobile-menu" class="hidden md:hidden border-t border-gold/10 glass-panel" aria-label="Mobile">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col">
+          <a href="#about" class="nav-mobile-link nav-link py-3.5">Method</a>
+          <a href="#gallery" class="nav-mobile-link nav-link py-3.5">Portfolio</a>
+          <a href="#links" class="nav-mobile-link nav-link py-3.5">Short Links</a>
+          <a id="mobile-quote" href="quote" class="my-3 py-3.5 text-center border border-gold/40 text-gold-light font-display text-lg cta-primary">Request a Quote</a>
         </div>
       </nav>
     </header>
 
     <main id="main">
       <!-- Hero -->
-      <section class="relative min-h-[calc(100svh-var(--nav-h))] flex items-center overflow-hidden">
-        <div class="absolute inset-0 bg-[radial-gradient(ellipse_65%_50%_at_80%_25%,rgba(201,162,39,0.07),transparent)]"></div>
-        <div class="max-w-5xl mx-auto px-4 sm:px-6 w-full py-10 sm:py-14">
-          <div class="grid lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-14 items-center">
+      <section class="relative min-h-[calc(100svh-var(--nav-h))] flex items-center overflow-hidden hero-veil">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8 w-full py-12 sm:py-16 lg:py-20">
+          <div class="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center">
             <div class="reveal text-center lg:text-left order-2 lg:order-1">
-              <div class="hero-shield rounded-sm">
+              <div class="hero-lockup rounded-sm mb-8">
                 <picture>
                   <source srcset="assets/logo-msr.webp" type="image/webp" />
-                  <img src="assets/logo-msr.png" alt="MSR Shield" width="56" height="56" />
+                  <img src="assets/logo-msr.png" alt="MSR Shield" width="64" height="64" />
                 </picture>
-                <div class="text-left leading-tight">
-                  <p class="font-display text-lg sm:text-xl text-gold-light">Master Sanctum Restoration</p>
-                  <p class="text-[9px] sm:text-[10px] tracking-luxury uppercase text-stone-muted mt-1">Protecting What Endures</p>
+                <div class="text-left">
+                  <p class="font-display text-xl sm:text-2xl text-gold-light font-semibold">Master Sanctum Restoration</p>
+                  <p class="text-[10px] tracking-luxury uppercase text-stone-muted mt-1.5">Luxury Stone Conservation</p>
                 </div>
               </div>
-              <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3">Luxury Stone Conservation</p>
-              <h1 class="font-display text-[2rem] sm:text-[2.75rem] lg:text-[3.25rem] text-stone font-semibold leading-[1.04] tracking-wide">
-                Surfaces restored<br class="hidden sm:block" /> to endure.
-              </h1>
-              <div class="gold-line w-28 sm:w-36 mx-auto lg:mx-0 my-5"></div>
-              <p class="font-display italic text-xl sm:text-2xl text-gold-light tagline mb-4">Protecting What Endures</p>
-              <p class="text-stone-soft text-[15px] sm:text-base leading-[1.8] max-w-md mx-auto lg:mx-0 mb-8">
-                Marble, limestone, and architectural stone — assessed with precision, finished by hand, sealed for permanence.
+
+              <p class="hero-tagline font-display font-semibold text-gold-light mb-5">
+                Protecting What Endures
               </p>
-              <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <a id="hero-quote" href="quote" class="cta-primary inline-flex items-center justify-center min-h-[48px] px-8 border border-gold/50 text-gold-light font-display text-lg tracking-wide hover:bg-gold/20 transition-all">Request a Quote</a>
-                <a href="#gallery" class="inline-flex items-center justify-center min-h-[48px] px-8 border border-gold/18 text-stone-soft font-display text-lg tracking-wide hover:text-gold-light hover:border-gold/35 transition-all">View the Work</a>
+              <div class="gold-line w-32 sm:w-44 mx-auto lg:mx-0 mb-6"></div>
+              <h1 class="font-display text-2xl sm:text-3xl lg:text-[2.1rem] text-stone font-medium leading-snug tracking-wide mb-5 max-w-lg mx-auto lg:mx-0">
+                Architectural stone restored with conservation discipline — not contractor haste.
+              </h1>
+              <p class="text-stone-soft text-[15px] sm:text-base leading-[1.85] max-w-md mx-auto lg:mx-0 mb-9">
+                Marble, limestone, and heritage surfaces — assessed, hand-finished, and sealed for permanence.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-3.5 justify-center lg:justify-start">
+                <a id="hero-quote" href="quote" class="cta-primary inline-flex items-center justify-center min-h-[52px] px-9 border border-gold/55 text-gold-light font-display text-lg tracking-wide">Request a Quote</a>
+                <a href="#gallery" class="cta-ghost inline-flex items-center justify-center min-h-[52px] px-9 border border-gold/20 text-stone-soft font-display text-lg tracking-wide">View Restoration Work</a>
               </div>
             </div>
-            <div class="reveal reveal-d1 order-1 lg:order-2 flex justify-center">
-              <div class="guardian-stage pb-8 sm:pb-10">
+
+            <div class="reveal reveal-d1 order-1 lg:order-2 flex justify-center lg:justify-end">
+              <div class="guardian-stage pb-10 sm:pb-14 w-full max-w-[520px]">
                 <div class="guardian-ring guardian-float relative shadow-guardian">
                   <picture>
                     <source srcset="assets/guardian-marble.webp" type="image/webp" />
-                    <img src="assets/guardian-marble.png" alt="Marble guardian emblem" width="460" height="460" class="max-w-[min(86vw,320px)] sm:max-w-[400px] lg:max-w-[460px] w-full" loading="eager" fetchpriority="high" />
+                    <img src="assets/guardian-marble.png" alt="Marble guardian — emblem of Master Sanctum Restoration" width="520" height="520" class="max-w-[min(88vw,360px)] sm:max-w-[440px] lg:max-w-[520px] w-full" loading="eager" fetchpriority="high" />
                   </picture>
+                  <div class="guardian-badge hidden sm:block" aria-hidden="true">
+                    <picture>
+                      <source srcset="assets/logo-msr.webp" type="image/webp" />
+                      <img src="assets/logo-msr.png" alt="" width="48" height="48" />
+                    </picture>
+                  </div>
                 </div>
                 <div class="guardian-pedestal" aria-hidden="true"></div>
               </div>
             </div>
           </div>
         </div>
+        <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-stone-muted hover:text-gold-light transition-colors scroll-hint" aria-label="Scroll to method">
+          <span class="text-[9px] tracking-luxury uppercase">Explore</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
       </section>
 
-      <div class="border-y border-gold/8">
-        <div class="max-w-5xl mx-auto px-4 py-4 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-10 text-[10px] tracking-luxury uppercase text-stone-muted text-center">
-          <span>Conservation-grade</span><span class="hidden sm:inline text-gold/25">·</span>
-          <span>Hand-finished</span><span class="hidden sm:inline text-gold/25">·</span>
-          <span>Documented protocols</span>
+      <div class="border-y border-gold/10 bg-marble-dark/40">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8 py-5 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-12 text-[10px] tracking-luxury uppercase text-stone-muted text-center font-medium">
+          <span>Conservation-grade protocols</span><span class="hidden sm:inline text-gold/20">·</span>
+          <span>Hand-finished surfaces</span><span class="hidden sm:inline text-gold/20">·</span>
+          <span>Documented commissions</span>
         </div>
       </div>
 
       <!-- Pillars -->
       <section id="about" class="section-pad" data-section="about">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6">
-          <div class="reveal text-center mb-12 sm:mb-16 max-w-lg mx-auto">
-            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-2">The MSR Standard</p>
-            <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold">Three Disciplines</h2>
-            <div class="gold-line w-20 mx-auto my-5"></div>
-            <p class="text-stone-soft text-sm sm:text-[15px] leading-relaxed">One covenant across every commission — <em class="font-display text-gold-light/90 not-italic">Protecting What Endures.</em></p>
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">The MSR Standard</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Three Disciplines</h2>
+            <div class="gold-line w-24 mx-auto my-6"></div>
+            <p class="text-stone-soft text-base sm:text-lg leading-relaxed font-display">
+              One covenant across every commission.
+            </p>
           </div>
-          <div class="grid md:grid-cols-3 gap-4 lg:gap-5">
-            <article class="reveal reveal-d1 pillar-card rounded-sm p-7 sm:p-8 text-center">
+          <div class="grid md:grid-cols-3 gap-5 lg:gap-6">
+            <article class="reveal reveal-d1 pillar-card rounded-sm p-8 sm:p-9" data-numeral="I">
               <div class="pillar-icon-wrap">
                 <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg>
               </div>
-              <h3 class="font-display text-xl sm:text-2xl text-gold-light mb-2">Assessment</h3>
-              <p class="text-stone-soft text-sm leading-[1.75]">Read the stone first — substrate, veining, prior work — before any tool meets the surface.</p>
+              <h3 class="font-display text-2xl sm:text-[1.65rem] text-gold-light mb-3 font-semibold">Assessment</h3>
+              <p class="text-stone-soft text-sm sm:text-[15px] leading-[1.8]">We read substrate, veining, and prior intervention before a single tool meets the stone. Condition is documented. Scope is defined with precision.</p>
             </article>
-            <article class="reveal reveal-d2 pillar-card pillar-featured rounded-sm p-7 sm:p-8 text-center md:-translate-y-2">
+            <article class="reveal reveal-d2 pillar-card pillar-featured rounded-sm p-8 sm:p-9 md:-translate-y-3" data-numeral="II">
               <div class="pillar-icon-wrap">
                 <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 20l4-12 4 12M6 20h12"/></svg>
               </div>
-              <h3 class="font-display text-xl sm:text-2xl text-gold-light mb-2">Restoration</h3>
-              <p class="text-stone-soft text-sm leading-[1.75]">Honing, polish, and color-matched infill — by hand, for surfaces built to outlast trends.</p>
+              <h3 class="font-display text-2xl sm:text-[1.65rem] text-gold-light mb-3 font-semibold">Restoration</h3>
+              <p class="text-stone-soft text-sm sm:text-[15px] leading-[1.8]">Controlled honing, color-matched infill, and hand polish — executed for surfaces meant to outlast generations, not trends.</p>
             </article>
-            <article class="reveal reveal-d3 pillar-card rounded-sm p-7 sm:p-8 text-center">
+            <article class="reveal reveal-d3 pillar-card rounded-sm p-8 sm:p-9" data-numeral="III">
               <div class="pillar-icon-wrap">
                 <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 4v6c0 5-3 8-7 9-4-1-7-4-7-9V7l7-4z"/></svg>
               </div>
-              <h3 class="font-display text-xl sm:text-2xl text-gold-light mb-2">Protection</h3>
-              <p class="text-stone-soft text-sm leading-[1.75]">Impregnating sealers and care guidance — so the finish holds through years of use.</p>
+              <h3 class="font-display text-2xl sm:text-[1.65rem] text-gold-light mb-3 font-semibold">Protection</h3>
+              <p class="text-stone-soft text-sm sm:text-[15px] leading-[1.8]">Impregnating sealers and maintenance guidance — so the finish holds its integrity through years of daily use.</p>
             </article>
           </div>
         </div>
       </section>
 
       <!-- Gallery -->
-      <section id="gallery" class="section-pad border-t border-gold/6 bg-[radial-gradient(ellipse_at_bottom,rgba(201,162,39,0.03),transparent_60%)]" data-section="gallery">
-        <div class="max-w-5xl mx-auto px-4 sm:px-6">
-          <div class="reveal flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-10">
-            <div class="text-center sm:text-left">
-              <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-2">Restoration Gallery</p>
-              <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold">Before &amp; After</h2>
-              <div class="gold-line w-20 mx-auto sm:mx-0 my-4"></div>
-              <p class="text-stone-soft text-sm max-w-md mx-auto sm:mx-0 leading-relaxed">Documented commissions — marble, granite, limestone.</p>
+      <section id="gallery" class="section-pad border-t border-gold/8 bg-[radial-gradient(ellipse_at_bottom,rgba(201,162,39,0.04),transparent_65%)]" data-section="gallery">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="reveal flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
+            <div class="text-center lg:text-left max-w-xl">
+              <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Restoration Portfolio</p>
+              <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Before &amp; After</h2>
+              <div class="gold-line w-24 mx-auto lg:mx-0 my-5"></div>
+              <p class="text-stone-soft text-sm sm:text-base leading-relaxed">Documented transformations across marble, granite, limestone, and architectural stone. Select any image for full detail.</p>
+              <p id="gallery-count" class="text-stone-muted text-xs mt-3 tracking-wide"></p>
             </div>
-            <div id="gallery-filters" class="flex flex-wrap justify-center sm:justify-end gap-1.5" role="tablist">
-              <button type="button" class="filter-btn is-active px-3.5 py-1.5 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="all" aria-selected="true">All</button>
-              <button type="button" class="filter-btn px-3.5 py-1.5 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="before">Before</button>
-              <button type="button" class="filter-btn px-3.5 py-1.5 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="after">After</button>
-              <button type="button" class="filter-btn px-3.5 py-1.5 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="process">Process</button>
+            <div id="gallery-filters" class="flex flex-wrap justify-center lg:justify-end gap-2" role="tablist">
+              <button type="button" class="filter-btn is-active px-4 py-2 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="all" aria-selected="true">All</button>
+              <button type="button" class="filter-btn px-4 py-2 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="before">Before</button>
+              <button type="button" class="filter-btn px-4 py-2 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="after">After</button>
+              <button type="button" class="filter-btn px-4 py-2 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="process">Process</button>
             </div>
           </div>
-          <div id="gallery-pairs" class="reveal space-y-4 sm:space-y-5 mb-8"></div>
-          <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3">
-            <p class="col-span-full text-center text-stone-muted text-sm py-12 animate-pulse">Loading gallery…</p>
+          <div id="gallery-pairs" class="reveal space-y-6 sm:space-y-8 mb-10"></div>
+          <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5">
+            <p class="col-span-full text-center text-stone-muted text-sm py-14 animate-pulse">Loading gallery…</p>
           </div>
         </div>
       </section>
 
       <!-- Links -->
-      <section id="links" class="section-pad border-t border-gold/6" data-section="links">
-        <div class="max-w-3xl mx-auto px-4 sm:px-6">
-          <div class="reveal text-center mb-10">
-            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-2">Quick Access</p>
-            <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold">Short Links</h2>
-            <div class="gold-line w-16 mx-auto my-4"></div>
-            <p class="text-stone-soft text-sm leading-relaxed">Append a slug to this domain — instant routing to quotes, portfolio, and more.</p>
+      <section id="links" class="section-pad border-t border-gold/8" data-section="links">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-12">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Instant Routing</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Short Links</h2>
+            <div class="gold-line w-20 mx-auto my-5"></div>
+            <p class="text-stone-soft text-sm sm:text-base leading-relaxed max-w-md mx-auto">Append any slug to this domain for direct access to quotes, portfolio, and contact.</p>
           </div>
-          <div id="slug-featured" class="reveal reveal-d1 grid grid-cols-2 sm:grid-cols-4 gap-2.5 sm:gap-3 mb-8">
-            <a href="quote" data-slug="quote" class="slug-featured slug-link rounded-sm p-4 sm:p-5 text-center group">
-              <p class="font-mono text-gold-light text-sm sm:text-base group-hover:text-gold transition-colors">/quote</p>
-              <p class="text-stone-muted text-[10px] sm:text-xs mt-1.5 tracking-wide">Estimate</p>
+
+          <div class="reveal reveal-d1 domain-bar rounded-sm mb-8 max-w-md mx-auto overflow-hidden">
+            <span class="host" id="domain-host">sanctum-shortener.is-a.dev</span>
+            <span class="slug">/quote</span>
+          </div>
+
+          <div id="slug-featured" class="reveal reveal-d1 grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-10">
+            <a href="quote" data-slug="quote" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/quote</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Conservation Estimate</p>
             </a>
-            <a href="portfolio" data-slug="portfolio" class="slug-featured slug-link rounded-sm p-4 sm:p-5 text-center group">
-              <p class="font-mono text-gold-light text-sm sm:text-base group-hover:text-gold transition-colors">/portfolio</p>
-              <p class="text-stone-muted text-[10px] sm:text-xs mt-1.5 tracking-wide">Gallery</p>
+            <a href="portfolio" data-slug="portfolio" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 15l5-5 4 4 6-8"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/portfolio</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Restoration Gallery</p>
             </a>
-            <a href="book" data-slug="book" class="slug-featured slug-link rounded-sm p-4 sm:p-5 text-center group">
-              <p class="font-mono text-gold-light text-sm sm:text-base group-hover:text-gold transition-colors">/book</p>
-              <p class="text-stone-muted text-[10px] sm:text-xs mt-1.5 tracking-wide">Publication</p>
+            <a href="book" data-slug="book" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/book</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Publication</p>
             </a>
-            <a href="contact" data-slug="contact" class="slug-featured slug-link rounded-sm p-4 sm:p-5 text-center group">
-              <p class="font-mono text-gold-light text-sm sm:text-base group-hover:text-gold transition-colors">/contact</p>
-              <p class="text-stone-muted text-[10px] sm:text-xs mt-1.5 tracking-wide">Contact</p>
+            <a href="contact" data-slug="contact" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/contact</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Direct Contact</p>
             </a>
           </div>
-          <div id="links-grid" class="space-y-2.5 reveal reveal-d2">
+
+          <div id="links-grid" class="space-y-3 reveal reveal-d2">
             <p class="text-center text-stone-muted text-sm py-6 animate-pulse">Loading links…</p>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="border-t border-gold/8 py-12 sm:py-14">
-      <div class="max-w-5xl mx-auto px-4 sm:px-6">
-        <div class="grid sm:grid-cols-3 gap-8 text-center sm:text-left">
-          <div class="flex flex-col items-center sm:items-start">
+    <footer class="footer-brand py-14 sm:py-18">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center sm:text-left">
+          <div class="sm:col-span-2 lg:col-span-1 flex flex-col items-center sm:items-start">
             <picture>
               <source srcset="assets/logo-msr.webp" type="image/webp" />
-              <img src="assets/logo-msr.png" alt="" width="44" height="44" class="mb-3 opacity-90" />
+              <img src="assets/logo-msr.png" alt="" width="52" height="52" class="mb-4" />
             </picture>
-            <p class="font-display italic text-stone-soft text-lg">Protecting What Endures</p>
-            <p class="text-[10px] tracking-luxury uppercase text-stone-muted mt-2">Master Sanctum Restoration</p>
+            <p class="font-display text-xl text-gold-light font-semibold italic">Protecting What Endures</p>
+            <p class="text-[10px] tracking-luxury uppercase text-stone-muted mt-3">Master Sanctum Restoration</p>
           </div>
           <div>
-            <p class="text-[10px] tracking-luxury uppercase text-gold/60 mb-3">Contact</p>
-            <ul class="space-y-2 text-sm text-stone-soft">
-              <li><a href="quote" id="footer-quote" class="hover:text-gold-light transition-colors">Request a quote →</a></li>
-              <li><a href="contact" class="slug-footer hover:text-gold-light transition-colors">/contact</a></li>
-              <li class="text-stone-muted text-xs pt-1">Florida &amp; select commissions nationwide</li>
+            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-4 font-medium">Contact</p>
+            <ul class="space-y-2.5 text-sm text-stone-soft">
+              <li><a href="quote" id="footer-quote" class="hover:text-gold-light transition-colors duration-300">Request a quote →</a></li>
+              <li><a href="contact" class="slug-footer hover:text-gold-light transition-colors duration-300">/contact</a></li>
+              <li class="text-stone-muted text-xs pt-2 leading-relaxed">Florida &amp; select commissions nationwide</li>
             </ul>
           </div>
           <div>
-            <p class="text-[10px] tracking-luxury uppercase text-gold/60 mb-3">Short Links</p>
-            <ul class="space-y-2 text-sm font-mono text-stone-muted">
-              <li><a href="quote" class="slug-footer hover:text-gold-light transition-colors">/quote</a></li>
-              <li><a href="portfolio" class="slug-footer hover:text-gold-light transition-colors">/portfolio</a></li>
-              <li><a href="book" class="slug-footer hover:text-gold-light transition-colors">/book</a></li>
-              <li><a href="contact" class="slug-footer hover:text-gold-light transition-colors">/contact</a></li>
+            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-4 font-medium">Short Links</p>
+            <ul class="space-y-2.5 text-sm font-mono text-stone-muted">
+              <li><a href="quote" class="slug-footer hover:text-gold-light transition-colors duration-300">/quote</a></li>
+              <li><a href="portfolio" class="slug-footer hover:text-gold-light transition-colors duration-300">/portfolio</a></li>
+              <li><a href="book" class="slug-footer hover:text-gold-light transition-colors duration-300">/book</a></li>
+              <li><a href="contact" class="slug-footer hover:text-gold-light transition-colors duration-300">/contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-4 font-medium">Standards</p>
+            <ul class="space-y-2 text-xs text-stone-muted leading-relaxed">
+              <li>Conservation-grade assessment</li>
+              <li>Hand-finished restoration</li>
+              <li>Documented protection protocols</li>
             </ul>
           </div>
         </div>
-        <div class="gold-line max-w-xs mx-auto mt-10 mb-6 opacity-40"></div>
-        <p class="text-center text-stone-dim text-[11px]">© Master Sanctum Restoration</p>
+        <div class="gold-line max-w-sm mx-auto mt-12 mb-7 opacity-50"></div>
+        <p class="text-center text-stone-dim text-[11px] tracking-wide">© Master Sanctum Restoration · Craft · Conservation · Continuity</p>
       </div>
     </footer>
 
     <div class="mobile-bar md:hidden">
-      <a id="mobile-bar-quote" href="quote" class="cta-primary flex items-center justify-center w-full min-h-[44px] border border-gold/45 text-gold-light font-display tracking-wide text-sm">Get a Quote</a>
+      <a id="mobile-bar-quote" href="quote" class="cta-primary flex items-center justify-center w-full min-h-[48px] border border-gold/50 text-gold-light font-display tracking-wide">Request a Quote</a>
     </div>
 
-    <div id="lightbox" class="hidden fixed inset-0 z-[200] items-center justify-center bg-marble-dark/97 p-4" role="dialog" aria-modal="true">
-      <button type="button" id="lightbox-close" class="absolute top-4 right-4 p-2 text-gold-light border border-gold/25 hover:bg-gold/10 rounded-sm" aria-label="Close">
+    <div id="lightbox" class="hidden fixed inset-0 z-[200] items-center justify-center bg-marble-dark/98 p-4 sm:p-8" role="dialog" aria-modal="true">
+      <button type="button" id="lightbox-close" class="absolute top-5 right-5 p-2.5 text-gold-light border border-gold/28 hover:bg-gold/10 rounded-sm transition-colors" aria-label="Close">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18"/></svg>
       </button>
-      <figure class="max-w-3xl w-full text-center">
-        <img id="lightbox-img" src="" alt="" class="max-h-[72vh] mx-auto rounded-sm border border-gold/18 shadow-card" />
-        <figcaption id="lightbox-caption" class="mt-4 text-stone-soft text-sm font-display max-w-md mx-auto"></figcaption>
+      <figure class="max-w-4xl w-full text-center">
+        <img id="lightbox-img" src="" alt="" class="max-h-[78vh] mx-auto rounded-sm border border-gold/22 shadow-card" />
+        <figcaption id="lightbox-caption" class="mt-5 text-stone-soft text-sm sm:text-base font-display max-w-lg mx-auto leading-relaxed"></figcaption>
       </figure>
     </div>
 
@@ -482,34 +593,41 @@
             if (!p.before || !p.after) return;
             var title = pairTitles[g] || g.charAt(0).toUpperCase() + g.slice(1);
             html +=
-              '<article class="pair-card rounded-sm shadow-card overflow-hidden">' +
-              '<div class="pair-header px-4 py-3 flex items-center justify-between">' +
-              '<p class="font-display text-gold-light text-lg">' + title + '</p>' +
+              '<article class="pair-card rounded-sm overflow-hidden">' +
+              '<div class="pair-header px-5 py-4 flex items-center justify-between">' +
+              '<p class="font-display text-gold-light text-xl font-semibold">' + title + '</p>' +
               '<p class="text-[9px] tracking-luxury uppercase text-stone-muted">Before → After</p></div>' +
-              '<div class="grid grid-cols-[1fr_auto_1fr] items-stretch">' +
-              '<figure class="relative aspect-[4/3] cursor-zoom-in" data-idx="' + p.before.index + '" tabindex="0" role="button">' +
-              '<span class="absolute top-2 left-2 z-10 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm label-before">Before</span>' +
-              '<img src="' + p.before.item.src + '" alt="' + p.before.item.alt + '" loading="lazy" class="w-full h-full object-cover" /></figure>' +
-              '<div class="flex items-center px-1 sm:px-2 pair-arrow" aria-hidden="true"><svg class="w-4 h-4 sm:w-5 sm:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg></div>' +
-              '<figure class="relative aspect-[4/3] cursor-zoom-in" data-idx="' + p.after.index + '" tabindex="0" role="button">' +
-              '<span class="absolute top-2 left-2 z-10 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm label-after">After</span>' +
-              '<img src="' + p.after.item.src + '" alt="' + p.after.item.alt + '" loading="lazy" class="w-full h-full object-cover" /></figure>' +
-              '</div></article>';
+              '<div class="pair-frame"><div class="grid grid-cols-[1fr_auto_1fr] items-stretch gap-0">' +
+              '<figure class="pair-figure relative aspect-[4/3] cursor-zoom-in" data-idx="' + p.before.index + '" tabindex="0" role="button">' +
+              '<span class="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm label-before">Before</span>' +
+              '<img src="' + p.before.item.src + '" alt="' + p.before.item.alt + '" loading="lazy" class="w-full h-full object-cover" />' +
+              '<span class="pair-caption">' + (p.before.item.caption || p.before.item.alt) + '</span></figure>' +
+              '<div class="flex items-center px-2 sm:px-3 pair-arrow" aria-hidden="true"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg></div>' +
+              '<figure class="pair-figure relative aspect-[4/3] cursor-zoom-in" data-idx="' + p.after.index + '" tabindex="0" role="button">' +
+              '<span class="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm label-after">After</span>' +
+              '<img src="' + p.after.item.src + '" alt="' + p.after.item.alt + '" loading="lazy" class="w-full h-full object-cover" />' +
+              '<span class="pair-caption">' + (p.after.item.caption || p.after.item.alt) + '</span></figure>' +
+              '</div></div></article>';
           });
-          el.innerHTML = html;
+          el.innerHTML = html || '<p class="text-center text-stone-muted text-sm py-8">No before/after pairs in gallery.</p>';
           bindGallery(el, items);
         }
 
         function renderGalleryGrid(items) {
           var grid = document.getElementById("gallery-grid");
-          if (!items.filter(matchesFilter).length) {
-            grid.innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-12">No images in this view.</p>';
+          var visible = items.filter(matchesFilter);
+          var countEl = document.getElementById("gallery-count");
+          if (countEl) countEl.textContent = items.length + " documented images · " + visible.length + " in current view";
+          if (!visible.length) {
+            grid.innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-14">No images in this view.</p>';
             return;
           }
           grid.innerHTML = items.map(function (item, i) {
             var hid = matchesFilter(item) ? "" : " is-hidden";
-            var lbl = item.label ? '<span class="absolute top-1.5 left-1.5 z-10 px-1.5 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm ' + labelClass(item.label) + '">' + item.label + '</span>' : "";
-            return '<figure class="gallery-card relative rounded-sm aspect-[4/5] shadow-card' + hid + '" data-idx="' + i + '" tabindex="0" role="button">' + lbl +
+            var feat = i === 0 && activeFilter === "all" ? " is-featured" : "";
+            var lbl = item.label ? '<span class="absolute top-2 left-2 z-10 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm ' + labelClass(item.label) + '">' + item.label + '</span>' : "";
+            var aspect = feat ? "" : " aspect-[4/5]";
+            return '<figure class="gallery-card relative rounded-sm shadow-card' + hid + feat + aspect + '" data-idx="' + i + '" tabindex="0" role="button">' + lbl +
               '<img src="' + item.src + '" alt="' + item.alt + '" loading="lazy" class="w-full h-full object-cover" /></figure>';
           }).join("");
           bindGallery(grid, items);
@@ -521,12 +639,12 @@
           var base = getBasePath();
           grid.innerHTML = keys.map(function (key) {
             var m = getLinkMeta(links[key]);
-            return '<a href="' + base + key + '" class="link-card block px-4 py-4 rounded-sm group">' +
-              '<div class="flex justify-between gap-3"><div class="min-w-0">' +
-              '<p class="font-display text-lg text-gold-light">/' + key + '</p>' +
-              (m.title ? '<p class="text-stone-soft text-xs mt-1">' + m.title + '</p>' : '') +
-              (m.description ? '<p class="text-stone-muted text-[11px] mt-0.5">' + m.description + '</p>' : '') +
-              '</div><span class="text-gold/35 group-hover:text-gold shrink-0">→</span></div></a>';
+            return '<a href="' + base + key + '" class="link-card block px-5 py-4 rounded-sm group">' +
+              '<div class="flex justify-between gap-4 items-center"><div class="min-w-0">' +
+              '<p class="font-mono text-gold-light text-base group-hover:text-gold transition-colors">/' + key + '</p>' +
+              (m.title ? '<p class="font-display text-stone-soft text-sm mt-1">' + m.title + '</p>' : '') +
+              (m.description ? '<p class="text-stone-muted text-xs mt-1 leading-relaxed">' + m.description + '</p>' : '') +
+              '</div><span class="text-gold/30 group-hover:text-gold shrink-0 text-lg transition-colors">→</span></div></a>';
           }).join("");
         }
 
@@ -558,7 +676,7 @@
           if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("is-visible"); }); return; }
           var obs = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-visible"); obs.unobserve(e.target); } });
-          }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+          }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
           els.forEach(function (e) { obs.observe(e); });
         }
         function initNavSpy() {
@@ -570,11 +688,24 @@
                 l.classList.toggle("is-active", l.getAttribute("data-section") === e.target.getAttribute("data-section"));
               });
             });
-          }, { threshold: 0.3, rootMargin: "-15% 0px -60% 0px" });
+          }, { threshold: 0.25, rootMargin: "-12% 0px -55% 0px" });
           document.querySelectorAll("[data-section]").forEach(function (s) { obs.observe(s); });
         }
 
+        function initSlugHover() {
+          var bar = document.querySelector(".domain-bar .slug");
+          document.querySelectorAll(".slug-link").forEach(function (a) {
+            a.addEventListener("mouseenter", function () {
+              var slug = a.getAttribute("data-slug");
+              if (bar && slug) bar.textContent = "/" + slug;
+            });
+          });
+        }
+
         var base = getBasePath();
+        var hostEl = document.getElementById("domain-host");
+        if (hostEl) hostEl.textContent = window.location.hostname;
+
         ["hero-quote", "mobile-quote", "nav-quote", "footer-quote", "mobile-bar-quote"].forEach(function (id) {
           var el = document.getElementById(id); if (el) el.href = base + "quote";
         });
@@ -585,7 +716,7 @@
 
         document.getElementById("site-header").classList.toggle("is-scrolled", false);
         window.addEventListener("scroll", function () {
-          document.getElementById("site-header").classList.toggle("is-scrolled", window.scrollY > 20);
+          document.getElementById("site-header").classList.toggle("is-scrolled", window.scrollY > 24);
         }, { passive: true });
 
         document.getElementById("menu-toggle").addEventListener("click", function () {
@@ -604,7 +735,7 @@
         document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLightbox(); });
         if (location.hash === "#gallery") setTimeout(function () { document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" }); }, 300);
 
-        initReveal(); initNavSpy();
+        initReveal(); initNavSpy(); initSlugHover();
 
         var lx = new XMLHttpRequest();
         lx.onload = function () { try { renderLinks(jsyaml.load(lx.response)); } catch (e) {} };
@@ -613,7 +744,7 @@
         var gx = new XMLHttpRequest();
         gx.onload = function () {
           try { galleryItems = JSON.parse(gx.response); renderPairs(galleryItems); renderGalleryGrid(galleryItems); }
-          catch (e) { document.getElementById("gallery-grid").innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-12">Gallery unavailable</p>'; }
+          catch (e) { document.getElementById("gallery-grid").innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-14">Gallery unavailable</p>'; }
         };
         gx.open("GET", base + "gallery.json"); gx.send();
       })();
