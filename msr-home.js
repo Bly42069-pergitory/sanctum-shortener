@@ -88,6 +88,177 @@
       "Next: Site assessment + intake (" + root + "/intake)"
     ].filter(Boolean).join("\n");
   }
+
+  function applyTemplateVars(text, vars) {
+    return String(text || "").replace(/\{\{(\w+)\}\}/g, function (_, key) {
+      return vars[key] != null && vars[key] !== "" ? vars[key] : "{{" + key + "}}";
+    });
+  }
+
+  function leadTemplateVars(lead) {
+    var b = (siteData && siteData.business) || {};
+    var root = canonicalSiteRoot();
+    var locality = b.address && b.address.addressLocality ? b.address.addressLocality : "SWFL";
+    return {
+      name: lead && lead.name ? lead.name.split(" ")[0] : "there",
+      city: locality,
+      stoneType: "your stone",
+      primaryIssue: lead && lead.message ? lead.message.slice(0, 160) : "restoration needs",
+      surface: "as described in your inquiry",
+      location: locality + ", FL",
+      timeline: "your stated timeline",
+      goal: lead && lead.message ? lead.message : "restore and protect the surface",
+      intakeUrl: root + "/intake",
+      phone: b.phoneDisplay || b.phone || "(callback via quote form)",
+      email: b.email || "(contact pending setup)",
+      gatekeeperName: "Master-Sanctum-Gatekeeper",
+      slot1: "a weekday morning",
+      slot2: "a weekday afternoon",
+      date: "TBD",
+      time: "TBD",
+      timezone: "ET",
+      address: "On file after confirmation",
+      assessor: "Master Sanctum conservation team"
+    };
+  }
+
+  function copyToClipboard(text, onDone) {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(text).then(function () { onDone(true); }).catch(function () { onDone(false); });
+      return;
+    }
+    onDone(false);
+  }
+
+  function getPendingLead() {
+    var raw;
+    try { raw = sessionStorage.getItem("msr-quote-pending"); } catch (e) { return null; }
+    if (!raw) return null;
+    var lead;
+    try { lead = JSON.parse(raw); } catch (e) { return null; }
+    if (!lead || !lead.name) return null;
+    if (lead.ts && Date.now() - lead.ts > 86400000) {
+      try { sessionStorage.removeItem("msr-quote-pending"); } catch (err) {}
+      return null;
+    }
+    return lead;
+  }
+
+  function updatePendingLeadBadge() {
+    var on = !!getPendingLead();
+    ["nav-pending-badge", "nav-pending-badge-mobile"].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.classList.toggle("hidden", !on);
+    });
+  }
+
+  function downloadLeadTxt(lead) {
+    var blob = new Blob([formatLeadSummary(lead)], { type: "text/plain;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = "msr-lead-" + (lead.name || "inquiry").replace(/[^\w.-]+/g, "-").toLowerCase() + ".txt";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  var GK_TEMPLATE_KEYS = ["hotLead", "coldInquiry", "priceShopper", "siteVisitConfirmation"];
+
+  function renderGatekeeperTemplates(templates) {
+    var wrap = document.getElementById("gatekeeper-templates");
+    var grid = document.getElementById("gatekeeper-templates-grid");
+    if (!wrap || !grid || !templates) return;
+    var cards = GK_TEMPLATE_KEYS.map(function (key) {
+      var t = templates[key];
+      if (!t || !t.body) return "";
+      return '<article class="gk-template-card rounded-sm p-5 text-left" data-template-key="' + esc(key) + '">' +
+        '<p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-2 font-medium">' + esc(t.name || key) + '</p>' +
+        '<p class="text-stone-muted text-xs mb-3 leading-snug"><span class="text-stone-dim">Subject:</span> ' + esc(t.subject || "") + '</p>' +
+        '<div class="flex flex-wrap gap-2">' +
+        '<button type="button" class="gk-tpl-copy-subject btn-legend min-h-[36px] px-4 text-xs text-stone-soft font-display tracking-wide">Copy Subject</button>' +
+        '<button type="button" class="gk-tpl-copy-body btn-call min-h-[36px] px-4 text-xs text-gold-light font-display tracking-wide">Copy Body</button>' +
+        '</div>' +
+        '<p class="gk-tpl-status text-gold-light/80 text-xs mt-2 hidden" role="status"></p>' +
+        '</article>';
+    }).filter(Boolean);
+    if (!cards.length) return;
+    wrap.classList.remove("hidden");
+    grid.innerHTML = cards.join("");
+    var pending = getPendingLead();
+    grid.querySelectorAll(".gk-template-card").forEach(function (card) {
+      var key = card.getAttribute("data-template-key");
+      var t = templates[key];
+      if (!t) return;
+      var statusEl = card.querySelector(".gk-tpl-status");
+      function showStatus(msg) {
+        if (!statusEl) return;
+        statusEl.classList.remove("hidden");
+        statusEl.textContent = msg;
+      }
+      var subBtn = card.querySelector(".gk-tpl-copy-subject");
+      var bodyBtn = card.querySelector(".gk-tpl-copy-body");
+      if (subBtn) {
+        subBtn.addEventListener("click", function () {
+          var vars = pending ? leadTemplateVars(pending) : leadTemplateVars({});
+          copyToClipboard(applyTemplateVars(t.subject, vars), function (ok) {
+            showStatus(ok ? "Subject copied." : "Copy failed — select manually.");
+          });
+        });
+      }
+      if (bodyBtn) {
+        bodyBtn.addEventListener("click", function () {
+          var vars = pending ? leadTemplateVars(pending) : leadTemplateVars({});
+          copyToClipboard(applyTemplateVars(t.body, vars), function (ok) {
+            showStatus(ok ? "Body copied — paste into email or CRM." : "Copy failed — select manually.");
+          });
+        });
+      }
+    });
+  }
+
+  function renderGatekeeperExample(sim) {
+    var wrap = document.getElementById("gatekeeper-example");
+    var body = document.getElementById("gatekeeper-example-body");
+    var title = document.getElementById("gatekeeper-example-title");
+    if (!wrap || !body || !sim || !sim.conversation) return;
+    if (title && sim._meta && sim._meta.scenario) title.textContent = sim._meta.scenario;
+    body.innerHTML = sim.conversation.map(function (turn) {
+      var who = turn.role === "customer" ? "Customer" : "Gatekeeper";
+      var cls = turn.role === "customer" ? "text-stone-soft" : "text-gold-light/90";
+      return '<div class="mb-4 pb-4 border-b border-gold/8 last:border-0 last:mb-0 last:pb-0">' +
+        '<p class="text-[10px] tracking-luxury uppercase text-gold/50 mb-1.5 font-medium">' + esc(who) +
+        (turn.channel ? ' · ' + esc(turn.channel) : '') + '</p>' +
+        '<p class="' + cls + ' whitespace-pre-line leading-relaxed">' + esc(turn.text) + '</p></div>';
+    }).join("");
+    wrap.classList.remove("hidden");
+  }
+
+  function loadGatekeeperAssets() {
+    if (window.__MSR_INLINE__ && window.__MSR_INLINE__.gatekeeperTemplates) {
+      renderGatekeeperTemplates(window.__MSR_INLINE__.gatekeeperTemplates);
+    } else {
+      var base = getBasePath();
+      var tx = new XMLHttpRequest();
+      tx.onload = function () {
+        try { renderGatekeeperTemplates(JSON.parse(tx.response)); } catch (e) {}
+      };
+      tx.open("GET", base + "gatekeeper/templates.json");
+      tx.send();
+    }
+    if (window.__MSR_INLINE__ && window.__MSR_INLINE__.gatekeeperExample) {
+      renderGatekeeperExample(window.__MSR_INLINE__.gatekeeperExample);
+    } else {
+      var base2 = getBasePath();
+      var sx = new XMLHttpRequest();
+      sx.onload = function () {
+        try { renderGatekeeperExample(JSON.parse(sx.response)); } catch (e) {}
+      };
+      sx.open("GET", base2 + "gatekeeper/simulations/north-port-marble-counter.json");
+      sx.send();
+    }
+  }
   function externalQuoteUrl() {
     var map = (window.__MSR_INLINE__ && window.__MSR_INLINE__.links) || linksData;
     var url = map ? getLinkUrlFromMap(map, "quote") : null;
@@ -489,6 +660,7 @@
       if (swflNote && gk.serviceAreaNote) swflNote.textContent = gk.serviceAreaNote;
     }
     renderPendingQuoteLead();
+    loadGatekeeperAssets();
   }
 
   function renderPendingQuoteLead() {
@@ -503,20 +675,9 @@
       var inner = section.querySelector(".max-w-6xl");
       if (inner && steps) inner.insertBefore(mount, steps);
     }
-    var raw;
-    try { raw = sessionStorage.getItem("msr-quote-pending"); } catch (e) { raw = null; }
-    if (!raw) {
-      mount.classList.add("hidden");
-      return;
-    }
-    var lead;
-    try { lead = JSON.parse(raw); } catch (e) { return; }
-    if (!lead || !lead.name) {
-      mount.classList.add("hidden");
-      return;
-    }
-    if (lead.ts && Date.now() - lead.ts > 86400000) {
-      try { sessionStorage.removeItem("msr-quote-pending"); } catch (err) {}
+    var lead = getPendingLead();
+    updatePendingLeadBadge();
+    if (!lead) {
       mount.classList.add("hidden");
       return;
     }
@@ -531,34 +692,70 @@
       (lead.email ? '<li>Email: ' + esc(lead.email) + '</li>' : '') +
       (lead.message ? '<li class="pt-2 text-stone-muted leading-relaxed">' + esc(lead.message) + '</li>' : '') +
       '</ul>' +
-      '<p class="text-stone-muted text-xs mt-4 italic">Copy the lead summary for Gatekeeper follow-up, or dismiss when handled.</p>' +
+      '<p class="text-stone-muted text-xs mt-4 italic">Export for follow-up, draft a hot-lead reply from templates below, or dismiss when handled.</p>' +
       '<div class="flex flex-wrap gap-2 mt-4">' +
       '<button type="button" id="gk-copy-lead" class="btn-call min-h-[40px] px-5 text-sm text-gold-light font-display tracking-wide">Copy Lead Summary</button>' +
+      '<button type="button" id="gk-download-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Download .txt</button>' +
+      '<button type="button" id="gk-draft-hot" class="btn-call min-h-[40px] px-5 text-sm text-gold-light font-display tracking-wide">Draft Hot Lead Reply</button>' +
       '<button type="button" id="gk-dismiss-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Dismiss</button>' +
       '</div>' +
       '<p id="gk-copy-status" class="text-gold-light/80 text-xs mt-2 hidden" role="status"></p>' +
       '</div>';
     var copyBtn = document.getElementById("gk-copy-lead");
+    var downloadBtn = document.getElementById("gk-download-lead");
+    var draftBtn = document.getElementById("gk-draft-hot");
     var dismissBtn = document.getElementById("gk-dismiss-lead");
     var statusEl = document.getElementById("gk-copy-status");
+    function showStatus(msg) {
+      if (!statusEl) return;
+      statusEl.classList.remove("hidden");
+      statusEl.textContent = msg;
+    }
     if (copyBtn) {
       copyBtn.addEventListener("click", function () {
-        function done(ok) {
-          if (!statusEl) return;
-          statusEl.classList.remove("hidden");
-          statusEl.textContent = ok ? "Lead summary copied — paste into email or CRM." : "Copy failed — select text manually.";
+        copyToClipboard(summary, function (ok) {
+          showStatus(ok ? "Lead summary copied — paste into email or CRM." : "Copy failed — select text manually.");
+        });
+      });
+    }
+    if (downloadBtn) {
+      downloadBtn.addEventListener("click", function () {
+        downloadLeadTxt(lead);
+        showStatus("Lead summary downloaded.");
+      });
+    }
+    if (draftBtn) {
+      draftBtn.addEventListener("click", function () {
+        var templates = window.__MSR_INLINE__ && window.__MSR_INLINE__.gatekeeperTemplates;
+        function draftFrom(tpl) {
+          if (!tpl || !tpl.hotLead) {
+            showStatus("Templates loading — try Copy Body on Hot Lead below.");
+            return;
+          }
+          var vars = leadTemplateVars(lead);
+          var text = "Subject: " + applyTemplateVars(tpl.hotLead.subject, vars) + "\n\n" + applyTemplateVars(tpl.hotLead.body, vars);
+          copyToClipboard(text, function (ok) {
+            showStatus(ok ? "Hot lead reply copied — paste into your email client." : "Copy failed — use Hot Lead template below.");
+          });
         }
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          navigator.clipboard.writeText(summary).then(function () { done(true); }).catch(function () { done(false); });
-        } else {
-          done(false);
+        if (templates) {
+          draftFrom(templates);
+          return;
         }
+        var base = getBasePath();
+        var dx = new XMLHttpRequest();
+        dx.onload = function () {
+          try { draftFrom(JSON.parse(dx.response)); } catch (e) { showStatus("Could not load templates."); }
+        };
+        dx.open("GET", base + "gatekeeper/templates.json");
+        dx.send();
       });
     }
     if (dismissBtn) {
       dismissBtn.addEventListener("click", function () {
         try { sessionStorage.removeItem("msr-quote-pending"); } catch (err) {}
         mount.classList.add("hidden");
+        updatePendingLeadBadge();
       });
     }
   }
@@ -799,6 +996,7 @@
 
     initQuoteForm();
     initNavSpy();
+    updatePendingLeadBadge();
 
     if (window.__MSR_INLINE__) {
       try {

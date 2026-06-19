@@ -339,6 +339,22 @@
       .gatekeeper-step:hover { border-color: rgba(201,162,39,0.32); transform: translateY(-3px); }
       .discovery-item { border-bottom: 1px solid rgba(201,162,39,0.08); }
       .discovery-item:last-child { border-bottom: none; }
+      .gk-template-card {
+        background: linear-gradient(160deg, rgba(30,30,34,0.55), rgba(7,7,9,0.92));
+        border: 1px solid rgba(201,162,39,0.14);
+        transition: border-color 0.3s ease;
+      }
+      .gk-template-card:hover { border-color: rgba(201,162,39,0.28); }
+      .gk-example-details summary { cursor: pointer; list-style: none; }
+      .gk-example-details summary::-webkit-details-marker { display: none; }
+      .gk-example-details[open] .gk-example-chevron { transform: rotate(180deg); }
+      .pending-badge {
+        display: inline-flex; align-items: center; justify-content: center;
+        min-width: 1.125rem; height: 1.125rem; padding: 0 0.25rem;
+        margin-left: 0.35rem; font-size: 0.625rem; font-weight: 600;
+        color: #070709; background: var(--gold-light); border-radius: 9999px;
+        vertical-align: middle;
+      }
       .faq-chevron.rotate-180 { transform: rotate(180deg); }
       .form-input {
         width: 100%; padding: 0.75rem 1rem; background: rgba(7,7,9,0.8);
@@ -412,7 +428,7 @@
           <a href="#gallery" class="nav-link" data-section="gallery">Gallery</a>
           <a href="#about" class="nav-link" data-section="about">About</a>
           <a href="#links" class="nav-link" data-section="links">Short Links</a>
-          <a href="#gatekeeper" class="nav-link" data-section="gatekeeper">Get Started</a>
+          <a href="#gatekeeper" class="nav-link" data-section="gatekeeper">Get Started<span id="nav-pending-badge" class="pending-badge hidden" aria-label="Pending lead">1</span></a>
           <a href="#quote" class="nav-link" data-section="quote">Contact</a>
           <a data-action="quote" data-ab="nav-quote" href="quote" class="px-5 py-2.5 border border-gold/35 text-gold-light font-display tracking-wide text-sm cta-primary">Request a Quote</a>
         </nav>
@@ -428,7 +444,7 @@
           <a href="#gallery" class="nav-mobile-link nav-link py-3.5">Gallery</a>
           <a href="#about" class="nav-mobile-link nav-link py-3.5">About</a>
           <a href="#links" class="nav-mobile-link nav-link py-3.5">Short Links</a>
-          <a href="#gatekeeper" class="nav-mobile-link nav-link py-3.5">Get Started</a>
+          <a href="#gatekeeper" class="nav-mobile-link nav-link py-3.5">Get Started<span id="nav-pending-badge-mobile" class="pending-badge hidden" aria-label="Pending lead">1</span></a>
           <a href="#quote" class="nav-mobile-link nav-link py-3.5">Contact</a>
           <div class="grid grid-cols-2 gap-2 my-3">
             <a href="#sliders" class="py-3.5 text-center btn-call text-gold-light font-display text-sm">View Our Work</a>
@@ -759,6 +775,23 @@
               </div>
             </div>
           </div>
+
+          <div id="gatekeeper-templates" class="reveal reveal-d3 mt-10 hidden">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-2 font-medium text-center">Gatekeeper Response Templates</p>
+            <p class="text-stone-muted text-xs text-center mb-6 max-w-xl mx-auto">Copy-ready follow-ups for hot leads, education-first replies, pricing questions, and visit confirmations.</p>
+            <div id="gatekeeper-templates-grid" class="grid sm:grid-cols-2 gap-4"></div>
+          </div>
+
+          <details id="gatekeeper-example" class="gk-example-details reveal reveal-d4 mt-8 max-w-3xl mx-auto hidden">
+            <summary class="gatekeeper-panel rounded-sm p-4 sm:p-5 flex items-center justify-between gap-4 text-left">
+              <div>
+                <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-1 font-medium">Example Lead Flow</p>
+                <p id="gatekeeper-example-title" class="font-display text-lg text-gold-light font-semibold">North Port — Carrara Counter</p>
+              </div>
+              <span class="gk-example-chevron text-gold/50 text-sm transition-transform shrink-0">▼</span>
+            </summary>
+            <div id="gatekeeper-example-body" class="gatekeeper-panel rounded-sm p-5 sm:p-6 mt-2 text-sm text-stone-soft leading-relaxed border-t-0"></div>
+          </details>
         </div>
       </section>
 

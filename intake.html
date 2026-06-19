@@ -123,5 +123,33 @@
       <p class="text-gold/50 text-[10px] tracking-luxury uppercase mb-1">Guarded by Marmorax</p>
       <p class="text-stone-dim text-[11px] tracking-wide">© Master Sanctum Restoration · Protecting What Endures</p>
     </footer>
+    <script>
+      (function () {
+        var banner = document.getElementById("intake-pending-banner");
+        if (!banner) {
+          banner = document.createElement("div");
+          banner.id = "intake-pending-banner";
+          banner.className = "hidden max-w-2xl mx-auto px-4 sm:px-8 -mt-4 mb-6";
+          var main = document.querySelector("main .max-w-2xl");
+          if (main) main.insertBefore(banner, main.firstChild);
+        }
+        try {
+          var raw = sessionStorage.getItem("msr-quote-pending");
+          if (!raw) return;
+          var lead = JSON.parse(raw);
+          if (!lead || !lead.name) return;
+          if (lead.ts && Date.now() - lead.ts > 86400000) {
+            sessionStorage.removeItem("msr-quote-pending");
+            return;
+          }
+          banner.className = "max-w-2xl mx-auto px-4 sm:px-8 -mt-4 mb-6";
+          banner.innerHTML =
+            '<div class="intake-panel rounded-sm p-4 sm:p-5 text-sm text-stone-soft leading-relaxed">' +
+            '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">Gatekeeper Queue</p>' +
+            '<p>Your quote request for <strong class="text-gold-light font-display">' + lead.name.replace(/</g, "&lt;") + '</strong> is logged. ' +
+            'Complete this intake questionnaire, then return to <a href="./#gatekeeper" class="text-gold-light/80 hover:text-gold-light transition-colors">Get Started</a> to copy follow-up templates.</p></div>';
+        } catch (e) {}
+      })();
+    </script>
   </body>
 </html>

@@ -15,6 +15,8 @@ const msrJs = read("msr-home.js");
 const site = JSON.parse(read("site.json"));
 const gallery = JSON.parse(read("gallery.json"));
 const links = JSON.parse(read("links.json"));
+const gatekeeperTemplates = JSON.parse(read("gatekeeper/templates.json"));
+const gatekeeperExample = JSON.parse(read("gatekeeper/simulations/north-port-marble-counter.json"));
 
 let html = indexHtml;
 
@@ -25,7 +27,7 @@ html = html.replace(
 
 html = html.replace(/\s*<script src="https:\/\/cdn\.jsdelivr\.net\/npm\/js-yaml@4\/dist\/js-yaml\.min\.js"><\/script>\s*/, "\n");
 
-const inlinePayload = JSON.stringify({ site, gallery, links });
+const inlinePayload = JSON.stringify({ site, gallery, links, gatekeeperTemplates, gatekeeperExample });
 const inlineScript = `<script>window.__MSR_INLINE__=${inlinePayload};window.__MSR_STANDALONE__=true;</script>`;
 
 html = html.replace(
