@@ -2,9 +2,16 @@
   "use strict";
 
   var siteData = null;
+  var linksData = null;
   var galleryItems = [];
   var activeFilter = "all";
   var activeSlide = 0;
+
+  function getLinkUrlFromMap(links, slug) {
+    if (!links || !links[slug]) return null;
+    var v = links[slug];
+    return typeof v === "string" ? v : (v && v.url);
+  }
 
   function getPathSegmentsToSkip() {
     var s = window.location.pathname.split("/").filter(Boolean);
@@ -45,10 +52,14 @@
     });
   }
   function externalQuoteUrl() {
-    if (window.__MSR_STANDALONE__ && window.__MSR_INLINE__ && window.__MSR_INLINE__.links && window.__MSR_INLINE__.links.quote) {
-      return window.__MSR_INLINE__.links.quote;
+    var map = (window.__MSR_INLINE__ && window.__MSR_INLINE__.links) || linksData;
+    var url = map ? getLinkUrlFromMap(map, "quote") : null;
+    if (url) {
+      if (url.charAt(0) === "#") return url;
+      if (url.indexOf("http") === 0) return url;
+      return getBasePath() + url.replace(/^\//, "");
     }
-    return getBasePath() + "quote";
+    return "#quote";
   }
   function applyQuoteLinks() {
     var href = externalQuoteUrl();
@@ -57,17 +68,22 @@
     });
   }
   function resolveSlugHref(slug) {
-    if (window.__MSR_STANDALONE__ && window.__MSR_INLINE__ && window.__MSR_INLINE__.links) {
-      var L = window.__MSR_INLINE__.links;
-      if (L[slug]) {
-        var u = L[slug];
-        if (u.indexOf("#") === 0) return u;
-        if (u.indexOf("http") !== 0) return getBasePath() + u.replace(/^\//, "");
-        if (slug === "portfolio" && u.indexOf("#") !== -1) return u.split("#")[1] ? "#" + u.split("#")[1] : "#sliders";
-        return u;
+    var map = (window.__MSR_INLINE__ && window.__MSR_INLINE__.links) || linksData;
+    if (map) {
+      var url = getLinkUrlFromMap(map, slug);
+      if (url) {
+        if (url.charAt(0) === "#") return url;
+        if (url.indexOf("http") !== 0) return getBasePath() + url.replace(/^\//, "");
+        if (slug === "portfolio" && url.indexOf("#") !== -1) {
+          var hash = url.split("#")[1];
+          return hash ? "#" + hash : "#sliders";
+        }
+        return url;
       }
     }
     if (slug === "marmorax") return "#warden";
+    if (slug === "gatekeeper") return "#gatekeeper";
+    if (slug === "quote" || slug === "book" || slug === "contact") return slug === "book" ? "#gatekeeper" : "#quote";
     if (slug === "intake") return getBasePath() + "intake.html";
     return getBasePath() + slug.replace(/^\//, "");
   }
@@ -565,15 +581,55 @@
     initReveal();
   }
 
+  function showQuoteConfirmation(form) {
+    var el = document.getElementById("quote-confirm");
+    if (!el) {
+      el = document.createElement("p");
+      el.id = "quote-confirm";
+      el.className = "text-gold-light text-sm mt-4 leading-relaxed border border-gold/25 rounded-sm p-4 bg-marble-dark/40";
+      form.appendChild(el);
+    }
+    el.textContent = "Thank you — your request is logged under Gatekeeper protocol. We'll follow up to schedule your site assessment. Download the intake questionnaire from Get Started when you're ready.";
+    el.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    form.reset();
+  }
+
   function initQuoteForm() {
     var form = document.getElementById("quote-form");
     if (!form) return;
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var fd = new FormData(form);
+      var payload = {
+        name: fd.get("name") || "",
+        phone: fd.get("phone") || "",
+        email: fd.get("email") || "",
+        message: fd.get("message") || "",
+        ts: Date.now()
+      };
+      var dest = externalQuoteUrl();
+      var b = siteData && siteData.business;
+
+      if (b && b.email) {
+        var subject = encodeURIComponent("MSR Quote Request — " + payload.name);
+        var body = encodeURIComponent(
+          "Name: " + payload.name + "\nPhone: " + payload.phone + "\nEmail: " + payload.email + "\n\nProject:\n" + payload.message
+        );
+        window.location.href = "mailto:" + b.email + "?subject=" + subject + "&body=" + body;
+        return;
+      }
+
+      if (dest.charAt(0) === "#") {
+        try { sessionStorage.setItem("msr-quote-pending", JSON.stringify(payload)); } catch (err) {}
+        var target = document.querySelector(dest) || document.getElementById("gatekeeper");
+        if (target) target.scrollIntoView({ behavior: "smooth" });
+        showQuoteConfirmation(form);
+        return;
+      }
+
       var q = [];
       fd.forEach(function (v, k) { if (v) q.push(encodeURIComponent(k) + "=" + encodeURIComponent(v)); });
-      window.location.href = externalQuoteUrl() + (q.length ? (externalQuoteUrl().indexOf("?") >= 0 ? "&" : "?") + q.join("&") : "");
+      window.location.href = dest + (q.length ? (dest.indexOf("?") >= 0 ? "&" : "?") + q.join("&") : "");
     });
   }
 
@@ -622,7 +678,7 @@
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") { closeLightbox(); closeLegendModal(); }
     });
-    if (location.hash === "#gallery" || location.hash === "#sliders" || location.hash === "#warden" || location.hash === "#legend" || location.hash === "#gatekeeper") {
+    if (location.hash === "#gallery" || location.hash === "#sliders" || location.hash === "#warden" || location.hash === "#legend" || location.hash === "#gatekeeper" || location.hash === "#quote") {
       setTimeout(function () {
         var t = document.querySelector(location.hash);
         if (t) t.scrollIntoView({ behavior: "smooth" });
@@ -637,7 +693,11 @@
         initSite(window.__MSR_INLINE__.site);
         galleryItems = window.__MSR_INLINE__.gallery || [];
         renderGalleryGrid(galleryItems);
-        if (window.__MSR_INLINE__.links) renderLinks(window.__MSR_INLINE__.links);
+        if (window.__MSR_INLINE__.links) {
+          linksData = window.__MSR_INLINE__.links;
+          renderLinks(window.__MSR_INLINE__.links);
+          applyQuoteLinks();
+        }
       } catch (err) { console.error(err); }
       return;
     }
@@ -650,7 +710,17 @@
     sx.send();
 
     function loadLinks(data) {
-      try { renderLinks(data); } catch (e) { console.error(e); }
+      linksData = data;
+      try {
+        renderLinks(data);
+        applyQuoteLinks();
+        document.querySelectorAll(".slug-link, .slug-footer").forEach(function (a) {
+          var slug = a.getAttribute("data-slug") || a.getAttribute("href");
+          if (slug && slug.indexOf("http") !== 0 && slug.indexOf("#") !== 0) {
+            a.href = resolveSlugHref(slug.replace(/^\//, ""));
+          }
+        });
+      } catch (e) { console.error(e); }
     }
     var lx = new XMLHttpRequest();
     lx.onload = function () {
