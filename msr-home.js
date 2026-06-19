@@ -617,8 +617,25 @@
     sx.open("GET", base + "site.json");
     sx.send();
 
+    function loadLinks(data) {
+      try { renderLinks(data); } catch (e) { console.error(e); }
+    }
     var lx = new XMLHttpRequest();
-    lx.onload = function () { try { renderLinks(jsyaml.load(lx.response)); } catch (e) {} };
+    lx.onload = function () {
+      try { loadLinks(jsyaml.load(lx.response)); }
+      catch (e) {
+        var jx = new XMLHttpRequest();
+        jx.onload = function () { try { loadLinks(JSON.parse(jx.response)); } catch (err) {} };
+        jx.open("GET", base + "links.json");
+        jx.send();
+      }
+    };
+    lx.onerror = function () {
+      var jx = new XMLHttpRequest();
+      jx.onload = function () { try { loadLinks(JSON.parse(jx.response)); } catch (err) {} };
+      jx.open("GET", base + "links.json");
+      jx.send();
+    };
     lx.open("GET", base + "links.yml");
     lx.send();
 
