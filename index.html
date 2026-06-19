@@ -244,6 +244,29 @@
 
       .footer-brand { border-top: 1px solid rgba(201,162,39,0.1); background: rgba(7,7,9,0.5); }
 
+      .ba-before img { height: 100%; width: 100%; object-fit: cover; }
+      .slider-dot { border-color: rgba(201,162,39,0.2); color: #b0aaa0; }
+      .slider-dot.is-active, .slider-dot:hover { border-color: rgba(237,217,138,0.45); color: var(--gold-light); background: rgba(201,162,39,0.1); }
+      .service-card, .review-card {
+        background: linear-gradient(160deg, rgba(30,30,34,0.65), rgba(7,7,9,0.96));
+        border: 1px solid rgba(201,162,39,0.12);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+      .service-card:hover, .review-card:hover { border-color: rgba(201,162,39,0.28); transform: translateY(-3px); }
+      .process-step { padding: 1rem 0; border-bottom: 1px solid rgba(201,162,39,0.08); }
+      .process-step:last-child { border-bottom: none; }
+      .faq-chevron.rotate-180 { transform: rotate(180deg); }
+      .form-input {
+        width: 100%; padding: 0.75rem 1rem; background: rgba(7,7,9,0.8);
+        border: 1px solid rgba(201,162,39,0.2); color: #f7f4ef; border-radius: 2px;
+        transition: border-color 0.25s ease;
+      }
+      .form-input:focus { outline: none; border-color: rgba(237,217,138,0.5); box-shadow: 0 0 0 2px rgba(201,162,39,0.15); }
+      .btn-call { background: linear-gradient(135deg, rgba(30,30,34,0.9), rgba(7,7,9,0.95)); border: 1px solid rgba(201,162,39,0.35); }
+      .btn-call:hover { border-color: rgba(237,217,138,0.55); background: rgba(201,162,39,0.1); }
+      #trust-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      @media (min-width: 640px) { #trust-bar { grid-template-columns: repeat(4, 1fr); display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem 3rem; } }
+
       @keyframes guardian-drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
       @keyframes ring-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.95; } }
       @keyframes scroll-hint { 0%, 100% { opacity: 0.4; transform: translateY(0); } 50% { opacity: 1; transform: translateY(6px); } }
@@ -256,7 +279,8 @@
           background: rgba(7,7,9,0.97); border-top: 1px solid rgba(201,162,39,0.14);
           backdrop-filter: blur(16px);
         }
-        body { padding-bottom: 4.5rem; }
+        body { padding-bottom: 5rem; }
+        .mobile-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
         .hero-lockup { margin-left: auto; margin-right: auto; }
         .guardian-badge { display: none; }
         .pillar-card::after { font-size: 3.5rem; }
@@ -285,11 +309,13 @@
             <span class="block text-[9px] tracking-luxury uppercase text-stone-muted">Restoration</span>
           </div>
         </a>
-        <nav class="hidden md:flex items-center gap-8 text-sm" aria-label="Primary">
-          <a href="#about" class="nav-link" data-section="about">Method</a>
-          <a href="#gallery" class="nav-link" data-section="gallery">Portfolio</a>
-          <a href="#links" class="nav-link" data-section="links">Links</a>
-          <a id="nav-quote" href="quote" class="ml-2 px-5 py-2.5 border border-gold/35 text-gold-light font-display tracking-wide text-sm cta-primary">Request Quote</a>
+        <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-sm" aria-label="Primary">
+          <a href="#sliders" class="nav-link" data-section="sliders">Work</a>
+          <a href="#services" class="nav-link" data-section="services">Services</a>
+          <a href="#reviews" class="nav-link" data-section="reviews">Reviews</a>
+          <a href="#faq" class="nav-link" data-section="faq">FAQ</a>
+          <a data-action="call" href="quote" class="btn-call px-4 py-2.5 text-gold-light font-display tracking-wide text-sm transition-colors"><span class="call-label">Call Now</span></a>
+          <a data-action="quote" data-ab="nav-quote" href="quote" class="px-5 py-2.5 border border-gold/35 text-gold-light font-display tracking-wide text-sm cta-primary">Free Quote</a>
         </nav>
         <button id="menu-toggle" type="button" class="md:hidden p-2.5 text-gold-light border border-gold/22 rounded-sm" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
           <svg id="menu-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -298,10 +324,14 @@
       </div>
       <nav id="mobile-menu" class="hidden md:hidden border-t border-gold/10 glass-panel" aria-label="Mobile">
         <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col">
-          <a href="#about" class="nav-mobile-link nav-link py-3.5">Method</a>
-          <a href="#gallery" class="nav-mobile-link nav-link py-3.5">Portfolio</a>
-          <a href="#links" class="nav-mobile-link nav-link py-3.5">Short Links</a>
-          <a id="mobile-quote" href="quote" class="my-3 py-3.5 text-center border border-gold/40 text-gold-light font-display text-lg cta-primary">Request a Quote</a>
+          <a href="#sliders" class="nav-mobile-link nav-link py-3.5">Before &amp; After</a>
+          <a href="#services" class="nav-mobile-link nav-link py-3.5">Services</a>
+          <a href="#reviews" class="nav-mobile-link nav-link py-3.5">Reviews</a>
+          <a href="#faq" class="nav-mobile-link nav-link py-3.5">FAQ</a>
+          <div class="grid grid-cols-2 gap-2 my-3">
+            <a data-action="call" href="quote" class="py-3.5 text-center btn-call text-gold-light font-display text-sm"><span class="call-label">Call Now</span></a>
+            <a data-action="quote" href="quote" class="py-3.5 text-center border border-gold/40 text-gold-light font-display text-sm cta-primary">Free Quote</a>
+          </div>
         </div>
       </nav>
     </header>
@@ -334,9 +364,10 @@
                 Marble, limestone, and heritage surfaces — assessed, hand-finished, and sealed for permanence.
               </p>
               <div class="flex flex-col sm:flex-row gap-3.5 justify-center lg:justify-start">
-                <a id="hero-quote" href="quote" class="cta-primary inline-flex items-center justify-center min-h-[52px] px-9 border border-gold/55 text-gold-light font-display text-lg tracking-wide">Request a Quote</a>
-                <a href="#gallery" class="cta-ghost inline-flex items-center justify-center min-h-[52px] px-9 border border-gold/20 text-stone-soft font-display text-lg tracking-wide">View Restoration Work</a>
+                <a data-action="call" data-ab="hero-call" href="quote" class="btn-call inline-flex items-center justify-center min-h-[52px] px-9 text-gold-light font-display text-lg tracking-wide transition-colors"><span class="call-label">Call Now</span></a>
+                <a data-action="quote" data-ab="hero-quote" href="quote" class="cta-primary inline-flex items-center justify-center min-h-[52px] px-9 border border-gold/55 text-gold-light font-display text-lg tracking-wide">Free Quote</a>
               </div>
+              <p class="mt-4 text-stone-muted text-xs"><a href="#sliders" class="hover:text-gold-light transition-colors">View interactive before &amp; after →</a></p>
             </div>
 
             <div class="reveal reveal-d1 order-1 lg:order-2 flex justify-center lg:justify-end">
@@ -358,66 +389,71 @@
             </div>
           </div>
         </div>
-        <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-stone-muted hover:text-gold-light transition-colors scroll-hint" aria-label="Scroll to method">
+        <a href="#sliders" class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-stone-muted hover:text-gold-light transition-colors scroll-hint" aria-label="Scroll to before and after">
           <span class="text-[9px] tracking-luxury uppercase">Explore</span>
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M12 5v14M5 12l7 7 7-7"/></svg>
         </a>
       </section>
 
       <div class="border-y border-gold/10 bg-marble-dark/40">
-        <div class="max-w-6xl mx-auto px-4 sm:px-8 py-5 flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-12 text-[10px] tracking-luxury uppercase text-stone-muted text-center font-medium">
-          <span>Conservation-grade protocols</span><span class="hidden sm:inline text-gold/20">·</span>
-          <span>Hand-finished surfaces</span><span class="hidden sm:inline text-gold/20">·</span>
-          <span>Documented commissions</span>
+        <div id="trust-bar" class="max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
+          <p class="col-span-full w-full text-center text-stone-muted text-sm animate-pulse">Loading trust metrics…</p>
         </div>
       </div>
 
-      <!-- Pillars -->
-      <section id="about" class="section-pad" data-section="about">
-        <div class="max-w-6xl mx-auto px-4 sm:px-8">
-          <div class="reveal text-center mb-14 sm:mb-20 max-w-2xl mx-auto">
-            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">The MSR Standard</p>
-            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Three Disciplines</h2>
-            <div class="gold-line w-24 mx-auto my-6"></div>
-            <p class="text-stone-soft text-base sm:text-lg leading-relaxed font-display">
-              One covenant across every commission.
-            </p>
+      <!-- Before/After Sliders — Centerpiece -->
+      <section id="sliders" class="section-pad bg-[radial-gradient(ellipse_at_center,rgba(201,162,39,0.06),transparent_70%)]" data-section="sliders">
+        <div class="max-w-5xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-10 sm:mb-14 max-w-2xl mx-auto">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Restoration Evidence</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Before &amp; After</h2>
+            <div class="gold-line w-24 mx-auto my-5"></div>
+            <p class="text-stone-soft text-sm sm:text-base leading-relaxed">Drag the slider to compare documented commissions. Each project is assessed, hand-finished, and sealed for permanence.</p>
           </div>
-          <div class="grid md:grid-cols-3 gap-5 lg:gap-6">
-            <article class="reveal reveal-d1 pillar-card rounded-sm p-8 sm:p-9" data-numeral="I">
-              <div class="pillar-icon-wrap">
-                <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M16 16l5 5"/></svg>
-              </div>
-              <h3 class="font-display text-2xl sm:text-[1.65rem] text-gold-light mb-3 font-semibold">Assessment</h3>
-              <p class="text-stone-soft text-sm sm:text-[15px] leading-[1.8]">We read substrate, veining, and prior intervention before a single tool meets the stone. Condition is documented. Scope is defined with precision.</p>
-            </article>
-            <article class="reveal reveal-d2 pillar-card pillar-featured rounded-sm p-8 sm:p-9 md:-translate-y-3" data-numeral="II">
-              <div class="pillar-icon-wrap">
-                <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 20l4-12 4 12M6 20h12"/></svg>
-              </div>
-              <h3 class="font-display text-2xl sm:text-[1.65rem] text-gold-light mb-3 font-semibold">Restoration</h3>
-              <p class="text-stone-soft text-sm sm:text-[15px] leading-[1.8]">Controlled honing, color-matched infill, and hand polish — executed for surfaces meant to outlast generations, not trends.</p>
-            </article>
-            <article class="reveal reveal-d3 pillar-card rounded-sm p-8 sm:p-9" data-numeral="III">
-              <div class="pillar-icon-wrap">
-                <svg class="pillar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 3l7 4v6c0 5-3 8-7 9-4-1-7-4-7-9V7l7-4z"/></svg>
-              </div>
-              <h3 class="font-display text-2xl sm:text-[1.65rem] text-gold-light mb-3 font-semibold">Protection</h3>
-              <p class="text-stone-soft text-sm sm:text-[15px] leading-[1.8]">Impregnating sealers and maintenance guidance — so the finish holds its integrity through years of daily use.</p>
-            </article>
+          <div id="slider-root" class="reveal">
+            <p class="text-center text-stone-muted text-sm py-16 animate-pulse">Loading restoration sliders…</p>
           </div>
         </div>
       </section>
 
-      <!-- Gallery -->
-      <section id="gallery" class="section-pad border-t border-gold/8 bg-[radial-gradient(ellipse_at_bottom,rgba(201,162,39,0.04),transparent_65%)]" data-section="gallery">
+      <!-- Services -->
+      <section id="services" class="section-pad border-t border-gold/8" data-section="services">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-12 max-w-2xl mx-auto">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">What We Restore</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Services Overview</h2>
+            <div class="gold-line w-24 mx-auto my-5"></div>
+            <p id="service-areas" class="text-stone-muted text-xs tracking-wide uppercase">Loading service areas…</p>
+          </div>
+          <div id="services-grid" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <p class="col-span-full text-center text-stone-muted text-sm py-8 animate-pulse">Loading services…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Process -->
+      <section id="process" class="section-pad border-t border-gold/8 bg-marble-dark/30" data-section="process">
+        <div class="max-w-3xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-10">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Our Method</p>
+            <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold tracking-wide">Our Process</h2>
+            <div class="gold-line w-20 mx-auto my-5"></div>
+          </div>
+          <div id="process-steps" class="space-y-2">
+            <p class="text-center text-stone-muted text-sm py-6 animate-pulse">Loading process…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Featured Projects -->
+      <section id="gallery" class="section-pad border-t border-gold/8" data-section="gallery">
         <div class="max-w-6xl mx-auto px-4 sm:px-8">
           <div class="reveal flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
             <div class="text-center lg:text-left max-w-xl">
-              <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Restoration Portfolio</p>
-              <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Before &amp; After</h2>
+              <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Portfolio Archive</p>
+              <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Featured Projects</h2>
               <div class="gold-line w-24 mx-auto lg:mx-0 my-5"></div>
-              <p class="text-stone-soft text-sm sm:text-base leading-relaxed">Documented transformations across marble, granite, limestone, and architectural stone. Select any image for full detail.</p>
+              <p class="text-stone-soft text-sm sm:text-base leading-relaxed">Full commission archive — tap any image for detail.</p>
               <p id="gallery-count" class="text-stone-muted text-xs mt-3 tracking-wide"></p>
             </div>
             <div id="gallery-filters" class="flex flex-wrap justify-center lg:justify-end gap-2" role="tablist">
@@ -427,9 +463,80 @@
               <button type="button" class="filter-btn px-4 py-2 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="process">Process</button>
             </div>
           </div>
-          <div id="gallery-pairs" class="reveal space-y-6 sm:space-y-8 mb-10"></div>
-          <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5">
+          <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 reveal">
             <p class="col-span-full text-center text-stone-muted text-sm py-14 animate-pulse">Loading gallery…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Reviews -->
+      <section id="reviews" class="section-pad border-t border-gold/8 bg-[radial-gradient(ellipse_at_top,rgba(201,162,39,0.04),transparent_60%)]" data-section="reviews">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-12 max-w-xl mx-auto">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Client Trust</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Testimonials</h2>
+            <div class="gold-line w-20 mx-auto my-5"></div>
+          </div>
+          <div id="reviews-grid" class="grid md:grid-cols-3 gap-4 sm:gap-5">
+            <p class="col-span-full text-center text-stone-muted text-sm py-8 animate-pulse">Loading reviews…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section-pad border-t border-gold/8" data-section="faq">
+        <div class="max-w-2xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-10">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Common Questions</p>
+            <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold tracking-wide">FAQ</h2>
+            <div class="gold-line w-16 mx-auto my-5"></div>
+          </div>
+          <div id="faq-list" class="space-y-2 reveal">
+            <p class="text-center text-stone-muted text-sm py-6 animate-pulse">Loading FAQ…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Guarantee + Quote -->
+      <section id="quote" class="section-pad border-t border-gold/8 bg-marble-dark/40" data-section="quote">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+            <div class="reveal">
+              <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Our Commitment</p>
+              <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold tracking-wide mb-5">Guarantee &amp; Standards</h2>
+              <ul id="guarantee-list" class="space-y-3 mb-8">
+                <li class="text-stone-muted text-sm animate-pulse">Loading guarantees…</li>
+              </ul>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <a data-action="call" href="quote" class="btn-call inline-flex items-center justify-center min-h-[48px] px-8 text-gold-light font-display tracking-wide"><span class="call-label">Call Now</span></a>
+                <a data-action="quote" href="quote" class="cta-primary inline-flex items-center justify-center min-h-[48px] px-8 border border-gold/50 text-gold-light font-display tracking-wide">Free Quote</a>
+              </div>
+            </div>
+            <div class="reveal reveal-d1">
+              <form id="quote-form" class="rounded-sm border border-gold/18 p-6 sm:p-8 bg-marble-mid/20 space-y-4" aria-label="Request a free quote">
+                <h3 class="font-display text-2xl text-gold-light font-semibold mb-2">Free Conservation Quote</h3>
+                <p class="text-stone-muted text-xs mb-4">Tell us about your stone — we respond with assessment scope and estimate.</p>
+                <div>
+                  <label for="qf-name" class="block text-[10px] tracking-luxury uppercase text-stone-muted mb-1.5">Name</label>
+                  <input class="form-input" id="qf-name" name="name" type="text" required autocomplete="name" />
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="qf-phone" class="block text-[10px] tracking-luxury uppercase text-stone-muted mb-1.5">Phone</label>
+                    <input class="form-input" id="qf-phone" name="phone" type="tel" required autocomplete="tel" />
+                  </div>
+                  <div>
+                    <label for="qf-email" class="block text-[10px] tracking-luxury uppercase text-stone-muted mb-1.5">Email</label>
+                    <input class="form-input" id="qf-email" name="email" type="email" autocomplete="email" />
+                  </div>
+                </div>
+                <div>
+                  <label for="qf-message" class="block text-[10px] tracking-luxury uppercase text-stone-muted mb-1.5">Project Details</label>
+                  <textarea class="form-input min-h-[100px] resize-y" id="qf-message" name="message" placeholder="Stone type, location, condition…"></textarea>
+                </div>
+                <button type="submit" class="cta-primary w-full min-h-[48px] border border-gold/50 text-gold-light font-display text-lg tracking-wide">Submit Free Quote Request</button>
+              </form>
+            </div>
           </div>
         </div>
       </section>
@@ -493,7 +600,8 @@
           <div>
             <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-4 font-medium">Contact</p>
             <ul class="space-y-2.5 text-sm text-stone-soft">
-              <li><a href="quote" id="footer-quote" class="hover:text-gold-light transition-colors duration-300">Request a quote →</a></li>
+              <li><a data-action="call" href="quote" class="hover:text-gold-light transition-colors duration-300"><span class="call-label">Call Now</span></a></li>
+              <li><a data-action="quote" href="quote" class="hover:text-gold-light transition-colors duration-300">Free quote →</a></li>
               <li><a href="contact" class="slug-footer hover:text-gold-light transition-colors duration-300">/contact</a></li>
               <li class="text-stone-muted text-xs pt-2 leading-relaxed">Florida &amp; select commissions nationwide</li>
             </ul>
@@ -522,7 +630,8 @@
     </footer>
 
     <div class="mobile-bar md:hidden">
-      <a id="mobile-bar-quote" href="quote" class="cta-primary flex items-center justify-center w-full min-h-[48px] border border-gold/50 text-gold-light font-display tracking-wide">Request a Quote</a>
+      <a data-action="call" href="quote" class="btn-call flex items-center justify-center min-h-[48px] text-gold-light font-display text-sm tracking-wide"><span class="call-label">Call</span></a>
+      <a data-action="quote" data-ab="mobile-quote" href="quote" class="cta-primary flex items-center justify-center min-h-[48px] border border-gold/50 text-gold-light font-display text-sm tracking-wide">Free Quote</a>
     </div>
 
     <div id="lightbox" class="hidden fixed inset-0 z-[200] items-center justify-center bg-marble-dark/98 p-4 sm:p-8" role="dialog" aria-modal="true">
@@ -535,219 +644,6 @@
       </figure>
     </div>
 
-    <script>
-      (function () {
-        var galleryItems = [], activeFilter = "all";
-        var pairTitles = { vanity: "Marble Vanity", monument: "Memorial Stone", exterior: "Exterior Bench", interior: "Interior Marble" };
-
-        function getPathSegmentsToSkip() {
-          var s = window.location.pathname.split("/").filter(Boolean);
-          return window.location.hostname.endsWith("github.io") && s.length > 1 ? 1 : 0;
-        }
-        function getBasePath() {
-          var skip = getPathSegmentsToSkip();
-          if (!skip) return "/";
-          var s = window.location.pathname.split("/").filter(Boolean);
-          return "/" + s.slice(0, skip).join("/") + "/";
-        }
-        function isSlugEntry(k, v) {
-          if (k.charAt(0) === "_") return false;
-          if (typeof v === "string") return /^https?:\/\//.test(v);
-          return typeof v === "object" && v && v.url && /^https?:\/\//.test(v.url);
-        }
-        function getLinkMeta(v) {
-          return typeof v === "string" ? { url: v, title: null, description: null } : { url: v.url, title: v.title || null, description: v.description || null };
-        }
-        function labelClass(l) {
-          l = (l || "").toLowerCase();
-          if (l === "after") return "label-after";
-          if (l === "before") return "label-before";
-          return "label-detail";
-        }
-        function matchesFilter(item) {
-          if (activeFilter === "all") return true;
-          if (activeFilter === "process") return item.pair === "process" || item.pair === "detail";
-          return item.pair === activeFilter;
-        }
-
-        function bindGallery(el, items) {
-          el.querySelectorAll("[data-idx]").forEach(function (node) {
-            var i = +node.getAttribute("data-idx");
-            function go() { openLightbox(items[i]); }
-            node.addEventListener("click", go);
-            node.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
-          });
-        }
-
-        function renderPairs(items) {
-          var el = document.getElementById("gallery-pairs");
-          var groups = {};
-          items.forEach(function (item, i) {
-            if (!item.group || item.pair !== "before" && item.pair !== "after") return;
-            if (!groups[item.group]) groups[item.group] = {};
-            groups[item.group][item.pair] = { item: item, index: i };
-          });
-          var html = "";
-          Object.keys(groups).forEach(function (g) {
-            var p = groups[g];
-            if (!p.before || !p.after) return;
-            var title = pairTitles[g] || g.charAt(0).toUpperCase() + g.slice(1);
-            html +=
-              '<article class="pair-card rounded-sm overflow-hidden">' +
-              '<div class="pair-header px-5 py-4 flex items-center justify-between">' +
-              '<p class="font-display text-gold-light text-xl font-semibold">' + title + '</p>' +
-              '<p class="text-[9px] tracking-luxury uppercase text-stone-muted">Before → After</p></div>' +
-              '<div class="pair-frame"><div class="grid grid-cols-[1fr_auto_1fr] items-stretch gap-0">' +
-              '<figure class="pair-figure relative aspect-[4/3] cursor-zoom-in" data-idx="' + p.before.index + '" tabindex="0" role="button">' +
-              '<span class="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm label-before">Before</span>' +
-              '<img src="' + p.before.item.src + '" alt="' + p.before.item.alt + '" loading="lazy" class="w-full h-full object-cover" />' +
-              '<span class="pair-caption">' + (p.before.item.caption || p.before.item.alt) + '</span></figure>' +
-              '<div class="flex items-center px-2 sm:px-3 pair-arrow" aria-hidden="true"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M9 5l7 7-7 7"/></svg></div>' +
-              '<figure class="pair-figure relative aspect-[4/3] cursor-zoom-in" data-idx="' + p.after.index + '" tabindex="0" role="button">' +
-              '<span class="absolute top-2.5 left-2.5 z-10 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm label-after">After</span>' +
-              '<img src="' + p.after.item.src + '" alt="' + p.after.item.alt + '" loading="lazy" class="w-full h-full object-cover" />' +
-              '<span class="pair-caption">' + (p.after.item.caption || p.after.item.alt) + '</span></figure>' +
-              '</div></div></article>';
-          });
-          el.innerHTML = html || '<p class="text-center text-stone-muted text-sm py-8">No before/after pairs in gallery.</p>';
-          bindGallery(el, items);
-        }
-
-        function renderGalleryGrid(items) {
-          var grid = document.getElementById("gallery-grid");
-          var visible = items.filter(matchesFilter);
-          var countEl = document.getElementById("gallery-count");
-          if (countEl) countEl.textContent = items.length + " documented images · " + visible.length + " in current view";
-          if (!visible.length) {
-            grid.innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-14">No images in this view.</p>';
-            return;
-          }
-          grid.innerHTML = items.map(function (item, i) {
-            var hid = matchesFilter(item) ? "" : " is-hidden";
-            var feat = i === 0 && activeFilter === "all" ? " is-featured" : "";
-            var lbl = item.label ? '<span class="absolute top-2 left-2 z-10 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm ' + labelClass(item.label) + '">' + item.label + '</span>' : "";
-            var aspect = feat ? "" : " aspect-[4/5]";
-            return '<figure class="gallery-card relative rounded-sm shadow-card' + hid + feat + aspect + '" data-idx="' + i + '" tabindex="0" role="button">' + lbl +
-              '<img src="' + item.src + '" alt="' + item.alt + '" loading="lazy" class="w-full h-full object-cover" /></figure>';
-          }).join("");
-          bindGallery(grid, items);
-        }
-
-        function renderLinks(links) {
-          var grid = document.getElementById("links-grid");
-          var keys = Object.keys(links).filter(function (k) { return isSlugEntry(k, links[k]); });
-          var base = getBasePath();
-          grid.innerHTML = keys.map(function (key) {
-            var m = getLinkMeta(links[key]);
-            return '<a href="' + base + key + '" class="link-card block px-5 py-4 rounded-sm group">' +
-              '<div class="flex justify-between gap-4 items-center"><div class="min-w-0">' +
-              '<p class="font-mono text-gold-light text-base group-hover:text-gold transition-colors">/' + key + '</p>' +
-              (m.title ? '<p class="font-display text-stone-soft text-sm mt-1">' + m.title + '</p>' : '') +
-              (m.description ? '<p class="text-stone-muted text-xs mt-1 leading-relaxed">' + m.description + '</p>' : '') +
-              '</div><span class="text-gold/30 group-hover:text-gold shrink-0 text-lg transition-colors">→</span></div></a>';
-          }).join("");
-        }
-
-        function openLightbox(item) {
-          document.getElementById("lightbox-img").src = item.src;
-          document.getElementById("lightbox-img").alt = item.alt;
-          document.getElementById("lightbox-caption").textContent = item.caption || item.alt;
-          var lb = document.getElementById("lightbox");
-          lb.classList.remove("hidden"); lb.classList.add("open");
-          document.body.style.overflow = "hidden";
-        }
-        function closeLightbox() {
-          var lb = document.getElementById("lightbox");
-          lb.classList.add("hidden"); lb.classList.remove("open");
-          document.body.style.overflow = "";
-        }
-        function setFilter(f) {
-          activeFilter = f;
-          document.querySelectorAll(".filter-btn").forEach(function (b) {
-            var on = b.getAttribute("data-filter") === f;
-            b.classList.toggle("is-active", on);
-            b.setAttribute("aria-selected", on ? "true" : "false");
-          });
-          renderGalleryGrid(galleryItems);
-        }
-
-        function initReveal() {
-          var els = document.querySelectorAll(".reveal");
-          if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("is-visible"); }); return; }
-          var obs = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-visible"); obs.unobserve(e.target); } });
-          }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
-          els.forEach(function (e) { obs.observe(e); });
-        }
-        function initNavSpy() {
-          if (!("IntersectionObserver" in window)) return;
-          var links = document.querySelectorAll(".nav-link[data-section]");
-          var obs = new IntersectionObserver(function (entries) {
-            entries.forEach(function (e) {
-              if (e.isIntersecting) links.forEach(function (l) {
-                l.classList.toggle("is-active", l.getAttribute("data-section") === e.target.getAttribute("data-section"));
-              });
-            });
-          }, { threshold: 0.25, rootMargin: "-12% 0px -55% 0px" });
-          document.querySelectorAll("[data-section]").forEach(function (s) { obs.observe(s); });
-        }
-
-        function initSlugHover() {
-          var bar = document.querySelector(".domain-bar .slug");
-          document.querySelectorAll(".slug-link").forEach(function (a) {
-            a.addEventListener("mouseenter", function () {
-              var slug = a.getAttribute("data-slug");
-              if (bar && slug) bar.textContent = "/" + slug;
-            });
-          });
-        }
-
-        var base = getBasePath();
-        var hostEl = document.getElementById("domain-host");
-        if (hostEl) hostEl.textContent = window.location.hostname;
-
-        ["hero-quote", "mobile-quote", "nav-quote", "footer-quote", "mobile-bar-quote"].forEach(function (id) {
-          var el = document.getElementById(id); if (el) el.href = base + "quote";
-        });
-        document.querySelectorAll(".slug-link, .slug-footer").forEach(function (a) {
-          var slug = a.getAttribute("data-slug") || a.getAttribute("href");
-          if (slug && slug.indexOf("http") !== 0) a.href = base + slug.replace(/^\//, "");
-        });
-
-        document.getElementById("site-header").classList.toggle("is-scrolled", false);
-        window.addEventListener("scroll", function () {
-          document.getElementById("site-header").classList.toggle("is-scrolled", window.scrollY > 24);
-        }, { passive: true });
-
-        document.getElementById("menu-toggle").addEventListener("click", function () {
-          var open = document.body.classList.toggle("nav-open");
-          this.setAttribute("aria-expanded", open);
-          this.setAttribute("aria-label", open ? "Close menu" : "Open menu");
-        });
-        document.querySelectorAll(".nav-mobile-link").forEach(function (l) {
-          l.addEventListener("click", function () { document.body.classList.remove("nav-open"); });
-        });
-        document.querySelectorAll(".filter-btn").forEach(function (b) {
-          b.addEventListener("click", function () { setFilter(b.getAttribute("data-filter")); });
-        });
-        document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
-        document.getElementById("lightbox").addEventListener("click", function (e) { if (e.target === this) closeLightbox(); });
-        document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeLightbox(); });
-        if (location.hash === "#gallery") setTimeout(function () { document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" }); }, 300);
-
-        initReveal(); initNavSpy(); initSlugHover();
-
-        var lx = new XMLHttpRequest();
-        lx.onload = function () { try { renderLinks(jsyaml.load(lx.response)); } catch (e) {} };
-        lx.open("GET", base + "links.yml"); lx.send();
-
-        var gx = new XMLHttpRequest();
-        gx.onload = function () {
-          try { galleryItems = JSON.parse(gx.response); renderPairs(galleryItems); renderGalleryGrid(galleryItems); }
-          catch (e) { document.getElementById("gallery-grid").innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-14">Gallery unavailable</p>'; }
-        };
-        gx.open("GET", base + "gallery.json"); gx.send();
-      })();
-    </script>
+    <script src="msr-home.js" defer></script>
   </body>
 </html>
