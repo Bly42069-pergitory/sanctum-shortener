@@ -4,7 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Master Sanctum Restoration · Protecting What Endures</title>
-    <meta name="description" content="Luxury marble and natural stone restoration — assessed with precision, finished by hand, sealed for permanence." />
+    <meta name="description" content="Luxury marble restoration guarded by Marmorax — assessed, hand-finished, sealed for permanence. Florida &amp; nationwide commissions." />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Master Sanctum Restoration · Protecting What Endures" />
     <meta property="og:description" content="Luxury stone conservation for surfaces meant to outlast generations." />
@@ -15,6 +15,7 @@
     <meta name="twitter:description" content="Protecting What Endures — luxury stone & marble restoration." />
     <meta name="twitter:image" content="https://sanctum-shortener.is-a.dev/assets/guardian-marble.webp" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/guardian-marble.webp" as="image" type="image/webp" fetchpriority="high" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
       tailwind.config = {
@@ -331,6 +332,19 @@
         transition: border-color 0.25s ease;
       }
       .form-input:focus { outline: none; border-color: rgba(237,217,138,0.5); box-shadow: 0 0 0 2px rgba(201,162,39,0.15); }
+      .nav-link:focus-visible,
+      .cta-primary:focus-visible,
+      .btn-call:focus-visible,
+      .btn-legend:focus-visible,
+      .filter-btn:focus-visible,
+      .slug-link:focus-visible,
+      .link-card:focus-visible,
+      .form-input:focus-visible,
+      #menu-toggle:focus-visible,
+      #legend-open:focus-visible {
+        outline: 2px solid var(--gold-light);
+        outline-offset: 3px;
+      }
       .btn-call { background: linear-gradient(135deg, rgba(30,30,34,0.9), rgba(7,7,9,0.95)); border: 1px solid rgba(201,162,39,0.35); }
       .btn-call:hover { border-color: rgba(237,217,138,0.55); background: rgba(201,162,39,0.1); }
       #trust-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
@@ -357,7 +371,7 @@
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
         .reveal { opacity: 1; transform: none; transition: none; }
-        .guardian-float, .guardian-ring::before, .scroll-hint { animation: none; }
+        .guardian-float, .guardian-ring::before, .scroll-hint, .hero-vein, .marmorax-eyes { animation: none; }
         .gallery-card img, .pillar-card, .link-card, .slug-featured, .pair-figure img { transition: none; }
       }
     </style>
@@ -380,10 +394,9 @@
         </a>
         <nav class="hidden md:flex items-center gap-5 lg:gap-7 text-sm" aria-label="Primary">
           <a href="#main" class="nav-link" data-section="hero">Home</a>
-          <a href="#about" class="nav-link" data-section="about">About</a>
           <a href="#warden" class="nav-link" data-section="warden">Warden</a>
-          <a href="#method" class="nav-link" data-section="method">Services</a>
           <a href="#gallery" class="nav-link" data-section="gallery">Gallery</a>
+          <a href="#about" class="nav-link" data-section="about">About</a>
           <a href="#links" class="nav-link" data-section="links">Short Links</a>
           <a href="#quote" class="nav-link" data-section="quote">Contact</a>
           <a data-action="quote" data-ab="nav-quote" href="quote" class="px-5 py-2.5 border border-gold/35 text-gold-light font-display tracking-wide text-sm cta-primary">Request a Quote</a>
@@ -396,10 +409,9 @@
       <nav id="mobile-menu" class="hidden md:hidden border-t border-gold/10 glass-panel" aria-label="Mobile">
         <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col">
           <a href="#main" class="nav-mobile-link nav-link py-3.5">Home</a>
-          <a href="#about" class="nav-mobile-link nav-link py-3.5">About</a>
           <a href="#warden" class="nav-mobile-link nav-link py-3.5">Marmorax</a>
-          <a href="#method" class="nav-mobile-link nav-link py-3.5">Services</a>
           <a href="#gallery" class="nav-mobile-link nav-link py-3.5">Gallery</a>
+          <a href="#about" class="nav-mobile-link nav-link py-3.5">About</a>
           <a href="#links" class="nav-mobile-link nav-link py-3.5">Short Links</a>
           <a href="#quote" class="nav-mobile-link nav-link py-3.5">Contact</a>
           <div class="grid grid-cols-2 gap-2 my-3">
@@ -489,9 +501,10 @@
               <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide mb-2">Marmorax</h2>
               <p class="text-stone-muted text-xs tracking-luxury uppercase mb-5">Guardian of the Sanctum · Keeper of Stone</p>
               <div class="gold-line w-24 mx-auto lg:mx-0 mb-6"></div>
-              <p id="warden-teaser" class="text-stone-soft text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+              <p id="warden-teaser" class="text-stone-soft text-base sm:text-lg leading-relaxed mb-4 max-w-xl mx-auto lg:mx-0">
                 Loading the warden's tale…
               </p>
+              <p id="warden-florida" class="text-gold-light/75 text-sm sm:text-base leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0 italic"></p>
               <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
                 <button type="button" id="legend-open" class="cta-primary min-h-[48px] px-8 border border-gold/50 text-gold-light font-display tracking-wide">Read the Full Legend</button>
                 <a href="#legend" class="btn-legend min-h-[48px] px-8 inline-flex items-center justify-center text-gold-light font-display tracking-wide">Scroll to Lore</a>
@@ -605,6 +618,60 @@
         </div>
       </section>
 
+      <!-- Links -->
+      <section id="links" class="section-pad border-t border-gold/8" data-section="links">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-12">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Instant Routing</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Short Links</h2>
+            <div class="gold-line w-20 mx-auto my-5"></div>
+            <p class="text-stone-soft text-sm sm:text-base leading-relaxed max-w-md mx-auto">Append any slug to this domain for direct access to quotes, portfolio, and contact.</p>
+          </div>
+
+          <div class="reveal reveal-d1 domain-bar rounded-sm mb-8 max-w-md mx-auto overflow-hidden">
+            <span class="host" id="domain-host">sanctum-shortener.is-a.dev</span>
+            <span class="slug">/quote</span>
+          </div>
+
+          <div id="slug-featured" class="reveal reveal-d1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 sm:gap-4 mb-10">
+            <a href="quote" data-slug="quote" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/quote</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Get a Free Estimate</p>
+            </a>
+            <a href="book" data-slug="book" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/book</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Book Consultation</p>
+            </a>
+            <a href="portfolio" data-slug="portfolio" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 15l5-5 4 4 6-8"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/portfolio</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Full Gallery</p>
+            </a>
+            <a href="marmorax" data-slug="marmorax" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 3l2.5 5.5L20 10l-4 4 .9 5.5L12 17l-4.9 2.5L8 14l-4-4 5.5-1.5L12 3z"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/marmorax</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Meet the Warden</p>
+            </a>
+            <a href="memoir" data-slug="memoir" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/memoir</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Your Story</p>
+            </a>
+            <a href="contact" data-slug="contact" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/contact</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Direct Contact</p>
+            </a>
+          </div>
+
+          <div id="links-grid" class="space-y-3 reveal reveal-d2">
+            <p class="text-center text-stone-muted text-sm py-6 animate-pulse">Loading links…</p>
+          </div>
+        </div>
+      </section>
+
       <!-- Testimonials -->
       <section id="reviews" class="section-pad border-t border-gold/8 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.04),transparent_60%)]" data-section="reviews">
         <div class="max-w-6xl mx-auto px-4 sm:px-8">
@@ -676,55 +743,6 @@
           </div>
         </div>
       </section>
-
-      <!-- Links -->
-      <section id="links" class="section-pad border-t border-gold/8" data-section="links">
-        <div class="max-w-4xl mx-auto px-4 sm:px-8">
-          <div class="reveal text-center mb-12">
-            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Instant Routing</p>
-            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Short Links</h2>
-            <div class="gold-line w-20 mx-auto my-5"></div>
-            <p class="text-stone-soft text-sm sm:text-base leading-relaxed max-w-md mx-auto">Append any slug to this domain for direct access to quotes, portfolio, and contact.</p>
-          </div>
-
-          <div class="reveal reveal-d1 domain-bar rounded-sm mb-8 max-w-md mx-auto overflow-hidden">
-            <span class="host" id="domain-host">sanctum-shortener.is-a.dev</span>
-            <span class="slug">/quote</span>
-          </div>
-
-          <div id="slug-featured" class="reveal reveal-d1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 mb-10">
-            <a href="quote" data-slug="quote" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
-              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
-              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/quote</p>
-              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Get a Free Estimate</p>
-            </a>
-            <a href="book" data-slug="book" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
-              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
-              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/book</p>
-              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Book Consultation</p>
-            </a>
-            <a href="portfolio" data-slug="portfolio" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
-              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 15l5-5 4 4 6-8"/></svg></div>
-              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/portfolio</p>
-              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Full Gallery</p>
-            </a>
-            <a href="memoir" data-slug="memoir" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
-              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
-              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/memoir</p>
-              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Your Story</p>
-            </a>
-            <a href="contact" data-slug="contact" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group col-span-2 sm:col-span-1">
-              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
-              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/contact</p>
-              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Direct Contact</p>
-            </a>
-          </div>
-
-          <div id="links-grid" class="space-y-3 reveal reveal-d2">
-            <p class="text-center text-stone-muted text-sm py-6 animate-pulse">Loading links…</p>
-          </div>
-        </div>
-      </section>
     </main>
 
     <footer class="footer-brand py-14 sm:py-18">
@@ -753,6 +771,7 @@
               <li><a href="quote" class="slug-footer hover:text-gold-light transition-colors duration-300">/quote</a></li>
               <li><a href="book" class="slug-footer hover:text-gold-light transition-colors duration-300">/book</a></li>
               <li><a href="portfolio" class="slug-footer hover:text-gold-light transition-colors duration-300">/portfolio</a></li>
+              <li><a href="marmorax" data-slug="marmorax" class="slug-footer hover:text-gold-light transition-colors duration-300">/marmorax</a></li>
               <li><a href="memoir" class="slug-footer hover:text-gold-light transition-colors duration-300">/memoir</a></li>
               <li><a href="contact" class="slug-footer hover:text-gold-light transition-colors duration-300">/contact</a></li>
             </ul>
