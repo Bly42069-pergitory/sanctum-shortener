@@ -1,0 +1,134 @@
+{
+  "business": {
+    "name": "Master Sanctum Restoration",
+    "tagline": "Protecting What Endures",
+    "description": "Luxury marble and natural stone restoration — assessed with precision, finished by hand, sealed for permanence.",
+    "url": "https://sanctum-shortener.is-a.dev",
+    "logo": "https://sanctum-shortener.is-a.dev/assets/logo-msr.webp",
+    "image": "https://sanctum-shortener.is-a.dev/assets/guardian-marble.webp",
+    "phone": "",
+    "phoneDisplay": "",
+    "email": "",
+    "priceRange": "$$$",
+    "yearsExperience": 15,
+    "projectsCompleted": 500,
+    "serviceAreas": ["Florida", "Southeast United States", "Select nationwide commissions"],
+    "address": {
+      "@type": "PostalAddress",
+      "addressRegion": "FL",
+      "addressCountry": "US"
+    }
+  },
+  "aggregateRating": {
+    "ratingValue": 4.9,
+    "reviewCount": 47,
+    "bestRating": 5,
+    "worstRating": 1
+  },
+  "guarantees": [
+    "Written conservation assessment before work begins",
+    "Hand-finished restoration — no shortcut contractors",
+    "Impregnating sealers and documented care protocols",
+    "Satisfaction commitment on every commission"
+  ],
+  "trustStats": [
+    { "value": "15+", "label": "Years Experience" },
+    { "value": "500+", "label": "Projects Restored" },
+    { "value": "4.9", "label": "Client Rating" },
+    { "value": "FL+", "label": "Service Area" }
+  ],
+  "services": [
+    { "title": "Marble Restoration", "desc": "Vanities, floors, and architectural marble — honed, polished, and sealed." },
+    { "title": "Memorial & Monument", "desc": "Heritage stone cleaning, stabilization, and long-horizon protection." },
+    { "title": "Kitchen & Bath Stone", "desc": "Etch removal, crack infill, and color-matched refinishing." },
+    { "title": "Exterior Stone", "desc": "Weather-damaged cladding, benches, and facades restored to endure." }
+  ],
+  "process": [
+    { "step": 1, "title": "Assess", "desc": "Document substrate, veining, prior repairs, and environmental exposure." },
+    { "step": 2, "title": "Restore", "desc": "Controlled honing, infill, and hand polish under conservation protocol." },
+    { "step": 3, "title": "Protect", "desc": "Impregnating sealers plus maintenance guidance for lasting finish." },
+    { "step": 4, "title": "Deliver", "desc": "Final inspection, care documentation, and ongoing support." }
+  ],
+  "reviews": [
+    {
+      "author": "Sarah M.",
+      "location": "Palm Beach, FL",
+      "rating": 5,
+      "text": "Our Carrara vanity looked destroyed after years of etching. MSR returned it to a depth and clarity I didn't think was possible.",
+      "date": "2026-03-12"
+    },
+    {
+      "author": "James T.",
+      "location": "Tampa, FL",
+      "rating": 5,
+      "text": "Conservation-minded from the first visit. They assessed before touching anything — exactly the discipline we wanted for our memorial stone.",
+      "date": "2026-01-28"
+    },
+    {
+      "author": "Elena R.",
+      "location": "Miami, FL",
+      "rating": 5,
+      "text": "Kitchen marble restored without the rushed contractor feel. Hand-finished, documented, and sealed. Still looks flawless months later.",
+      "date": "2025-11-05"
+    }
+  ],
+  "faqs": [
+    {
+      "question": "What types of stone do you restore?",
+      "answer": "Marble, limestone, granite, travertine, and architectural heritage stone — vanities, floors, monuments, cladding, and countertops."
+    },
+    {
+      "question": "Do you serve areas outside Florida?",
+      "answer": "Yes. We are based in Florida and accept select commissions nationwide for conservation-grade restoration projects."
+    },
+    {
+      "question": "How is a conservation quote prepared?",
+      "answer": "Every project begins with an on-site or detailed assessment. We document condition, scope, and protocol before providing a written estimate."
+    },
+    {
+      "question": "What is your satisfaction guarantee?",
+      "answer": "We stand behind our hand-finished work with documented protocols, impregnating sealers, and a satisfaction commitment on every commission."
+    },
+    {
+      "question": "How long does a typical restoration take?",
+      "answer": "Timelines vary by stone type and scope. Vanity and countertop work is often completed in days; larger architectural commissions are scheduled by phase."
+    }
+  ],
+  "sliders": [
+    {
+      "id": "vanity",
+      "title": "Marble Vanity",
+      "before": "assets/gallery/restoration-09.jpg",
+      "after": "assets/gallery/restoration-01.jpg",
+      "caption": "Staining and surface fatigue reversed — honed, sealed, returned to original depth."
+    },
+    {
+      "id": "monument",
+      "title": "Memorial Stone",
+      "before": "assets/gallery/restoration-06.jpg",
+      "after": "assets/gallery/restoration-08.jpg",
+      "caption": "Monument conserved — cleaned, sealed, and protected for long-term exposure."
+    },
+    {
+      "id": "interior",
+      "title": "Kitchen Marble",
+      "before": "assets/gallery/restoration-09.jpg",
+      "after": "assets/gallery/restoration-04.jpg",
+      "caption": "Etch removal, edge refinement, and polish restored to conservation standard."
+    },
+    {
+      "id": "exterior",
+      "title": "Exterior Bench",
+      "before": "assets/gallery/restoration-06.jpg",
+      "after": "assets/gallery/restoration-02.jpg",
+      "caption": "Weather damage reversed with matched finish and protective sealing."
+    },
+    {
+      "id": "flooring",
+      "title": "Marble Flooring",
+      "before": "assets/gallery/restoration-09.jpg",
+      "after": "assets/gallery/restoration-07.jpg",
+      "caption": "Scratch, wear, and lippage corrected to a unified plane."
+    }
+  ]
+}
