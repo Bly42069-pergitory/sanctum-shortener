@@ -109,8 +109,13 @@
               var destHost = document.createElement("a");
               destHost.href = destination;
               if (destHost.hostname === window.location.hostname) {
-                if (destHost.hash) {
-                  window.location.replace(destHost.pathname + destHost.search + destHost.hash);
+                var target = destHost.pathname + destHost.search + destHost.hash;
+                if (destHost.hash && (destHost.pathname === "/" || destHost.pathname === getSiteBasePath().replace(/\/$/, ""))) {
+                  window.location.replace(getHomepage().replace(/\/$/, "") + destHost.hash);
+                  return;
+                }
+                if (target && target !== "/" && target !== getSiteBasePath().replace(/\/$/, "")) {
+                  window.location.replace(target);
                   return;
                 }
                 showMiss(slug);
