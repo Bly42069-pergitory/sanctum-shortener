@@ -4,14 +4,14 @@ _meta:
   updated: "2026-06-19"
 
 home:
-  url: https://mastersanctumrestoration.com
+  url: https://bly42069-pergitory.github.io/sanctum-shortener/
   title: Main Website
   description: Full portfolio, services, and conservation philosophy
 
 quote:
-  url: https://mastersanctumrestoration.com/contact
+  url: "#quote"
   title: Conservation Quote
-  description: Surface assessment and restoration estimate
+  description: Request a free estimate — Gatekeeper intake on site
 
 portfolio:
   url: https://bly42069-pergitory.github.io/sanctum-shortener/#sliders
@@ -19,14 +19,14 @@ portfolio:
   description: Before & after documented commissions
 
 book:
-  url: https://mastersanctumrestoration.com/contact
+  url: "#gatekeeper"
   title: Book Consultation
-  description: Schedule an on-site stone assessment
+  description: Begin under Gatekeeper protocol — schedule site assessment
 
 contact:
-  url: https://mastersanctumrestoration.com/contact
+  url: "#quote"
   title: Contact MSR
-  description: Speak with our conservation team
+  description: Submit project details for Gatekeeper follow-up
 
 memoir:
   url: https://rbly8.github.io/OdysseusOCRAT/
