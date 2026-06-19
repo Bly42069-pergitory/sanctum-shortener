@@ -6,19 +6,29 @@ _meta:
 home:
   url: https://mastersanctumrestoration.com
   title: Main Website
-  description: Full portfolio, services, and conservation philosophy
+  description: Portfolio, services, conservation philosophy
 
 quote:
   url: https://mastersanctumrestoration.com/contact
-  title: Request a Conservation Quote
+  title: Conservation Quote
   description: Surface assessment and restoration estimate
+
+portfolio:
+  url: https://sanctum-shortener.is-a.dev/#gallery
+  title: Restoration Portfolio
+  description: Before & after commissions
 
 book:
   url: https://www.amazon.com/dp/9780563656357
   title: Featured Publication
-  description: Related reading and reference material
+  description: Reference reading
+
+contact:
+  url: https://mastersanctumrestoration.com/contact
+  title: Contact MSR
+  description: Speak with our conservation team
 
 memoir:
   url: https://rbly8.github.io/OdysseusOCRAT/
-  title: Author & Craft Narrative
+  title: Author Narrative
   description: Memoir and creative work by Robert Bly
