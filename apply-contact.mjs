@@ -45,9 +45,24 @@ if (build.status !== 0) {
   process.exit(build.status || 1);
 }
 
+const standalonePath = path.join(dir, "master-sanctum-website.html");
+const deployPath = path.join(dir, "_deploy_contact.json");
+const deployPayload = {
+  owner: "Bly42069-pergitory",
+  repo: "sanctum-shortener",
+  branch: "main",
+  message: "Wire contact — phone + email for Call Now and mailto quote",
+  files: [
+    { path: "site.json", content: fs.readFileSync(sitePath, "utf8") },
+    { path: "master-sanctum-website.html", content: fs.readFileSync(standalonePath, "utf8") },
+  ],
+};
+fs.writeFileSync(deployPath, JSON.stringify(deployPayload));
+
 console.log(JSON.stringify({
   ok: true,
   phone: site.business.phoneDisplay || site.business.phone,
   email: site.business.email,
-  next: "Deploy site.json + master-sanctum-website.html (node push-deploy-with-cred.mjs <payload>)",
+  deployPayload: deployPath,
+  next: "node push-deploy-with-cred.mjs _deploy_contact.json  (or: node deploy-contact.mjs --push)",
 }));

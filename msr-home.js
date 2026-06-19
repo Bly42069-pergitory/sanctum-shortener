@@ -133,6 +133,7 @@
   var LEAD_ARCHIVE_KEY = "msr-quote-archive";
   var LEAD_ARCHIVE_MAX = 20;
   var LEAD_ARCHIVE_TTL = 2592000000;
+  var QUOTE_DRAFT_KEY = "msr-quote-draft";
 
   function getPendingLead() {
     var raw;
@@ -203,6 +204,80 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  }
+
+  function downloadTextFile(text, filename) {
+    var blob = new Blob([text], { type: "text/plain;charset=utf-8" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function clearQuoteDraft() {
+    try { localStorage.removeItem(QUOTE_DRAFT_KEY); } catch (e) {}
+  }
+
+  function restoreQuoteDraft() {
+    var params = new URLSearchParams(window.location.search);
+    if (params.has("name") || params.has("phone") || params.has("email") || params.has("message")) return;
+    var draft;
+    try {
+      var raw = localStorage.getItem(QUOTE_DRAFT_KEY);
+      if (!raw) return;
+      draft = JSON.parse(raw);
+    } catch (e) { return; }
+    if (!draft) return;
+    var map = [["qf-name", "name"], ["qf-phone", "phone"], ["qf-email", "email"], ["qf-message", "message"]];
+    var restored = false;
+    map.forEach(function (pair) {
+      var el = document.getElementById(pair[0]);
+      if (!el || !draft[pair[1]]) return;
+      if (!el.value) {
+        el.value = draft[pair[1]];
+        restored = true;
+      }
+    });
+    if (!restored) return;
+    var hint = document.getElementById("quote-draft-hint");
+    if (!hint) {
+      var form = document.getElementById("quote-form");
+      if (!form) return;
+      hint = document.createElement("p");
+      hint.id = "quote-draft-hint";
+      hint.className = "text-stone-muted text-xs mb-3 italic";
+      form.insertBefore(hint, form.querySelector("h3").nextSibling);
+    }
+    hint.textContent = "Draft restored from your last session — edit and submit when ready.";
+  }
+
+  function bindQuoteDraftAutosave(form) {
+    var fields = ["qf-name", "qf-phone", "qf-email", "qf-message"];
+    var timer;
+    function snapshot() {
+      var draft = {};
+      fields.forEach(function (id) {
+        var el = document.getElementById(id);
+        if (el && el.name) draft[el.name] = el.value;
+      });
+      if (!draft.name && !draft.phone && !draft.email && !draft.message) {
+        clearQuoteDraft();
+        return;
+      }
+      try { localStorage.setItem(QUOTE_DRAFT_KEY, JSON.stringify(draft)); } catch (e) {}
+    }
+    fields.forEach(function (id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener("input", function () {
+        clearTimeout(timer);
+        timer = setTimeout(snapshot, 500);
+      });
+    });
   }
 
   var GK_TEMPLATE_KEYS = ["hotLead", "coldInquiry", "priceShopper", "siteVisitConfirmation"];
@@ -723,7 +798,11 @@
       '<div><p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-1 font-medium">Lead Archive</p>' +
       '<p class="font-display text-lg text-gold-light font-semibold">' + visible.length + ' saved lead' + (visible.length === 1 ? "" : "s") + '</p></div>' +
       '<span class="text-gold/50 text-xs shrink-0">▼</span></summary>' +
-      '<ul class="mt-4 space-y-3 border-t border-gold/10 pt-4">' +
+      '<div class="flex flex-wrap gap-2 mt-4 pt-4 border-t border-gold/10">' +
+      '<button type="button" id="gk-export-all" class="btn-call min-h-[36px] px-4 text-xs text-gold-light font-display tracking-wide">Export All (.txt)</button>' +
+      '<button type="button" id="gk-clear-archive" class="btn-legend min-h-[36px] px-4 text-xs text-stone-soft font-display tracking-wide">Clear Archive</button>' +
+      '</div>' +
+      '<ul class="mt-4 space-y-3">' +
       visible.map(function (l) {
         var when = l.ts ? new Date(l.ts).toLocaleString() : "recent";
         return '<li class="border border-gold/12 rounded-sm p-4" data-archive-ts="' + l.ts + '">' +
@@ -737,6 +816,24 @@
           '</div></li>';
       }).join("") +
       '</ul></details>';
+    var exportAll = document.getElementById("gk-export-all");
+    var clearAll = document.getElementById("gk-clear-archive");
+    if (exportAll) {
+      exportAll.addEventListener("click", function () {
+        var all = getLeadArchive();
+        if (!all.length) return;
+        var body = all.map(formatLeadSummary).join("\n\n========================================\n\n");
+        var stamp = new Date().toISOString().slice(0, 10);
+        downloadTextFile(body, "msr-leads-export-" + stamp + ".txt");
+      });
+    }
+    if (clearAll) {
+      clearAll.addEventListener("click", function () {
+        if (!window.confirm("Clear all saved leads from this browser?")) return;
+        saveLeadArchive([]);
+        renderLeadArchive();
+      });
+    }
     wrap.querySelectorAll("[data-archive-ts]").forEach(function (row) {
       var ts = +row.getAttribute("data-archive-ts");
       var lead = visible.find(function (l) { return l.ts === ts; });
@@ -1017,6 +1114,9 @@
       '<a href="' + esc(intake) + '" class="text-gold-light underline underline-offset-2 hover:text-gold transition-colors">Download the intake questionnaire</a> when you\'re ready.';
     el.scrollIntoView({ behavior: "smooth", block: "nearest" });
     form.reset();
+    clearQuoteDraft();
+    var hint = document.getElementById("quote-draft-hint");
+    if (hint) hint.remove();
     prefillQuoteFormFromQuery(true);
   }
 
@@ -1045,6 +1145,8 @@
     var form = document.getElementById("quote-form");
     if (!form) return;
     prefillQuoteFormFromQuery(false);
+    restoreQuoteDraft();
+    bindQuoteDraftAutosave(form);
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var fd = new FormData(form);

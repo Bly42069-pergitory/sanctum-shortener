@@ -125,30 +125,55 @@
     </footer>
     <script>
       (function () {
-        var banner = document.getElementById("intake-pending-banner");
-        if (!banner) {
-          banner = document.createElement("div");
-          banner.id = "intake-pending-banner";
-          banner.className = "hidden max-w-2xl mx-auto px-4 sm:px-8 -mt-4 mb-6";
-          var main = document.querySelector("main .max-w-2xl");
-          if (main) main.insertBefore(banner, main.firstChild);
+        var main = document.querySelector("main .max-w-2xl");
+        if (!main) return;
+        function esc(s) {
+          return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
         }
-        try {
-          var raw = sessionStorage.getItem("msr-quote-pending");
-          if (!raw) return;
-          var lead = JSON.parse(raw);
-          if (!lead || !lead.name) return;
-          if (lead.ts && Date.now() - lead.ts > 86400000) {
-            sessionStorage.removeItem("msr-quote-pending");
-            return;
-          }
-          banner.className = "max-w-2xl mx-auto px-4 sm:px-8 -mt-4 mb-6";
-          banner.innerHTML =
-            '<div class="intake-panel rounded-sm p-4 sm:p-5 text-sm text-stone-soft leading-relaxed">' +
+        function readArchive() {
+          try {
+            var raw = localStorage.getItem("msr-quote-archive");
+            if (!raw) return [];
+            var list = JSON.parse(raw);
+            return Array.isArray(list) ? list.filter(function (l) { return l && l.name; }) : [];
+          } catch (e) { return []; }
+        }
+        function readPending() {
+          try {
+            var raw = sessionStorage.getItem("msr-quote-pending");
+            if (!raw) return null;
+            var lead = JSON.parse(raw);
+            if (!lead || !lead.name) return null;
+            if (lead.ts && Date.now() - lead.ts > 86400000) {
+              sessionStorage.removeItem("msr-quote-pending");
+              return null;
+            }
+            return lead;
+          } catch (e) { return null; }
+        }
+        var pending = readPending();
+        var archive = readArchive();
+        if (!pending && !archive.length) return;
+        var banner = document.createElement("div");
+        banner.id = "intake-pending-banner";
+        banner.className = "max-w-2xl mx-auto px-4 sm:px-8 -mt-4 mb-6";
+        var html = "";
+        if (pending) {
+          html +=
+            '<div class="intake-panel rounded-sm p-4 sm:p-5 text-sm text-stone-soft leading-relaxed mb-4">' +
             '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">Gatekeeper Queue</p>' +
-            '<p>Your quote request for <strong class="text-gold-light font-display">' + lead.name.replace(/</g, "&lt;") + '</strong> is logged. ' +
+            '<p>Your quote request for <strong class="text-gold-light font-display">' + esc(pending.name) + '</strong> is active. ' +
             'Complete this intake questionnaire, then return to <a href="./#gatekeeper" class="text-gold-light/80 hover:text-gold-light transition-colors">Get Started</a> to copy follow-up templates.</p></div>';
-        } catch (e) {}
+        }
+        if (archive.length) {
+          html +=
+            '<div class="intake-panel rounded-sm p-4 sm:p-5 text-sm text-stone-soft leading-relaxed">' +
+            '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">Lead Archive</p>' +
+            '<p>' + archive.length + ' saved lead' + (archive.length === 1 ? "" : "s") + ' in this browser. ' +
+            'Restore and export from <a href="./#gatekeeper" class="text-gold-light/80 hover:text-gold-light transition-colors">Gatekeeper</a> after intake.</p></div>';
+        }
+        banner.innerHTML = html;
+        main.insertBefore(banner, main.firstChild);
       })();
     </script>
   </body>

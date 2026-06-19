@@ -42,6 +42,7 @@ git-cred*.mjs
 invoke-push*.mjs
 mcp-push*.mjs
 push-deploy*.mjs
+!push-deploy-with-cred.mjs
 push-single*.mjs
 run-mcp*.mjs
 run-push*.mjs
