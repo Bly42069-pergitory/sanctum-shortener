@@ -5,7 +5,6 @@
   var galleryItems = [];
   var activeFilter = "all";
   var activeSlide = 0;
-  var pairTitles = { vanity: "Marble Vanity", monument: "Memorial Stone", exterior: "Exterior Bench", interior: "Interior Marble" };
 
   function getPathSegmentsToSkip() {
     var s = window.location.pathname.split("/").filter(Boolean);
@@ -115,6 +114,48 @@
     }).join("");
   }
 
+  function pillarIcon(numeral) {
+    if (numeral === "I") return '<svg class="pillar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>';
+    if (numeral === "II") return '<svg class="pillar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>';
+    return '<svg class="pillar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>';
+  }
+
+  function renderPillars(data) {
+    var el = document.getElementById("pillars-grid");
+    if (!el || !data.pillars) return;
+    el.innerHTML = data.pillars.map(function (p, i) {
+      var feat = p.featured ? " pillar-featured" : "";
+      return '<article class="reveal reveal-d' + (i + 1) + ' pillar-card rounded-sm p-7 sm:p-8' + feat + '" data-numeral="' + esc(p.numeral) + '">' +
+        '<div class="pillar-icon-wrap">' + pillarIcon(p.numeral) + '</div>' +
+        '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">' + esc(p.numeral) + ' · ' + esc(p.title) + '</p>' +
+        '<h3 class="font-display text-2xl text-gold-light font-semibold mb-2">' + esc(p.subtitle) + '</h3>' +
+        '<p class="text-stone-soft text-sm leading-relaxed">' + esc(p.desc) + '</p></article>';
+    }).join("");
+  }
+
+  function renderWhyChoose(data) {
+    var wc = data.whyChoose;
+    if (!wc) return;
+    var headline = document.getElementById("why-headline");
+    if (headline) headline.textContent = wc.headline;
+    var phil = document.getElementById("why-philosophy");
+    if (phil) phil.textContent = wc.philosophy;
+    var highlights = document.getElementById("why-highlights");
+    if (highlights) {
+      highlights.innerHTML = wc.highlights.map(function (h, i) {
+        return '<div class="reveal reveal-d' + (i % 3 + 1) + ' why-card rounded-sm p-6 sm:p-7">' +
+          '<h3 class="font-display text-xl text-gold-light font-semibold mb-2">' + esc(h.title) + '</h3>' +
+          '<p class="text-stone-soft text-sm leading-relaxed">' + esc(h.desc) + '</p></div>';
+      }).join("");
+    }
+    var tech = document.getElementById("why-techniques");
+    if (tech) {
+      tech.innerHTML = wc.techniques.map(function (t) {
+        return '<li class="flex gap-2 text-stone-soft text-sm"><span class="text-gold shrink-0">◆</span><span>' + esc(t) + '</span></li>';
+      }).join("");
+    }
+  }
+
   function renderSliders(data) {
     var root = document.getElementById("slider-root");
     if (!root || !data.sliders.length) return;
@@ -129,7 +170,7 @@
         '<div class="ba-before absolute inset-y-0 left-0 overflow-hidden border-r-2 border-gold-light/80" style="width:50%">' +
         '<img src="' + esc(sl.before) + '" alt="' + esc(sl.title) + ' before restoration" class="absolute inset-0 h-full max-w-none object-cover ba-before-img" loading="' + (i === 0 ? "eager" : "lazy") + '" />' +
         '</div>' +
-        '<div class="ba-handle absolute top-0 bottom-0 w-1 bg-gold-light shadow-[0_0_12px_rgba(237,217,138,0.8)] pointer-events-none" style="left:50%"></div>' +
+        '<div class="ba-handle absolute top-0 bottom-0 w-1 bg-gold-light shadow-[0_0_12px_rgba(232,197,71,0.8)] pointer-events-none" style="left:50%"></div>' +
         '<span class="absolute top-3 left-3 z-20 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm label-before">Before</span>' +
         '<span class="absolute top-3 right-3 z-20 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm label-after">After</span>' +
         '<input type="range" min="0" max="100" value="50" class="ba-range absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30" aria-label="Drag to compare before and after: ' + esc(sl.title) + '" />' +
@@ -137,10 +178,10 @@
         '<div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">' +
         '<div><h3 class="font-display text-2xl text-gold-light font-semibold">' + esc(sl.title) + '</h3>' +
         '<p class="text-stone-soft text-sm mt-2 max-w-xl leading-relaxed">' + esc(sl.caption) + '</p></div>' +
-        '<a href="' + getBasePath() + 'quote" data-action="quote" class="cta-primary shrink-0 inline-flex items-center justify-center min-h-[48px] px-6 border border-gold/50 text-gold-light font-display tracking-wide text-sm sm:text-base">Book Similar Project</a>' +
+        '<a href="' + getBasePath() + 'quote" data-action="quote" class="cta-primary shrink-0 inline-flex items-center justify-center min-h-[48px] px-6 border border-gold/50 text-gold-light font-display tracking-wide text-sm sm:text-base">Request a Quote</a>' +
         '</div></div>';
     });
-    html += '</div><div class="flex items-center justify-center gap-2 mt-8" role="tablist" aria-label="Restoration projects">';
+    html += '</div><div class="flex flex-wrap items-center justify-center gap-2 mt-8" role="tablist" aria-label="Restoration projects">';
     slides.forEach(function (sl, i) {
       html += '<button type="button" class="slider-dot px-3 py-1.5 text-[9px] tracking-luxury uppercase border rounded-sm transition-all' + (i === activeSlide ? " is-active" : "") + '" data-slide-to="' + i + '" role="tab" aria-selected="' + (i === activeSlide ? "true" : "false") + '">' + esc(sl.title) + '</button>';
     });
@@ -176,32 +217,13 @@
     });
   }
 
-  function renderServices(data) {
-    var el = document.getElementById("services-grid");
-    if (!el) return;
-    el.innerHTML = data.services.map(function (s, i) {
-      return '<article class="reveal reveal-d' + (i % 3 + 1) + ' service-card rounded-sm p-6 sm:p-7">' +
-        '<h3 class="font-display text-xl text-gold-light font-semibold mb-2">' + esc(s.title) + '</h3>' +
-        '<p class="text-stone-soft text-sm leading-relaxed">' + esc(s.desc) + '</p></article>';
-    }).join("");
-  }
-
-  function renderProcess(data) {
-    var el = document.getElementById("process-steps");
-    if (!el) return;
-    el.innerHTML = data.process.map(function (p, i) {
-      return '<div class="reveal reveal-d' + (i % 4 + 1) + ' process-step flex gap-4 sm:gap-5">' +
-        '<div class="process-num shrink-0 w-10 h-10 flex items-center justify-center font-display text-lg text-gold-light border border-gold/30 rounded-full">' + p.step + '</div>' +
-        '<div><h3 class="font-display text-lg text-gold-light font-semibold">' + esc(p.title) + '</h3>' +
-        '<p class="text-stone-soft text-sm mt-1 leading-relaxed">' + esc(p.desc) + '</p></div></div>';
-    }).join("");
-  }
-
   function renderReviews(data) {
     var el = document.getElementById("reviews-grid");
     if (!el) return;
     el.innerHTML = data.reviews.map(function (r, i) {
+      var proj = r.project ? '<p class="text-[9px] tracking-luxury uppercase text-gold/60 mb-3">' + esc(r.project) + '</p>' : "";
       return '<article class="reveal reveal-d' + (i % 3 + 1) + ' review-card rounded-sm p-6 sm:p-7">' +
+        proj +
         '<div class="flex gap-0.5 text-sm mb-3" aria-label="' + r.rating + ' out of 5 stars">' + stars(r.rating) + '</div>' +
         '<p class="text-stone-soft text-sm leading-relaxed italic">"' + esc(r.text) + '"</p>' +
         '<p class="mt-4 text-xs text-stone-muted"><span class="text-gold-light/90 font-medium">' + esc(r.author) + '</span> · ' + esc(r.location) + '</p></article>';
@@ -242,12 +264,7 @@
     }).join("");
   }
 
-  function renderServiceAreas(data) {
-    var el = document.getElementById("service-areas");
-    if (el) el.textContent = data.business.serviceAreas.join(" · ");
-  }
-
-  /* --- gallery (existing) --- */
+  /* --- gallery --- */
   function isSlugEntry(k, v) {
     if (k.charAt(0) === "_") return false;
     if (typeof v === "string") return /^https?:\/\//.test(v);
@@ -264,8 +281,7 @@
   }
   function matchesFilter(item) {
     if (activeFilter === "all") return true;
-    if (activeFilter === "process") return item.pair === "process" || item.pair === "detail";
-    return item.pair === activeFilter;
+    return item.category === activeFilter;
   }
   function bindGallery(el, items) {
     el.querySelectorAll("[data-idx]").forEach(function (node) {
@@ -282,15 +298,17 @@
     var countEl = document.getElementById("gallery-count");
     if (countEl) countEl.textContent = items.length + " documented images · " + visible.length + " in current view";
     if (!visible.length) {
-      grid.innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-14">No images in this view.</p>';
+      grid.innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-14">No images in this category.</p>';
       return;
     }
     grid.innerHTML = items.map(function (item, i) {
       var hid = matchesFilter(item) ? "" : " is-hidden";
       var feat = i === 0 && activeFilter === "all" ? " is-featured" : "";
       var lbl = item.label ? '<span class="absolute top-2 left-2 z-10 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm ' + labelClass(item.label) + '">' + item.label + '</span>' : "";
+      var title = item.title ? '<div class="gallery-hover-caption"><p class="font-display text-sm text-gold-light font-semibold">' + esc(item.title) + '</p>' +
+        (item.caption ? '<p class="text-stone-muted text-xs mt-1 leading-snug">' + esc(item.caption) + '</p>' : '') + '</div>' : "";
       var aspect = feat ? "" : " aspect-[4/5]";
-      return '<figure class="gallery-card relative rounded-sm shadow-card' + hid + feat + aspect + '" data-idx="' + i + '" tabindex="0" role="button">' + lbl +
+      return '<figure class="gallery-card relative rounded-sm shadow-card' + hid + feat + aspect + '" data-idx="' + i + '" tabindex="0" role="button">' + lbl + title +
         '<img src="' + item.src + '" alt="' + esc(item.alt) + '" loading="lazy" class="w-full h-full object-cover" /></figure>';
     }).join("");
     bindGallery(grid, items);
@@ -298,7 +316,8 @@
   function renderLinks(links) {
     var grid = document.getElementById("links-grid");
     if (!grid) return;
-    var keys = Object.keys(links).filter(function (k) { return isSlugEntry(k, links[k]); });
+    var featured = ["quote", "book", "portfolio", "contact", "memoir"];
+    var keys = Object.keys(links).filter(function (k) { return isSlugEntry(k, links[k]) && featured.indexOf(k) === -1; });
     var base = getBasePath();
     grid.innerHTML = keys.map(function (key) {
       var m = getLinkMeta(links[key]);
@@ -313,7 +332,7 @@
   function openLightbox(item) {
     document.getElementById("lightbox-img").src = item.src;
     document.getElementById("lightbox-img").alt = item.alt;
-    document.getElementById("lightbox-caption").textContent = item.caption || item.alt;
+    document.getElementById("lightbox-caption").textContent = (item.title ? item.title + " — " : "") + (item.caption || item.alt);
     var lb = document.getElementById("lightbox");
     lb.classList.remove("hidden"); lb.classList.add("open");
     document.body.style.overflow = "hidden";
@@ -350,7 +369,7 @@
           l.classList.toggle("is-active", l.getAttribute("data-section") === e.target.getAttribute("data-section"));
         });
       });
-    }, { threshold: 0.2, rootMargin: "-12% 0px -55% 0px" });
+    }, { threshold: 0.15, rootMargin: "-12% 0px -55% 0px" });
     document.querySelectorAll("[data-section]").forEach(function (s) { obs.observe(s); });
   }
 
@@ -358,13 +377,12 @@
     siteData = data;
     injectSchema(data);
     renderTrustBar(data);
+    renderPillars(data);
+    renderWhyChoose(data);
     renderSliders(data);
-    renderServices(data);
-    renderProcess(data);
     renderReviews(data);
     renderFaqs(data);
     renderGuarantees(data);
-    renderServiceAreas(data);
     applyCallLinks();
     applyQuoteLinks();
     initReveal();

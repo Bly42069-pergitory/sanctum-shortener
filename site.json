@@ -2,7 +2,7 @@
   "business": {
     "name": "Master Sanctum Restoration",
     "tagline": "Protecting What Endures",
-    "description": "Luxury marble and natural stone restoration — assessed with precision, finished by hand, sealed for permanence.",
+    "description": "Luxury natural stone and marble restoration — architectural marble, heritage stone, countertops, monuments, and sanctuaries of craft.",
     "url": "https://sanctum-shortener.is-a.dev",
     "logo": "https://sanctum-shortener.is-a.dev/assets/logo-msr.webp",
     "image": "https://sanctum-shortener.is-a.dev/assets/guardian-marble.webp",
@@ -10,7 +10,7 @@
     "phoneDisplay": "",
     "email": "",
     "priceRange": "$$$",
-    "yearsExperience": 15,
+    "yearsExperience": 20,
     "projectsCompleted": 500,
     "serviceAreas": ["Florida", "Southeast United States", "Select nationwide commissions"],
     "address": {
@@ -32,22 +32,69 @@
     "Satisfaction commitment on every commission"
   ],
   "trustStats": [
-    { "value": "15+", "label": "Years Experience" },
+    { "value": "20+", "label": "Years Experience" },
     { "value": "500+", "label": "Projects Restored" },
     { "value": "4.9", "label": "Client Rating" },
     { "value": "FL+", "label": "Service Area" }
   ],
+  "pillars": [
+    {
+      "numeral": "I",
+      "title": "Assessment",
+      "subtitle": "Every surface tells a story",
+      "desc": "We document substrate, veining, prior repairs, and environmental exposure before a single tool touches stone. Conservation discipline starts with listening to what the material remembers.",
+      "featured": false
+    },
+    {
+      "numeral": "II",
+      "title": "Restoration",
+      "subtitle": "Hand-finished under protocol",
+      "desc": "Controlled honing, crack stabilization, color-matched infill, and lippage removal — each pass executed by hand, not contractor haste. Depth, clarity, and architectural integrity restored.",
+      "featured": true
+    },
+    {
+      "numeral": "III",
+      "title": "Protection",
+      "subtitle": "Sealed for permanence",
+      "desc": "Impregnating sealers, maintenance protocols, and documented care guidance so your stone endures generations — not just the next season.",
+      "featured": false
+    }
+  ],
+  "whyChoose": {
+    "headline": "Why Choose Master Sanctum",
+    "philosophy": "Protecting What Endures is not a tagline — it is the standard every commission is held to.",
+    "highlights": [
+      {
+        "title": "20+ Years of Stone Craft",
+        "desc": "Two decades restoring marble, limestone, granite, and heritage surfaces for residential estates, commercial landmarks, and memorial commissions."
+      },
+      {
+        "title": "Disney & Luxury Hospitality",
+        "desc": "Commissioned work across high-traffic hospitality environments where finish durability and guest-facing presentation demand conservation-grade discipline."
+      },
+      {
+        "title": "NYC Architectural Stone",
+        "desc": "Experience with urban luxury interiors — honed vanities, lobby floors, and architectural marble where lippage, etching, and wear require precision, not shortcuts."
+      },
+      {
+        "title": "Residential · Commercial · Historical",
+        "desc": "From kitchen countertops and shower surrounds to monument conservation and exterior cladding — one protocol, every substrate."
+      }
+    ],
+    "techniques": [
+      "Diamond honing & hand polish",
+      "Lippage removal & plane correction",
+      "Color-matched crack infill",
+      "Etch & stain reversal",
+      "Impregnating seal protection",
+      "Heritage stone stabilization"
+    ]
+  },
   "services": [
     { "title": "Marble Restoration", "desc": "Vanities, floors, and architectural marble — honed, polished, and sealed." },
     { "title": "Memorial & Monument", "desc": "Heritage stone cleaning, stabilization, and long-horizon protection." },
     { "title": "Kitchen & Bath Stone", "desc": "Etch removal, crack infill, and color-matched refinishing." },
     { "title": "Exterior Stone", "desc": "Weather-damaged cladding, benches, and facades restored to endure." }
-  ],
-  "process": [
-    { "step": 1, "title": "Assess", "desc": "Document substrate, veining, prior repairs, and environmental exposure." },
-    { "step": 2, "title": "Restore", "desc": "Controlled honing, infill, and hand polish under conservation protocol." },
-    { "step": 3, "title": "Protect", "desc": "Impregnating sealers plus maintenance guidance for lasting finish." },
-    { "step": 4, "title": "Deliver", "desc": "Final inspection, care documentation, and ongoing support." }
   ],
   "reviews": [
     {
@@ -55,21 +102,24 @@
       "location": "Palm Beach, FL",
       "rating": 5,
       "text": "Our Carrara vanity looked destroyed after years of etching. MSR returned it to a depth and clarity I didn't think was possible.",
-      "date": "2026-03-12"
+      "date": "2026-03-12",
+      "project": "Marble Vanity"
     },
     {
       "author": "James T.",
       "location": "Tampa, FL",
       "rating": 5,
       "text": "Conservation-minded from the first visit. They assessed before touching anything — exactly the discipline we wanted for our memorial stone.",
-      "date": "2026-01-28"
+      "date": "2026-01-28",
+      "project": "Memorial Stone"
     },
     {
       "author": "Elena R.",
       "location": "Miami, FL",
       "rating": 5,
       "text": "Kitchen marble restored without the rushed contractor feel. Hand-finished, documented, and sealed. Still looks flawless months later.",
-      "date": "2025-11-05"
+      "date": "2025-11-05",
+      "project": "Kitchen Marble"
     }
   ],
   "faqs": [
