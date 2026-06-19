@@ -368,10 +368,14 @@
     var wrap = document.getElementById("gatekeeper-templates");
     var grid = document.getElementById("gatekeeper-templates-grid");
     if (!wrap || !grid || !templates) return;
+    var pending = getPendingLead();
+    var suggestedKey = pending ? suggestedTemplateKey(pending) : null;
     var cards = GK_TEMPLATE_KEYS.map(function (key) {
       var t = templates[key];
       if (!t || !t.body) return "";
-      return '<article class="gk-template-card rounded-sm p-5 text-left" data-template-key="' + esc(key) + '">' +
+      var sug = key === suggestedKey ? " is-suggested" : "";
+      return '<article class="gk-template-card rounded-sm p-5 text-left' + sug + '" data-template-key="' + esc(key) + '">' +
+        (key === suggestedKey ? '<p class="text-[9px] tracking-luxury uppercase text-gold/80 mb-2 font-medium">Suggested for current lead</p>' : '') +
         '<p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-2 font-medium">' + esc(t.name || key) + '</p>' +
         '<p class="text-stone-muted text-xs mb-3 leading-snug"><span class="text-stone-dim">Subject:</span> ' + esc(t.subject || "") + '</p>' +
         '<div class="flex flex-wrap gap-2">' +
@@ -384,7 +388,6 @@
     if (!cards.length) return;
     wrap.classList.remove("hidden");
     grid.innerHTML = cards.join("");
-    var pending = getPendingLead();
     grid.querySelectorAll(".gk-template-card").forEach(function (card) {
       var key = card.getAttribute("data-template-key");
       var t = templates[key];
@@ -1202,11 +1205,39 @@
     document.querySelectorAll("[data-section]").forEach(function (s) { obs.observe(s); });
   }
 
+  function renderDomainBanner() {
+    if (window.__MSR_STANDALONE__) return;
+    var mount = document.getElementById("domain-banner-mount");
+    if (!mount) return;
+    if (!window.location.hostname.endsWith("github.io")) {
+      mount.classList.add("hidden");
+      return;
+    }
+    try {
+      if (sessionStorage.getItem("msr-domain-banner-dismiss")) {
+        mount.classList.add("hidden");
+        return;
+      }
+    } catch (e) {}
+    mount.classList.remove("hidden");
+    mount.innerHTML =
+      '<span>Preview host · Custom domain <strong class="text-gold-light/90 font-medium">sanctum-shortener.is-a.dev</strong> pending is-a.dev approval — </span>' +
+      '<button type="button" id="domain-banner-dismiss" class="text-gold-light/80 hover:text-gold-light underline underline-offset-2 ml-1">dismiss</button>';
+    var btn = document.getElementById("domain-banner-dismiss");
+    if (btn) {
+      btn.addEventListener("click", function () {
+        try { sessionStorage.setItem("msr-domain-banner-dismiss", "1"); } catch (err) {}
+        mount.classList.add("hidden");
+      });
+    }
+  }
+
   function initSite(data) {
     data = normalizeBusinessUrls(data);
     siteData = data;
     syncSocialMeta(data.business);
     injectSchema(data);
+    renderDomainBanner();
     renderTrustBar(data);
     renderMarmorax(data);
     renderPillars(data);

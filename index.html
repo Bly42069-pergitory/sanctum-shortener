@@ -350,6 +350,11 @@
         transition: border-color 0.3s ease;
       }
       .gk-template-card:hover { border-color: rgba(201,162,39,0.28); }
+      .gk-template-card.is-suggested { border-color: rgba(232,197,71,0.55); box-shadow: 0 0 0 1px rgba(212,175,55,0.25); }
+      .domain-banner {
+        background: linear-gradient(90deg, rgba(30,30,34,0.95), rgba(7,7,9,0.98));
+        border-bottom: 1px solid rgba(201,162,39,0.18);
+      }
       .gk-example-details summary { cursor: pointer; list-style: none; }
       .gk-example-details summary::-webkit-details-marker { display: none; }
       .gk-example-details[open] .gk-example-chevron { transform: rotate(180deg); }
@@ -414,6 +419,8 @@
   </head>
   <body class="min-h-screen font-sans antialiased marble-grain">
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-marble-dark focus:text-gold-light focus:border focus:border-gold/40">Skip to content</a>
+
+    <div id="domain-banner-mount" class="hidden domain-banner text-center px-4 py-2 text-xs text-stone-soft"></div>
 
     <header id="site-header" class="sticky top-0 z-50 glass-panel">
       <div class="max-w-6xl mx-auto px-4 sm:px-8 h-[var(--nav-h)] flex items-center justify-between">

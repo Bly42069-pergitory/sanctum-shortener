@@ -352,6 +352,11 @@
         transition: border-color 0.3s ease;
       }
       .gk-template-card:hover { border-color: rgba(201,162,39,0.28); }
+      .gk-template-card.is-suggested { border-color: rgba(232,197,71,0.55); box-shadow: 0 0 0 1px rgba(212,175,55,0.25); }
+      .domain-banner {
+        background: linear-gradient(90deg, rgba(30,30,34,0.95), rgba(7,7,9,0.98));
+        border-bottom: 1px solid rgba(201,162,39,0.18);
+      }
       .gk-example-details summary { cursor: pointer; list-style: none; }
       .gk-example-details summary::-webkit-details-marker { display: none; }
       .gk-example-details[open] .gk-example-chevron { transform: rotate(180deg); }
@@ -415,6 +420,8 @@
 </head>
   <body class="min-h-screen font-sans antialiased marble-grain">
     <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-marble-dark focus:text-gold-light focus:border focus:border-gold/40">Skip to content</a>
+
+    <div id="domain-banner-mount" class="hidden domain-banner text-center px-4 py-2 text-xs text-stone-soft"></div>
 
     <header id="site-header" class="sticky top-0 z-50 glass-panel">
       <div class="max-w-6xl mx-auto px-4 sm:px-8 h-[var(--nav-h)] flex items-center justify-between">
@@ -1318,10 +1325,14 @@
     var wrap = document.getElementById("gatekeeper-templates");
     var grid = document.getElementById("gatekeeper-templates-grid");
     if (!wrap || !grid || !templates) return;
+    var pending = getPendingLead();
+    var suggestedKey = pending ? suggestedTemplateKey(pending) : null;
     var cards = GK_TEMPLATE_KEYS.map(function (key) {
       var t = templates[key];
       if (!t || !t.body) return "";
-      return '<article class="gk-template-card rounded-sm p-5 text-left" data-template-key="' + esc(key) + '">' +
+      var sug = key === suggestedKey ? " is-suggested" : "";
+      return '<article class="gk-template-card rounded-sm p-5 text-left' + sug + '" data-template-key="' + esc(key) + '">' +
+        (key === suggestedKey ? '<p class="text-[9px] tracking-luxury uppercase text-gold/80 mb-2 font-medium">Suggested for current lead</p>' : '') +
         '<p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-2 font-medium">' + esc(t.name || key) + '</p>' +
         '<p class="text-stone-muted text-xs mb-3 leading-snug"><span class="text-stone-dim">Subject:</span> ' + esc(t.subject || "") + '</p>' +
         '<div class="flex flex-wrap gap-2">' +
@@ -1334,7 +1345,6 @@
     if (!cards.length) return;
     wrap.classList.remove("hidden");
     grid.innerHTML = cards.join("");
-    var pending = getPendingLead();
     grid.querySelectorAll(".gk-template-card").forEach(function (card) {
       var key = card.getAttribute("data-template-key");
       var t = templates[key];
@@ -2152,11 +2162,39 @@
     document.querySelectorAll("[data-section]").forEach(function (s) { obs.observe(s); });
   }
 
+  function renderDomainBanner() {
+    if (window.__MSR_STANDALONE__) return;
+    var mount = document.getElementById("domain-banner-mount");
+    if (!mount) return;
+    if (!window.location.hostname.endsWith("github.io")) {
+      mount.classList.add("hidden");
+      return;
+    }
+    try {
+      if (sessionStorage.getItem("msr-domain-banner-dismiss")) {
+        mount.classList.add("hidden");
+        return;
+      }
+    } catch (e) {}
+    mount.classList.remove("hidden");
+    mount.innerHTML =
+      '<span>Preview host · Custom domain <strong class="text-gold-light/90 font-medium">sanctum-shortener.is-a.dev</strong> pending is-a.dev approval — </span>' +
+      '<button type="button" id="domain-banner-dismiss" class="text-gold-light/80 hover:text-gold-light underline underline-offset-2 ml-1">dismiss</button>';
+    var btn = document.getElementById("domain-banner-dismiss");
+    if (btn) {
+      btn.addEventListener("click", function () {
+        try { sessionStorage.setItem("msr-domain-banner-dismiss", "1"); } catch (err) {}
+        mount.classList.add("hidden");
+      });
+    }
+  }
+
   function initSite(data) {
     data = normalizeBusinessUrls(data);
     siteData = data;
     syncSocialMeta(data.business);
     injectSchema(data);
+    renderDomainBanner();
     renderTrustBar(data);
     renderMarmorax(data);
     renderPillars(data);
