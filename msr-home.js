@@ -44,11 +44,30 @@
       else if (el.classList.contains("call-text-only")) el.textContent = label;
     });
   }
+  function externalQuoteUrl() {
+    if (window.__MSR_STANDALONE__ && window.__MSR_INLINE__ && window.__MSR_INLINE__.links && window.__MSR_INLINE__.links.quote) {
+      return window.__MSR_INLINE__.links.quote;
+    }
+    return getBasePath() + "quote";
+  }
   function applyQuoteLinks() {
-    var base = getBasePath();
+    var href = externalQuoteUrl();
     document.querySelectorAll("[data-action='quote']").forEach(function (el) {
-      el.href = base + "quote";
+      el.href = href;
     });
+  }
+  function resolveSlugHref(slug) {
+    if (window.__MSR_STANDALONE__ && window.__MSR_INLINE__ && window.__MSR_INLINE__.links) {
+      var L = window.__MSR_INLINE__.links;
+      if (L[slug]) {
+        var u = L[slug];
+        if (u.indexOf("#") !== -1 && u.indexOf("http") !== 0) return u;
+        if (slug === "portfolio" && u.indexOf("#") !== -1) return u.split("#")[1] ? "#" + u.split("#")[1] : "#sliders";
+        return u;
+      }
+    }
+    if (slug === "marmorax") return "#warden";
+    return getBasePath() + slug.replace(/^\//, "");
   }
 
   function injectSchema(data) {
@@ -157,6 +176,8 @@
         return '<li class="flex gap-2"><span class="text-gold shrink-0">◆</span><span>' + esc(v) + '</span></li>';
       }).join("");
     }
+    var florida = document.getElementById("warden-florida");
+    if (florida && m.floridaHeritage) florida.textContent = m.floridaHeritage;
   }
 
   function renderLegend(m) {
@@ -394,7 +415,7 @@
   function renderLinks(links) {
     var grid = document.getElementById("links-grid");
     if (!grid) return;
-    var featured = ["quote", "book", "portfolio", "contact", "memoir"];
+    var featured = ["quote", "book", "portfolio", "contact", "memoir", "marmorax"];
     var keys = Object.keys(links).filter(function (k) { return isSlugEntry(k, links[k]) && featured.indexOf(k) === -1; });
     var base = getBasePath();
     grid.innerHTML = keys.map(function (key) {
@@ -475,7 +496,7 @@
       var fd = new FormData(form);
       var q = [];
       fd.forEach(function (v, k) { if (v) q.push(encodeURIComponent(k) + "=" + encodeURIComponent(v)); });
-      window.location.href = getBasePath() + "quote" + (q.length ? "?" + q.join("&") : "");
+      window.location.href = externalQuoteUrl() + (q.length ? (externalQuoteUrl().indexOf("?") >= 0 ? "&" : "?") + q.join("&") : "");
     });
   }
 
@@ -486,7 +507,7 @@
 
     document.querySelectorAll(".slug-link, .slug-footer").forEach(function (a) {
       var slug = a.getAttribute("data-slug") || a.getAttribute("href");
-      if (slug && slug.indexOf("http") !== 0) a.href = base + slug.replace(/^\//, "");
+      if (slug && slug.indexOf("http") !== 0) a.href = resolveSlugHref(slug.replace(/^\//, ""));
     });
 
     var bar = document.querySelector(".domain-bar .slug");
@@ -533,6 +554,16 @@
 
     initQuoteForm();
     initNavSpy();
+
+    if (window.__MSR_INLINE__) {
+      try {
+        initSite(window.__MSR_INLINE__.site);
+        galleryItems = window.__MSR_INLINE__.gallery || [];
+        renderGalleryGrid(galleryItems);
+        if (window.__MSR_INLINE__.links) renderLinks(window.__MSR_INLINE__.links);
+      } catch (err) { console.error(err); }
+      return;
+    }
 
     var sx = new XMLHttpRequest();
     sx.onload = function () {
