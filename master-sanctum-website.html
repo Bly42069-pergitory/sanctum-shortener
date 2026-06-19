@@ -1,1 +1,1512 @@
-<!--LOADED_FROM_DISK_VIA_MCP-->
+<!DOCTYPE html>
+<!-- Master Sanctum Restoration · Standalone build 2026-06-19 · Open beside assets/ folder -->
+
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Master Sanctum Restoration · Protecting What Endures</title>
+    <meta name="description" content="Luxury marble restoration guarded by Marmorax — assessed, hand-finished, sealed for permanence. Protecting What Endures." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Master Sanctum Restoration · Protecting What Endures" />
+    <meta property="og:description" content="Luxury stone conservation for surfaces meant to outlast generations." />
+    <meta property="og:image" content="https://sanctum-shortener.is-a.dev/assets/guardian-marble.webp" />
+    <meta property="og:url" content="https://sanctum-shortener.is-a.dev/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Master Sanctum Restoration" />
+    <meta name="twitter:description" content="Protecting What Endures — luxury stone & marble restoration." />
+    <meta name="twitter:image" content="https://sanctum-shortener.is-a.dev/assets/guardian-marble.webp" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="preload" href="assets/guardian-marble.webp" as="image" type="image/webp" fetchpriority="high" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              marble: { dark: "#070709", mid: "#121214", light: "#1e1e22", vein: "#2e2e32" },
+              gold: { DEFAULT: "#D4AF37", light: "#E8C547", dark: "#9A7B1A", brass: "#B8962E" },
+              stone: { DEFAULT: "#f7f4ef", soft: "#e4dfd6", muted: "#b0aaa0", dim: "#6e6962" },
+            },
+            fontFamily: {
+              display: ["Cormorant Garamond", "Georgia", "serif"],
+              sans: ["Inter", "system-ui", sans-serif"],
+            },
+            boxShadow: {
+              card: "0 24px 64px rgba(0,0,0,0.55)",
+              guardian: "0 0 160px rgba(201,162,39,0.32), 0 40px 100px rgba(0,0,0,0.6)",
+              lift: "0 20px 50px rgba(0,0,0,0.45)",
+            },
+            letterSpacing: { luxury: "0.32em", wide: "0.12em" },
+            spacing: { 18: "4.5rem", 22: "5.5rem", 26: "6.5rem" },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+    <style>
+      :root { --gold: #D4AF37; --gold-light: #E8C547; --nav-h: 72px; scroll-padding-top: var(--nav-h); }
+      html { scroll-behavior: smooth; }
+      body {
+        background: radial-gradient(ellipse 150% 100% at 50% -20%, #2a2a2e 0%, #121214 38%, #070709 100%);
+        color: #f7f4ef; text-rendering: optimizeLegibility; -webkit-font-smoothing: antialiased;
+      }
+      .marble-grain {
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      }
+      .gold-line { background: linear-gradient(90deg, transparent, #9A7B1A 15%, #E8C547 50%, #D4AF37 85%, transparent); height: 1px; }
+      .section-pad { padding: 5rem 0; }
+      @media (min-width: 640px) { .section-pad { padding: 6rem 0; } }
+      @media (min-width: 1024px) { .section-pad { padding: 7.5rem 0; } }
+
+      .glass-panel {
+        background: linear-gradient(180deg, rgba(30,30,34,0.72) 0%, rgba(7,7,9,0.96) 100%);
+        backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
+        border-bottom: 1px solid rgba(201,162,39,0.12);
+        transition: box-shadow 0.4s ease, border-color 0.4s ease;
+      }
+      #site-header.is-scrolled { box-shadow: 0 12px 48px rgba(0,0,0,0.5); border-color: rgba(201,162,39,0.18); }
+
+      .nav-link { color: #e4dfd6; transition: color 0.25s ease; position: relative; font-weight: 500; }
+      .nav-link::after {
+        content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 1px;
+        background: var(--gold-light); transform: scaleX(0); transition: transform 0.3s ease; opacity: 0.85;
+      }
+      .nav-link:hover, .nav-link.is-active { color: var(--gold-light); }
+      .nav-link.is-active::after { transform: scaleX(1); }
+
+      .hero-marble {
+        background:
+          radial-gradient(ellipse 80% 60% at 50% 0%, rgba(212,175,55,0.14), transparent 55%),
+          radial-gradient(ellipse 45% 35% at 85% 40%, rgba(212,175,55,0.08), transparent 65%),
+          linear-gradient(165deg, #0a0a0c 0%, #070709 45%, #050506 100%);
+      }
+      .hero-vein {
+        position: absolute; inset: 0; pointer-events: none; opacity: 0.55;
+        background:
+          repeating-linear-gradient(118deg, transparent 0 42px, rgba(212,175,55,0.03) 42px 43px),
+          radial-gradient(ellipse 30% 20% at 20% 30%, rgba(232,197,71,0.12), transparent 70%),
+          radial-gradient(ellipse 25% 18% at 75% 55%, rgba(212,175,55,0.09), transparent 68%);
+        animation: vein-shimmer 14s ease-in-out infinite;
+      }
+      .marmorax-eyes {
+        position: absolute; top: 18%; right: 12%; width: min(28vw, 180px); height: min(18vw, 110px);
+        pointer-events: none; opacity: 0.35;
+        background: radial-gradient(ellipse 22% 38% at 32% 50%, rgba(232,197,71,0.95), transparent 68%),
+                    radial-gradient(ellipse 22% 38% at 68% 50%, rgba(232,197,71,0.95), transparent 68%);
+        filter: blur(8px);
+        animation: eyes-glow 5s ease-in-out infinite;
+      }
+      .hero-veil {
+        background:
+          radial-gradient(ellipse 55% 45% at 78% 28%, rgba(212,175,55,0.11), transparent 70%),
+          radial-gradient(ellipse 40% 35% at 12% 65%, rgba(212,175,55,0.05), transparent 65%);
+      }
+
+      .hero-lockup {
+        display: inline-flex; align-items: center; gap: 1.15rem;
+        padding: 0.85rem 1.35rem 0.85rem 0.85rem;
+        border: 1px solid rgba(201,162,39,0.28);
+        background: linear-gradient(135deg, rgba(30,30,34,0.75), rgba(7,7,9,0.92));
+        box-shadow: 0 8px 32px rgba(0,0,0,0.35), inset 0 1px 0 rgba(237,217,138,0.08);
+      }
+      .hero-lockup img { filter: drop-shadow(0 0 28px rgba(201,162,39,0.35)); }
+
+      .hero-tagline {
+        font-size: clamp(2.25rem, 6.5vw, 4.25rem);
+        line-height: 1.02;
+        letter-spacing: 0.04em;
+        text-shadow: 0 0 80px rgba(201,162,39,0.22), 0 2px 24px rgba(0,0,0,0.4);
+      }
+
+      .guardian-stage { position: relative; isolation: isolate; }
+      .guardian-stage::before {
+        content: ""; position: absolute; left: 50%; bottom: 2%; transform: translateX(-50%);
+        width: 75%; height: 20%; background: radial-gradient(ellipse, rgba(201,162,39,0.3), transparent 72%);
+        filter: blur(20px);
+      }
+      .guardian-pedestal {
+        position: absolute; left: 50%; bottom: 6%; transform: translateX(-50%); width: 60%; height: 2px;
+        background: linear-gradient(90deg, transparent, rgba(237,217,138,0.85), transparent);
+      }
+      .guardian-ring { position: relative; }
+      .guardian-ring::before {
+        content: ""; position: absolute; inset: -16%; border-radius: 50%;
+        border: 1px solid rgba(201,162,39,0.3); animation: ring-pulse 6s ease-in-out infinite;
+      }
+      .guardian-ring::after {
+        content: ""; position: absolute; inset: -28%; border-radius: 50%;
+        background: radial-gradient(circle, rgba(201,162,39,0.16), transparent 68%);
+      }
+      .guardian-float { animation: guardian-drift 11s ease-in-out infinite; }
+      .guardian-badge {
+        position: absolute; bottom: 8%; left: 6%; z-index: 2;
+        padding: 0.5rem; border: 1px solid rgba(201,162,39,0.35);
+        background: rgba(7,7,9,0.88); backdrop-filter: blur(8px);
+        box-shadow: 0 8px 28px rgba(0,0,0,0.45);
+      }
+
+      .pillar-card {
+        position: relative; overflow: hidden; text-align: left;
+        background: linear-gradient(160deg, rgba(30,30,34,0.65) 0%, rgba(7,7,9,0.96) 100%);
+        border: 1px solid rgba(201,162,39,0.12);
+        transition: transform 0.4s cubic-bezier(0.22,1,0.36,1), border-color 0.4s ease, box-shadow 0.4s ease;
+      }
+      .pillar-card::before {
+        content: ""; position: absolute; top: 0; left: 0; width: 3px; height: 100%;
+        background: linear-gradient(180deg, transparent, rgba(201,162,39,0.55), transparent); opacity: 0.7;
+      }
+      .pillar-card::after {
+        content: attr(data-numeral);
+        position: absolute; top: 1rem; right: 1.25rem;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 4.5rem; line-height: 1; color: rgba(201,162,39,0.07); pointer-events: none;
+      }
+      .pillar-card:hover { transform: translateY(-6px); border-color: rgba(201,162,39,0.32); box-shadow: var(--lift); }
+      .pillar-featured { border-color: rgba(201,162,39,0.28); }
+      .pillar-featured::before { opacity: 1; width: 4px; background: linear-gradient(180deg, #edd98a, #c9a227, #7a5c12); }
+      .pillar-icon-wrap {
+        width: 3.5rem; height: 3.5rem; margin-bottom: 1.25rem;
+        display: flex; align-items: center; justify-content: center;
+        border: 1px solid rgba(201,162,39,0.32); border-radius: 50%;
+        background: rgba(201,162,39,0.08); color: var(--gold-light);
+      }
+      .pillar-icon { width: 1.4rem; height: 1.4rem; }
+
+      .pair-card {
+        border: 1px solid rgba(201,162,39,0.16);
+        background: linear-gradient(180deg, rgba(18,18,20,0.6), rgba(7,7,9,0.85));
+        box-shadow: var(--card);
+      }
+      .pair-header { border-bottom: 1px solid rgba(201,162,39,0.12); }
+      .pair-frame { padding: 0.35rem; background: linear-gradient(135deg, rgba(201,162,39,0.08), transparent); }
+      .pair-arrow { color: var(--gold); opacity: 0.7; }
+      .pair-figure { position: relative; overflow: hidden; border: 1px solid rgba(201,162,39,0.1); }
+      .pair-figure img { transition: transform 0.75s cubic-bezier(0.22,1,0.36,1), filter 0.4s ease; }
+      .pair-card:hover .pair-figure img { transform: scale(1.05); filter: brightness(1.08); }
+      .pair-caption {
+        position: absolute; inset-inline: 0; bottom: 0; padding: 2rem 0.75rem 0.65rem;
+        background: linear-gradient(transparent, rgba(7,7,9,0.92));
+        font-size: 0.65rem; color: #e4dfd6; line-height: 1.4; opacity: 0; transform: translateY(6px);
+        transition: opacity 0.35s ease, transform 0.35s ease;
+      }
+      .pair-figure:hover .pair-caption { opacity: 1; transform: none; }
+
+      .filter-btn {
+        border: 1px solid rgba(201,162,39,0.2); color: #b0aaa0;
+        transition: all 0.3s ease; font-weight: 500;
+      }
+      .filter-btn:hover { color: var(--gold-light); border-color: rgba(201,162,39,0.4); background: rgba(201,162,39,0.06); }
+      .filter-btn.is-active {
+        background: linear-gradient(135deg, rgba(201,162,39,0.18), rgba(122,92,18,0.22));
+        border-color: rgba(237,217,138,0.45); color: var(--gold-light);
+      }
+
+      .gallery-card { overflow: hidden; cursor: zoom-in; border: 1px solid rgba(212,175,55,0.12); }
+      .gallery-card.is-hidden { display: none; }
+      .gallery-card.is-featured { grid-column: span 2; aspect-ratio: 16/10; }
+      .gallery-card img { transition: transform 0.75s ease, filter 0.4s ease; }
+      .gallery-card:hover img { transform: scale(1.06); filter: brightness(1.08); }
+      .gallery-hover-caption {
+        position: absolute; inset: 0; z-index: 5; display: flex; flex-direction: column; justify-content: flex-end;
+        padding: 1.25rem 0.85rem 0.75rem;
+        background: linear-gradient(transparent 30%, rgba(7,7,9,0.92));
+        opacity: 0; transform: translateY(8px); transition: opacity 0.35s ease, transform 0.35s ease; pointer-events: none;
+      }
+      .gallery-card:hover .gallery-hover-caption { opacity: 1; transform: none; }
+      .why-card {
+        background: linear-gradient(160deg, rgba(30,30,34,0.65), rgba(7,7,9,0.96));
+        border: 1px solid rgba(212,175,55,0.12);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+      .why-card:hover { border-color: rgba(212,175,55,0.28); transform: translateY(-3px); }
+
+      .warden-panel {
+        background: linear-gradient(155deg, rgba(30,30,34,0.75), rgba(7,7,9,0.98));
+        border: 1px solid rgba(212,175,55,0.2);
+        box-shadow: 0 24px 64px rgba(0,0,0,0.5), inset 0 1px 0 rgba(232,197,71,0.06);
+      }
+      .warden-glow { box-shadow: 0 0 120px rgba(212,175,55,0.22), 0 32px 80px rgba(0,0,0,0.55); }
+      .legend-block { border-left: 2px solid rgba(212,175,55,0.35); padding-left: 1.25rem; }
+      .timeline-node { position: relative; padding-left: 2rem; }
+      .timeline-node::before {
+        content: ""; position: absolute; left: 0.35rem; top: 0.55rem; width: 0.55rem; height: 0.55rem;
+        border-radius: 50%; background: var(--gold-light); box-shadow: 0 0 12px rgba(232,197,71,0.7);
+      }
+      .timeline-rail { border-left: 1px solid rgba(212,175,55,0.2); margin-left: 0.6rem; }
+      .gallery-crest {
+        position: absolute; bottom: 0.5rem; right: 0.5rem; z-index: 6; width: 1.75rem; height: 1.75rem;
+        opacity: 0.55; pointer-events: none; filter: drop-shadow(0 0 6px rgba(212,175,55,0.4));
+        transition: opacity 0.3s ease;
+      }
+      .gallery-card:hover .gallery-crest { opacity: 0.85; }
+      .pillar-shield {
+        position: absolute; top: 1rem; right: 1rem; width: 1.5rem; height: 1.5rem; opacity: 0.2;
+        pointer-events: none;
+      }
+      .pillar-card:hover .pillar-shield { opacity: 0.45; }
+      #legend-modal.open { display: flex; }
+      .marmorax-teaser { font-style: italic; color: #e4dfd6; }
+      .btn-legend {
+        background: transparent; border: 1px solid rgba(212,175,55,0.4);
+        transition: all 0.35s ease;
+      }
+      .btn-legend:hover { border-color: rgba(232,197,71,0.6); background: rgba(212,175,55,0.08); color: var(--gold-light); }
+      @keyframes vein-shimmer { 0%, 100% { opacity: 0.45; } 50% { opacity: 0.7; } }
+      @keyframes eyes-glow { 0%, 100% { opacity: 0.25; filter: blur(8px); } 50% { opacity: 0.5; filter: blur(10px); } }
+
+      .domain-bar {
+        display: flex; align-items: center; gap: 0;
+        border: 1px solid rgba(201,162,39,0.22);
+        background: rgba(7,7,9,0.75);
+        font-family: ui-monospace, monospace;
+        font-size: 0.8rem;
+      }
+      .domain-bar .host { padding: 0.65rem 1rem; color: #b0aaa0; border-right: 1px solid rgba(201,162,39,0.15); }
+      .domain-bar .slug { padding: 0.65rem 1rem; color: var(--gold-light); }
+
+      .slug-featured {
+        background: linear-gradient(155deg, rgba(30,30,34,0.8), rgba(7,7,9,0.97));
+        border: 1px solid rgba(201,162,39,0.22);
+        transition: all 0.35s cubic-bezier(0.22,1,0.36,1);
+      }
+      .slug-featured:hover {
+        border-color: rgba(237,217,138,0.5); transform: translateY(-4px);
+        box-shadow: 0 16px 44px rgba(0,0,0,0.42), 0 0 24px rgba(201,162,39,0.08);
+      }
+      .slug-icon {
+        width: 2rem; height: 2rem; margin: 0 auto 0.75rem;
+        display: flex; align-items: center; justify-content: center;
+        border-radius: 50%; border: 1px solid rgba(201,162,39,0.25);
+        color: var(--gold-light); background: rgba(201,162,39,0.06);
+      }
+      .link-card {
+        background: linear-gradient(155deg, rgba(30,30,34,0.7), rgba(7,7,9,0.97));
+        border: 1px solid rgba(201,162,39,0.14);
+        transition: all 0.35s ease;
+      }
+      .link-card:hover { border-color: rgba(237,217,138,0.42); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.38); }
+
+      .cta-primary {
+        background: linear-gradient(135deg, rgba(201,162,39,0.28), rgba(122,92,18,0.38));
+        box-shadow: 0 6px 28px rgba(201,162,39,0.14);
+        transition: all 0.35s ease;
+      }
+      .cta-primary:hover { box-shadow: 0 10px 40px rgba(201,162,39,0.26); transform: translateY(-1px); }
+      .cta-ghost { transition: all 0.35s ease; }
+      .cta-ghost:hover { border-color: rgba(201,162,39,0.4); color: var(--gold-light); }
+
+      .label-after { background: rgba(201,162,39,0.24); border: 1px solid rgba(237,217,138,0.5); color: #edd98a; }
+      .label-before { background: rgba(7,7,9,0.9); border: 1px solid rgba(176,170,160,0.4); color: #e4dfd6; }
+      .label-detail, .label-process { background: rgba(30,30,34,0.92); border: 1px solid rgba(201,162,39,0.3); color: #c9a227; }
+
+      .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+      .reveal.is-visible { opacity: 1; transform: none; }
+      .reveal-d1 { transition-delay: 0.1s; }
+      .reveal-d2 { transition-delay: 0.2s; }
+      .reveal-d3 { transition-delay: 0.3s; }
+
+      .scroll-hint { animation: scroll-hint 2.5s ease-in-out infinite; }
+      .nav-open #mobile-menu { display: block; }
+      .nav-open #menu-icon-open { display: none; }
+      .nav-open #menu-icon-close { display: block; }
+      #lightbox.open { display: flex; }
+
+      .footer-brand { border-top: 1px solid rgba(201,162,39,0.1); background: rgba(7,7,9,0.5); }
+
+      .ba-before img { height: 100%; width: 100%; object-fit: cover; }
+      .slider-dot { border-color: rgba(201,162,39,0.2); color: #b0aaa0; }
+      .slider-dot.is-active, .slider-dot:hover { border-color: rgba(237,217,138,0.45); color: var(--gold-light); background: rgba(201,162,39,0.1); }
+      .service-card, .review-card {
+        background: linear-gradient(160deg, rgba(30,30,34,0.65), rgba(7,7,9,0.96));
+        border: 1px solid rgba(201,162,39,0.12);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+      .service-card:hover, .review-card:hover { border-color: rgba(201,162,39,0.28); transform: translateY(-3px); }
+      .process-step { padding: 1rem 0; border-bottom: 1px solid rgba(201,162,39,0.08); }
+      .process-step:last-child { border-bottom: none; }
+      .gatekeeper-panel {
+        background: linear-gradient(155deg, rgba(30,30,34,0.78), rgba(7,7,9,0.98));
+        border: 1px solid rgba(212,175,55,0.22);
+        box-shadow: 0 24px 64px rgba(0,0,0,0.5), inset 0 1px 0 rgba(232,197,71,0.06);
+      }
+      .gatekeeper-step {
+        background: linear-gradient(160deg, rgba(30,30,34,0.55), rgba(7,7,9,0.92));
+        border: 1px solid rgba(201,162,39,0.14);
+        transition: border-color 0.3s ease, transform 0.3s ease;
+      }
+      .gatekeeper-step:hover { border-color: rgba(201,162,39,0.32); transform: translateY(-3px); }
+      .discovery-item { border-bottom: 1px solid rgba(201,162,39,0.08); }
+      .discovery-item:last-child { border-bottom: none; }
+      .faq-chevron.rotate-180 { transform: rotate(180deg); }
+      .form-input {
+        width: 100%; padding: 0.75rem 1rem; background: rgba(7,7,9,0.8);
+        border: 1px solid rgba(201,162,39,0.2); color: #f7f4ef; border-radius: 2px;
+        transition: border-color 0.25s ease;
+      }
+      .form-input:focus { outline: none; border-color: rgba(237,217,138,0.5); box-shadow: 0 0 0 2px rgba(201,162,39,0.15); }
+      .nav-link:focus-visible,
+      .cta-primary:focus-visible,
+      .btn-call:focus-visible,
+      .btn-legend:focus-visible,
+      .filter-btn:focus-visible,
+      .slug-link:focus-visible,
+      .link-card:focus-visible,
+      .form-input:focus-visible,
+      #menu-toggle:focus-visible,
+      #legend-open:focus-visible {
+        outline: 2px solid var(--gold-light);
+        outline-offset: 3px;
+      }
+      .btn-call { background: linear-gradient(135deg, rgba(30,30,34,0.9), rgba(7,7,9,0.95)); border: 1px solid rgba(201,162,39,0.35); }
+      .btn-call:hover { border-color: rgba(237,217,138,0.55); background: rgba(201,162,39,0.1); }
+      #trust-bar { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+      @media (min-width: 640px) { #trust-bar { grid-template-columns: repeat(4, 1fr); display: flex; flex-wrap: wrap; justify-content: center; gap: 2.5rem 3rem; } }
+
+      @keyframes guardian-drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+      @keyframes ring-pulse { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.95; } }
+      @keyframes scroll-hint { 0%, 100% { opacity: 0.4; transform: translateY(0); } 50% { opacity: 1; transform: translateY(6px); } }
+
+      @media (max-width: 767px) {
+        :root { --nav-h: 64px; }
+        .mobile-bar {
+          position: fixed; bottom: 0; left: 0; right: 0; z-index: 40;
+          padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+          background: rgba(7,7,9,0.97); border-top: 1px solid rgba(201,162,39,0.14);
+          backdrop-filter: blur(16px);
+        }
+        body { padding-bottom: 5rem; }
+        .mobile-bar { display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; }
+        .hero-lockup { margin-left: auto; margin-right: auto; }
+        .guardian-badge { display: none; }
+        .pillar-card::after { font-size: 3.5rem; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .reveal { opacity: 1; transform: none; transition: none; }
+        .guardian-float, .guardian-ring::before, .scroll-hint, .hero-vein, .marmorax-eyes { animation: none; }
+        .gallery-card img, .pillar-card, .link-card, .slug-featured, .pair-figure img { transition: none; }
+      }
+    </style>
+</head>
+  <body class="min-h-screen font-sans antialiased marble-grain">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-marble-dark focus:text-gold-light focus:border focus:border-gold/40">Skip to content</a>
+
+    <header id="site-header" class="sticky top-0 z-50 glass-panel">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8 h-[var(--nav-h)] flex items-center justify-between">
+        <a href="/" class="flex items-center gap-3 group shrink-0">
+          <picture>
+            <source srcset="assets/logo-msr.webp" type="image/webp" />
+            <img src="assets/logo-msr.png" alt="" width="44" height="44" class="group-hover:scale-105 transition-transform duration-300" />
+          </picture>
+          <div class="hidden sm:block leading-tight">
+            <span class="font-display text-gold-light text-sm lg:text-base">Master Sanctum Restoration</span>
+            <span class="block text-[9px] tracking-luxury uppercase text-stone-muted">Protecting What Endures</span>
+          </div>
+        </a>
+        <nav class="hidden md:flex items-center gap-5 lg:gap-7 text-sm" aria-label="Primary">
+          <a href="#main" class="nav-link" data-section="hero">Home</a>
+          <a href="#warden" class="nav-link" data-section="warden">Warden</a>
+          <a href="#gallery" class="nav-link" data-section="gallery">Gallery</a>
+          <a href="#about" class="nav-link" data-section="about">About</a>
+          <a href="#links" class="nav-link" data-section="links">Short Links</a>
+          <a href="#gatekeeper" class="nav-link" data-section="gatekeeper">Get Started</a>
+          <a href="#quote" class="nav-link" data-section="quote">Contact</a>
+          <a data-action="quote" data-ab="nav-quote" href="quote" class="px-5 py-2.5 border border-gold/35 text-gold-light font-display tracking-wide text-sm cta-primary">Request a Quote</a>
+        </nav>
+        <button id="menu-toggle" type="button" class="md:hidden p-2.5 text-gold-light border border-gold/22 rounded-sm" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <svg id="menu-icon-open" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+      </div>
+      <nav id="mobile-menu" class="hidden md:hidden border-t border-gold/10 glass-panel" aria-label="Mobile">
+        <div class="max-w-6xl mx-auto px-4 py-3 flex flex-col">
+          <a href="#main" class="nav-mobile-link nav-link py-3.5">Home</a>
+          <a href="#warden" class="nav-mobile-link nav-link py-3.5">Marmorax</a>
+          <a href="#gallery" class="nav-mobile-link nav-link py-3.5">Gallery</a>
+          <a href="#about" class="nav-mobile-link nav-link py-3.5">About</a>
+          <a href="#links" class="nav-mobile-link nav-link py-3.5">Short Links</a>
+          <a href="#gatekeeper" class="nav-mobile-link nav-link py-3.5">Get Started</a>
+          <a href="#quote" class="nav-mobile-link nav-link py-3.5">Contact</a>
+          <div class="grid grid-cols-2 gap-2 my-3">
+            <a href="#sliders" class="py-3.5 text-center btn-call text-gold-light font-display text-sm">View Our Work</a>
+            <a data-action="quote" href="quote" class="py-3.5 text-center border border-gold/40 text-gold-light font-display text-sm cta-primary">Request a Quote</a>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <!-- Hero -->
+      <section id="hero" class="relative min-h-[calc(100svh-var(--nav-h))] flex items-center overflow-hidden hero-marble hero-veil" data-section="hero">
+        <div class="hero-vein" aria-hidden="true"></div>
+        <div class="marmorax-eyes hidden lg:block" aria-hidden="true"></div>
+        <div class="max-w-6xl mx-auto px-4 sm:px-8 w-full py-12 sm:py-16 lg:py-20 relative z-10">
+          <div class="grid lg:grid-cols-[1fr_1fr] gap-10 lg:gap-16 items-center">
+            <div class="reveal text-center lg:text-left order-2 lg:order-1">
+              <div class="hero-lockup rounded-sm mb-8">
+                <picture>
+                  <source srcset="assets/logo-msr.webp" type="image/webp" />
+                  <img src="assets/logo-msr.png" alt="MSR Shield" width="64" height="64" />
+                </picture>
+                <div class="text-left">
+                  <p class="font-display text-xl sm:text-2xl text-gold-light font-semibold">Master Sanctum Restoration</p>
+                  <p class="text-[10px] tracking-luxury uppercase text-stone-muted mt-1.5">Luxury Stone Conservation</p>
+                </div>
+              </div>
+
+              <h1 class="hero-tagline font-display font-semibold text-gold-light mb-5">
+                Protecting What Endures
+              </h1>
+              <div class="gold-line w-32 sm:w-44 mx-auto lg:mx-0 mb-6"></div>
+              <p class="text-stone-soft text-[15px] sm:text-base lg:text-lg leading-[1.85] max-w-lg mx-auto lg:mx-0 mb-4">
+                Luxury natural stone and marble restoration — architectural marble, heritage stone, countertops, monuments, and sanctuaries of craft.
+              </p>
+              <p id="hero-marmorax-teaser" class="marmorax-teaser text-sm sm:text-base leading-relaxed max-w-lg mx-auto lg:mx-0 mb-9 text-gold-light/80">
+                Guarded by Marmorax, the Eternal Warden of Sanctum.
+              </p>
+              <div class="flex flex-col sm:flex-row flex-wrap gap-3.5 justify-center lg:justify-start">
+                <a data-action="quote" data-ab="hero-quote" href="quote" class="cta-primary inline-flex items-center justify-center min-h-[52px] px-9 border border-gold/55 text-gold-light font-display text-lg tracking-wide">Request a Quote</a>
+                <a href="#sliders" class="btn-call inline-flex items-center justify-center min-h-[52px] px-9 text-gold-light font-display text-lg tracking-wide transition-colors">View Our Work</a>
+                <a href="#warden" class="btn-legend inline-flex items-center justify-center min-h-[52px] px-9 text-gold-light font-display text-lg tracking-wide">Meet Marmorax</a>
+              </div>
+              <p class="mt-4 text-stone-muted text-xs"><a href="#gallery" class="hover:text-gold-light transition-colors">Browse full restoration gallery →</a></p>
+            </div>
+
+            <div class="reveal reveal-d1 order-1 lg:order-2 flex justify-center lg:justify-end">
+              <div class="guardian-stage pb-10 sm:pb-14 w-full max-w-[520px]">
+                <div class="guardian-ring guardian-float relative shadow-guardian">
+                  <picture>
+                    <source srcset="assets/guardian-marble.webp" type="image/webp" />
+                    <img src="assets/guardian-marble.png" alt="Marmorax, the Eternal Warden of Sanctum" width="520" height="520" class="max-w-[min(88vw,360px)] sm:max-w-[440px] lg:max-w-[520px] w-full" loading="eager" fetchpriority="high" />
+                  </picture>
+                  <div class="guardian-badge hidden sm:block" aria-hidden="true">
+                    <picture>
+                      <source srcset="assets/logo-msr.webp" type="image/webp" />
+                      <img src="assets/logo-msr.png" alt="" width="48" height="48" />
+                    </picture>
+                  </div>
+                </div>
+                <div class="guardian-pedestal" aria-hidden="true"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <a href="#sliders" class="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-2 text-stone-muted hover:text-gold-light transition-colors scroll-hint" aria-label="Scroll to before and after">
+          <span class="text-[9px] tracking-luxury uppercase">Explore</span>
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M12 5v14M5 12l7 7 7-7"/></svg>
+        </a>
+      </section>
+
+      <!-- The Eternal Warden -->
+      <section id="warden" class="section-pad border-t border-gold/8 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.05),transparent_65%)]" data-section="warden">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="reveal grid lg:grid-cols-[1fr_1.1fr] gap-10 lg:gap-14 items-center">
+            <div class="flex justify-center">
+              <div class="warden-panel warden-glow rounded-sm p-3 sm:p-4 max-w-md w-full">
+                <picture>
+                  <source srcset="assets/guardian-marble.webp" type="image/webp" />
+                  <img id="warden-image" src="assets/guardian-marble.png" alt="Marmorax, the Eternal Warden of Sanctum" width="480" height="480" class="w-full rounded-sm" loading="lazy" />
+                </picture>
+              </div>
+            </div>
+            <div class="text-center lg:text-left">
+              <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">The Eternal Warden</p>
+              <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide mb-2">Marmorax</h2>
+              <p class="text-stone-muted text-xs tracking-luxury uppercase mb-5">Guardian of the Sanctum · Keeper of Stone</p>
+              <div class="gold-line w-24 mx-auto lg:mx-0 mb-6"></div>
+              <p id="warden-teaser" class="text-stone-soft text-base sm:text-lg leading-relaxed mb-4 max-w-xl mx-auto lg:mx-0">
+                Loading the warden's tale…
+              </p>
+              <p id="warden-florida" class="text-gold-light/75 text-sm sm:text-base leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0 italic"></p>
+              <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                <button type="button" id="legend-open" class="cta-primary min-h-[48px] px-8 border border-gold/50 text-gold-light font-display tracking-wide">Read the Full Legend</button>
+                <a href="#legend" class="btn-legend min-h-[48px] px-8 inline-flex items-center justify-center text-gold-light font-display tracking-wide">Scroll to Lore</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="border-y border-gold/10 bg-marble-dark/40">
+        <div id="trust-bar" class="max-w-6xl mx-auto px-4 sm:px-8 py-8 sm:py-10">
+          <p class="col-span-full w-full text-center text-stone-muted text-sm animate-pulse">Loading trust metrics…</p>
+        </div>
+      </div>
+
+      <!-- Stone · Memory · Permanence -->
+      <section id="method" class="section-pad border-t border-gold/8" data-section="method">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-12 max-w-2xl mx-auto">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Our Method</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Stone · Memory · Permanence</h2>
+            <div class="gold-line w-24 mx-auto my-5"></div>
+            <p class="text-stone-soft text-sm sm:text-base leading-relaxed">Assessment → Restoration → Protection. Every commission follows conservation discipline from first document to final seal.</p>
+          </div>
+          <div id="pillars-grid" class="grid md:grid-cols-3 gap-4 sm:gap-5">
+            <p class="col-span-full text-center text-stone-muted text-sm py-8 animate-pulse">Loading method…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Before/After Sliders -->
+      <section id="sliders" class="section-pad bg-[radial-gradient(ellipse_at_center,rgba(212,175,55,0.06),transparent_70%)]" data-section="sliders">
+        <div class="max-w-5xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-10 sm:mb-14 max-w-2xl mx-auto">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Restoration Evidence</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Before &amp; After</h2>
+            <div class="gold-line w-24 mx-auto my-5"></div>
+            <p class="text-stone-soft text-sm sm:text-base leading-relaxed">Drag the slider to compare documented commissions. Each project is assessed, hand-finished, and sealed for permanence.</p>
+          </div>
+          <div id="slider-root" class="reveal">
+            <p class="text-center text-stone-muted text-sm py-16 animate-pulse">Loading restoration sliders…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Restoration Gallery -->
+      <section id="gallery" class="section-pad border-t border-gold/8" data-section="gallery">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="reveal flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8 mb-12">
+            <div class="text-center lg:text-left max-w-xl">
+              <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Restoration Evidence</p>
+              <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Restoration Gallery</h2>
+              <div class="gold-line w-24 mx-auto lg:mx-0 my-5"></div>
+              <p class="text-stone-soft text-sm sm:text-base leading-relaxed">Documented commissions — hover for project details, tap to enlarge.</p>
+              <p id="gallery-count" class="text-stone-muted text-xs mt-3 tracking-wide"></p>
+            </div>
+            <div id="gallery-filters" class="flex flex-wrap justify-center lg:justify-end gap-2" role="tablist">
+              <button type="button" class="filter-btn is-active px-4 py-2 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="all" aria-selected="true">All</button>
+              <button type="button" class="filter-btn px-4 py-2 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="floors">Floors</button>
+              <button type="button" class="filter-btn px-4 py-2 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="countertops">Countertops</button>
+              <button type="button" class="filter-btn px-4 py-2 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="showers">Showers</button>
+              <button type="button" class="filter-btn px-4 py-2 text-[9px] tracking-luxury uppercase rounded-sm" data-filter="historical">Historical</button>
+            </div>
+          </div>
+          <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-4 gap-2.5 sm:gap-3.5 reveal">
+            <p class="col-span-full text-center text-stone-muted text-sm py-14 animate-pulse">Loading gallery…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Why Choose MSR -->
+      <section id="about" class="section-pad border-t border-gold/8 bg-marble-dark/30" data-section="about">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-12 max-w-2xl mx-auto">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Trust &amp; Experience</p>
+            <h2 id="why-headline" class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Why Choose Master Sanctum</h2>
+            <div class="gold-line w-24 mx-auto my-5"></div>
+            <p id="why-philosophy" class="text-stone-soft text-sm sm:text-base leading-relaxed italic">Loading…</p>
+          </div>
+          <div id="why-highlights" class="grid sm:grid-cols-2 gap-4 sm:gap-5 mb-10">
+            <p class="col-span-full text-center text-stone-muted text-sm py-6 animate-pulse">Loading highlights…</p>
+          </div>
+          <div class="reveal max-w-xl mx-auto">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-4 text-center font-medium">Premium Techniques</p>
+            <ul id="why-techniques" class="grid sm:grid-cols-2 gap-x-6 gap-y-2">
+              <li class="text-stone-muted text-sm animate-pulse">Loading…</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- The Full Legend -->
+      <section id="legend" class="section-pad border-t border-gold/8 bg-marble-dark/40" data-section="legend">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-12">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Chronicle of the Warden</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">The Full Legend</h2>
+            <div class="gold-line w-24 mx-auto my-5"></div>
+            <p class="text-stone-soft text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">From ancient cathedral parapets to Florida sanctuaries — the story behind Protecting What Endures.</p>
+          </div>
+          <div id="legend-timeline" class="reveal timeline-rail space-y-8 mb-14 pl-2">
+            <p class="text-stone-muted text-sm animate-pulse">Loading timeline…</p>
+          </div>
+          <div id="legend-body" class="reveal space-y-10">
+            <p class="text-stone-muted text-sm animate-pulse text-center">Loading legend…</p>
+          </div>
+          <div id="legend-voice" class="reveal mt-12 pt-8 border-t border-gold/10">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-4 text-center font-medium">The Warden's Mark</p>
+            <ul id="legend-voice-list" class="space-y-2 max-w-xl mx-auto text-sm text-stone-soft"></ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- Links -->
+      <section id="links" class="section-pad border-t border-gold/8" data-section="links">
+        <div class="max-w-4xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-12">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Instant Routing</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Short Links</h2>
+            <div class="gold-line w-20 mx-auto my-5"></div>
+            <p class="text-stone-soft text-sm sm:text-base leading-relaxed max-w-md mx-auto">Append any slug to this domain for direct access to quotes, portfolio, and contact.</p>
+          </div>
+
+          <div class="reveal reveal-d1 domain-bar rounded-sm mb-8 max-w-md mx-auto overflow-hidden">
+            <span class="host" id="domain-host">sanctum-shortener.is-a.dev</span>
+            <span class="slug">/quote</span>
+          </div>
+
+          <div id="slug-featured" class="reveal reveal-d1 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4 mb-10">
+            <a href="quote" data-slug="quote" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/quote</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Get a Free Estimate</p>
+            </a>
+            <a href="book" data-slug="book" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/book</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Book Consultation</p>
+            </a>
+            <a href="portfolio" data-slug="portfolio" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 15l5-5 4 4 6-8"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/portfolio</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Full Gallery</p>
+            </a>
+            <a href="marmorax" data-slug="marmorax" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 3l2.5 5.5L20 10l-4 4 .9 5.5L12 17l-4.9 2.5L8 14l-4-4 5.5-1.5L12 3z"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/marmorax</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Meet the Warden</p>
+            </a>
+            <a href="memoir" data-slug="memoir" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/memoir</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Your Story</p>
+            </a>
+            <a href="intake" data-slug="intake" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/intake</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Client Intake</p>
+            </a>
+            <a href="contact" data-slug="contact" class="slug-featured slug-link rounded-sm p-5 sm:p-6 text-center group">
+              <div class="slug-icon"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></div>
+              <p class="font-mono text-gold-light text-base sm:text-lg group-hover:text-gold transition-colors">/contact</p>
+              <p class="text-stone-muted text-[10px] sm:text-xs mt-2 tracking-wide uppercase">Direct Contact</p>
+            </a>
+          </div>
+
+          <div id="links-grid" class="space-y-3 reveal reveal-d2">
+            <p class="text-center text-stone-muted text-sm py-6 animate-pulse">Loading links…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Testimonials -->
+      <section id="reviews" class="section-pad border-t border-gold/8 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.04),transparent_60%)]" data-section="reviews">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-12 max-w-xl mx-auto">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Client Trust</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Testimonials</h2>
+            <div class="gold-line w-20 mx-auto my-5"></div>
+          </div>
+          <div id="reviews-grid" class="grid md:grid-cols-3 gap-4 sm:gap-5">
+            <p class="col-span-full text-center text-stone-muted text-sm py-8 animate-pulse">Loading reviews…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- FAQ -->
+      <section id="faq" class="section-pad border-t border-gold/8" data-section="faq">
+        <div class="max-w-2xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-10">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Common Questions</p>
+            <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold tracking-wide">FAQ</h2>
+            <div class="gold-line w-16 mx-auto my-5"></div>
+          </div>
+          <div id="faq-list" class="space-y-2 reveal">
+            <p class="text-center text-stone-muted text-sm py-6 animate-pulse">Loading FAQ…</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Gatekeeper Intake -->
+      <section id="gatekeeper" class="section-pad border-t border-gold/8 bg-[radial-gradient(ellipse_at_top,rgba(212,175,55,0.06),transparent_65%)]" data-section="gatekeeper">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="reveal text-center mb-12 max-w-2xl mx-auto">
+            <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Master-Sanctum-Gatekeeper</p>
+            <h2 id="gatekeeper-headline" class="font-display text-3xl sm:text-4xl lg:text-5xl text-gold-light font-semibold tracking-wide">Begin Under Protocol</h2>
+            <div class="gold-line w-24 mx-auto my-5"></div>
+            <p id="gatekeeper-subheadline" class="text-gold-light/85 text-sm sm:text-base font-medium mb-3">Every commission starts with assessment — not haste.</p>
+            <p id="gatekeeper-teaser" class="text-stone-soft text-sm sm:text-base leading-relaxed">Loading intake flow…</p>
+          </div>
+
+          <div id="gatekeeper-steps" class="reveal reveal-d1 grid md:grid-cols-3 gap-4 sm:gap-5 mb-10">
+            <p class="col-span-full text-center text-stone-muted text-sm py-6 animate-pulse">Loading steps…</p>
+          </div>
+
+          <div class="reveal reveal-d2 grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-12 items-start">
+            <div class="gatekeeper-panel rounded-sm p-6 sm:p-8">
+              <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-4 font-medium">Discovery Questions</p>
+              <p class="text-stone-soft text-sm leading-relaxed mb-5">Before we schedule a visit, these details help us assess whether conservation restoration is the right protocol for your stone.</p>
+              <ol id="gatekeeper-questions" class="space-y-0 text-sm">
+                <li class="text-stone-muted text-sm animate-pulse py-4">Loading questions…</li>
+              </ol>
+            </div>
+            <div class="gatekeeper-panel rounded-sm p-6 sm:p-8 flex flex-col justify-center text-center lg:text-left">
+              <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-3 font-medium">Your Next Step</p>
+              <h3 class="font-display text-2xl sm:text-3xl text-gold-light font-semibold mb-4">Start Your Commission</h3>
+              <p class="text-stone-soft text-sm leading-relaxed mb-6">Download the intake questionnaire to prepare for assessment, or request a quote directly — the Gatekeeper routes every inquiry under conservation protocol.</p>
+              <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
+                <a href="intake" data-slug="intake" id="gatekeeper-cta-intake" class="cta-primary inline-flex items-center justify-center min-h-[48px] px-8 border border-gold/50 text-gold-light font-display tracking-wide">Download Intake Questionnaire</a>
+                <a data-action="quote" href="quote" id="gatekeeper-cta-quote" class="btn-call inline-flex items-center justify-center min-h-[48px] px-8 text-gold-light font-display tracking-wide">Request Site Assessment</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Guarantee + Quote -->
+      <section id="quote" class="section-pad border-t border-gold/8 bg-marble-dark/40" data-section="quote">
+        <div class="max-w-6xl mx-auto px-4 sm:px-8">
+          <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+            <div class="reveal">
+              <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-3 font-medium">Our Commitment</p>
+              <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold tracking-wide mb-5">Guarantee &amp; Standards</h2>
+              <ul id="guarantee-list" class="space-y-3 mb-8">
+                <li class="text-stone-muted text-sm animate-pulse">Loading guarantees…</li>
+              </ul>
+              <div class="flex flex-col sm:flex-row gap-3">
+                <a data-action="quote" href="quote" class="cta-primary inline-flex items-center justify-center min-h-[48px] px-8 border border-gold/50 text-gold-light font-display tracking-wide">Request a Quote</a>
+                <a href="#sliders" class="btn-call inline-flex items-center justify-center min-h-[48px] px-8 text-gold-light font-display tracking-wide">View Our Work</a>
+              </div>
+            </div>
+            <div class="reveal reveal-d1">
+              <form id="quote-form" class="rounded-sm border border-gold/18 p-6 sm:p-8 bg-marble-mid/20 space-y-4" aria-label="Request a free quote">
+                <h3 class="font-display text-2xl text-gold-light font-semibold mb-2">Request a Free Estimate</h3>
+                <p class="text-stone-muted text-xs mb-4">Tell us about your stone — we respond with assessment scope and estimate. <a href="intake" data-slug="intake" class="text-gold-light/80 hover:text-gold-light transition-colors">Download intake questionnaire →</a></p>
+                <div>
+                  <label for="qf-name" class="block text-[10px] tracking-luxury uppercase text-stone-muted mb-1.5">Name</label>
+                  <input class="form-input" id="qf-name" name="name" type="text" required autocomplete="name" />
+                </div>
+                <div class="grid sm:grid-cols-2 gap-4">
+                  <div>
+                    <label for="qf-phone" class="block text-[10px] tracking-luxury uppercase text-stone-muted mb-1.5">Phone</label>
+                    <input class="form-input" id="qf-phone" name="phone" type="tel" required autocomplete="tel" />
+                  </div>
+                  <div>
+                    <label for="qf-email" class="block text-[10px] tracking-luxury uppercase text-stone-muted mb-1.5">Email</label>
+                    <input class="form-input" id="qf-email" name="email" type="email" autocomplete="email" />
+                  </div>
+                </div>
+                <div>
+                  <label for="qf-message" class="block text-[10px] tracking-luxury uppercase text-stone-muted mb-1.5">Project Details</label>
+                  <textarea class="form-input min-h-[100px] resize-y" id="qf-message" name="message" placeholder="Stone type, location, condition…"></textarea>
+                </div>
+                <button type="submit" class="cta-primary w-full min-h-[48px] border border-gold/50 text-gold-light font-display text-lg tracking-wide">Submit Quote Request</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer-brand py-14 sm:py-18">
+      <div class="max-w-6xl mx-auto px-4 sm:px-8">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 text-center sm:text-left">
+          <div class="sm:col-span-2 lg:col-span-1 flex flex-col items-center sm:items-start">
+            <picture>
+              <source srcset="assets/logo-msr.webp" type="image/webp" />
+              <img src="assets/logo-msr.png" alt="" width="52" height="52" class="mb-4" />
+            </picture>
+            <p class="font-display text-xl text-gold-light font-semibold italic">Protecting What Endures</p>
+            <p class="text-[10px] tracking-luxury uppercase text-stone-muted mt-3">Master Sanctum Restoration</p>
+          </div>
+          <div>
+            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-4 font-medium">Contact</p>
+            <ul class="space-y-2.5 text-sm text-stone-soft">
+              <li><a data-action="quote" href="quote" class="hover:text-gold-light transition-colors duration-300">Request a quote →</a></li>
+              <li><a href="contact" class="slug-footer hover:text-gold-light transition-colors duration-300">/contact</a></li>
+              <li><a data-action="call" href="quote" class="hover:text-gold-light transition-colors duration-300"><span class="call-label">Call Now</span></a></li>
+              <li class="text-stone-muted text-xs pt-2 leading-relaxed">Florida &amp; select commissions nationwide</li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-4 font-medium">Short Links</p>
+            <ul class="space-y-2.5 text-sm font-mono text-stone-muted">
+              <li><a href="quote" class="slug-footer hover:text-gold-light transition-colors duration-300">/quote</a></li>
+              <li><a href="book" class="slug-footer hover:text-gold-light transition-colors duration-300">/book</a></li>
+              <li><a href="portfolio" class="slug-footer hover:text-gold-light transition-colors duration-300">/portfolio</a></li>
+              <li><a href="marmorax" data-slug="marmorax" class="slug-footer hover:text-gold-light transition-colors duration-300">/marmorax</a></li>
+              <li><a href="intake" data-slug="intake" class="slug-footer hover:text-gold-light transition-colors duration-300">/intake</a></li>
+              <li><a href="memoir" class="slug-footer hover:text-gold-light transition-colors duration-300">/memoir</a></li>
+              <li><a href="contact" class="slug-footer hover:text-gold-light transition-colors duration-300">/contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-4 font-medium">Standards</p>
+            <ul class="space-y-2 text-xs text-stone-muted leading-relaxed">
+              <li>Conservation-grade assessment</li>
+              <li>Hand-finished restoration</li>
+              <li>Documented protection protocols</li>
+            </ul>
+          </div>
+        </div>
+        <div class="gold-line max-w-sm mx-auto mt-12 mb-7 opacity-50"></div>
+        <div class="flex justify-center mb-5">
+          <picture>
+            <source srcset="assets/guardian-marble.webp" type="image/webp" />
+            <img src="assets/guardian-marble.png" alt="" width="40" height="40" class="opacity-40" aria-hidden="true" />
+          </picture>
+        </div>
+        <p class="text-center text-gold/50 text-[10px] tracking-luxury uppercase mb-2">Guarded by Marmorax</p>
+        <p class="text-center text-stone-dim text-[11px] tracking-wide">© Master Sanctum Restoration · Protecting What Endures</p>
+      </div>
+    </footer>
+
+    <div class="mobile-bar md:hidden">
+      <a href="#sliders" class="btn-call flex items-center justify-center min-h-[48px] text-gold-light font-display text-sm tracking-wide">View Work</a>
+      <a data-action="quote" data-ab="mobile-quote" href="quote" class="cta-primary flex items-center justify-center min-h-[48px] border border-gold/50 text-gold-light font-display text-sm tracking-wide">Request Quote</a>
+    </div>
+
+    <div id="legend-modal" class="hidden fixed inset-0 z-[210] items-start justify-center bg-marble-dark/98 p-4 sm:p-8 overflow-y-auto" role="dialog" aria-modal="true" aria-labelledby="legend-modal-title">
+      <div class="max-w-2xl w-full my-8 sm:my-12 relative">
+        <button type="button" id="legend-modal-close" class="absolute top-0 right-0 p-2.5 text-gold-light border border-gold/28 hover:bg-gold/10 rounded-sm transition-colors" aria-label="Close legend">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
+        <div class="rounded-sm border border-gold/20 bg-marble-mid/30 p-6 sm:p-10">
+          <p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2">Marmorax</p>
+          <h2 id="legend-modal-title" class="font-display text-3xl text-gold-light font-semibold mb-6">The Eternal Warden of Sanctum</h2>
+          <div id="legend-modal-body" class="space-y-6 text-stone-soft text-sm sm:text-base leading-relaxed"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="lightbox" class="hidden fixed inset-0 z-[200] items-center justify-center bg-marble-dark/98 p-4 sm:p-8" role="dialog" aria-modal="true">
+      <button type="button" id="lightbox-close" class="absolute top-5 right-5 p-2.5 text-gold-light border border-gold/28 hover:bg-gold/10 rounded-sm transition-colors" aria-label="Close">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <figure class="max-w-4xl w-full text-center">
+        <img id="lightbox-img" src="" alt="" class="max-h-[78vh] mx-auto rounded-sm border border-gold/22 shadow-card" />
+        <figcaption id="lightbox-caption" class="mt-5 text-stone-soft text-sm sm:text-base font-display max-w-lg mx-auto leading-relaxed"></figcaption>
+      </figure>
+    </div>
+
+    <script>window.__MSR_INLINE__={"site":{"business":{"name":"Master Sanctum Restoration","tagline":"Protecting What Endures","description":"Luxury natural stone and marble restoration — architectural marble, heritage stone, countertops, monuments, and sanctuaries of craft.","url":"https://sanctum-shortener.is-a.dev","logo":"https://sanctum-shortener.is-a.dev/assets/logo-msr.webp","image":"https://sanctum-shortener.is-a.dev/assets/guardian-marble.webp","phone":"","phoneDisplay":"","email":"","priceRange":"$$","yearsExperience":20,"projectsCompleted":500,"serviceAreas":["Florida","Southeast United States","Select nationwide commissions"],"address":{"@type":"PostalAddress","addressRegion":"FL","addressCountry":"US"}},"aggregateRating":{"ratingValue":4.9,"reviewCount":47,"bestRating":5,"worstRating":1},"guarantees":["Written conservation assessment before work begins","Hand-finished restoration — no shortcut contractors","Impregnating sealers and documented care protocols","Satisfaction commitment on every commission"],"trustStats":[{"value":"20+","label":"Years Experience"},{"value":"500+","label":"Projects Restored"},{"value":"4.9","label":"Client Rating"},{"value":"FL+","label":"Service Area"}],"pillars":[{"numeral":"I","title":"Assessment","subtitle":"Every surface tells a story","desc":"We document substrate, veining, prior repairs, and environmental exposure before a single tool touches stone. Conservation discipline starts with listening to what the material remembers.","featured":false},{"numeral":"II","title":"Restoration","subtitle":"Hand-finished under protocol","desc":"Controlled honing, crack stabilization, color-matched infill, and lippage removal — each pass executed by hand, not contractor haste. Depth, clarity, and architectural integrity restored.","featured":true},{"numeral":"III","title":"Protection","subtitle":"Sealed for permanence","desc":"Impregnating sealers, maintenance protocols, and documented care guidance so your stone endures generations — not just the next season.","featured":false}],"whyChoose":{"headline":"Why Choose Master Sanctum","philosophy":"Protecting What Endures is not a tagline — it is the standard every commission is held to.","highlights":[{"title":"20+ Years of Stone Craft","desc":"Two decades restoring marble, limestone, granite, and heritage surfaces for residential estates, commercial landmarks, and memorial commissions."},{"title":"Disney & Luxury Hospitality","desc":"Commissioned work across high-traffic hospitality environments where finish durability and guest-facing presentation demand conservation-grade discipline."},{"title":"NYC Architectural Stone","desc":"Experience with urban luxury interiors — honed vanities, lobby floors, and architectural marble where lippage, etching, and wear require precision, not shortcuts."},{"title":"Residential · Commercial · Historical","desc":"From kitchen countertops and shower surrounds to monument conservation and exterior cladding — one protocol, every substrate."}],"techniques":["Diamond honing & hand polish","Lippage removal & plane correction","Color-matched crack infill","Etch & stain reversal","Impregnating seal protection","Heritage stone stabilization"]},"marmorax":{"name":"Marmorax","epithet":"the Eternal Warden of Sanctum","heroTeaser":"Guarded by Marmorax — a marble knight who awakens when stone is assessed, restored, and sealed with conservation discipline.","wardenTeaser":"Carved from living veined marble to stand watch over sacred architecture, Marmorax fell silent for generations — until the first honest honing pass called him back to vigil.","image":"assets/guardian-marble.webp","imageAlt":"Marmorax, the Eternal Warden of Sanctum — marble gargoyle knight emblem","timeline":[{"era":"The Carving","period":"12th Century","title":"Origin Legend","desc":"Master stonecutters shaped Marmorax from a single block of Carrara — not as ornament, but as oath. His wings were folded into the parapet; his eyes set to catch the last light on polished limestone."},{"era":"The Vigil","period":"Cathedral Centuries","title":"Ancient Cathedral","desc":"For hundreds of years he watched from the clerestory — rain, incense, and foot-worn marble passing beneath his gaze. Every surface he protected was assessed before touched, finished by hand, sealed against time."},{"era":"The Silence","period":"The Fall","title":"Collapse & Dormancy","desc":"War, neglect, and acid rain took the spire. Marmorax shattered into the rubble field and slept within the dust of his own material — memory locked in veined fragments."},{"era":"The Awakening","period":"Present Day","title":"Reawakening at Master Sanctum","desc":"When Master Sanctum Restoration was founded in Florida, the first conservation commission — a honed Carrara vanity — sent a pulse through the stone. Marmorax opened his eyes. Gold light returned to the sanctum."}],"legend":[{"id":"origin","title":"Origin Legend","paragraphs":["Before Master Sanctum bore a name, there was only the material — marble with memory. Craftsmen of the old cathedral schools believed certain blocks held vigilance: stone that had witnessed enough prayer and weather to want guarding in return.","Marmorax was carved in that spirit — a gargoyle knight whose armor is veining, whose shield is the MSR crest, whose purpose is singular: protect what endures."]},{"id":"cathedral","title":"Ancient Cathedral","paragraphs":["He was set upon a high parapet where Atlantic winds met limestone and marble alike. From that height he learned the discipline still used today: document before intervention, honor the substrate, never replace what can be conserved.","Pilgrims below saw only weathered stone. The warden saw stories — etch rings on thresholds, lippage on nave floors, hairline fractures waiting to become loss."]},{"id":"fall","title":"The Fall","paragraphs":["Centuries erode even the faithful. Scaffolding came down and never returned. The cathedral roof failed; Marmorax fell with the cornice he once guarded.","In the rubble he dreamed in mineral time — slow, layered, patient — until the craft he embodied nearly disappeared from the world."]},{"id":"reawakening","title":"Reawakening","paragraphs":["Florida humidity, salt air, and sun load became his new cathedral. Estates, monuments, hospitality lobbies, and kitchen sanctuaries — each commission a parapet restored.","Marmorax stirs when assessment is honest and finish is by hand. His eyes glow gold at the final seal. The MSR shield is his crest upon every protected surface."]},{"id":"oath","title":"The Warden's Oath","paragraphs":["I will assess before I strike. I will restore without haste. I will seal for permanence, not for the season.","This is the oath behind Protecting What Endures — and the standard Master Sanctum Restoration keeps on every commission guarded by Marmorax."]}],"brandVoice":["Every sealed commission carries the warden's crest — a quiet mark of conservation discipline.","Marmorax embodies the MSR method: Assessment, Restoration, Protection.","From Florida estates to heritage monuments nationwide — the knight watches what endures."],"floridaHeritage":"Reawakened in Florida — humidity, salt air, and sun load are his new cathedral. Every MSR commission is a parapet restored under the warden's vigil."},"services":[{"title":"Marble Restoration","desc":"Vanities, floors, and architectural marble — honed, polished, and sealed."},{"title":"Memorial & Monument","desc":"Heritage stone cleaning, stabilization, and long-horizon protection."},{"title":"Kitchen & Bath Stone","desc":"Etch removal, crack infill, and color-matched refinishing."},{"title":"Exterior Stone","desc":"Weather-damaged cladding, benches, and facades restored to endure."}],"reviews":[{"author":"Sarah M.","location":"Palm Beach, FL","rating":5,"text":"Our Carrara vanity looked destroyed after years of etching. MSR returned it to a depth and clarity I didn't think was possible.","date":"2026-03-12","project":"Marble Vanity"},{"author":"James T.","location":"Tampa, FL","rating":5,"text":"Conservation-minded from the first visit. They assessed before touching anything — exactly the discipline we wanted for our memorial stone.","date":"2026-01-28","project":"Memorial Stone"},{"author":"Elena R.","location":"Miami, FL","rating":5,"text":"Kitchen marble restored without the rushed contractor feel. Hand-finished, documented, and sealed. Still looks flawless months later.","date":"2025-11-05","project":"Kitchen Marble"}],"gatekeeper":{"headline":"Begin Under Protocol","subheadline":"Every commission starts with assessment — not haste.","teaser":"The Gatekeeper reviews your inquiry, asks the questions that matter, and routes qualified projects to an on-site conservation assessment.","persona":"Master-Sanctum-Gatekeeper","steps":[{"numeral":"I","title":"Intake","desc":"Download the client questionnaire or submit your project details — stone type, location, primary concerns, and photos if available."},{"numeral":"II","title":"Discovery","desc":"We clarify substrate, exposure, timeline, and realistic outcomes. No pressure — useful guidance even if you're still researching."},{"numeral":"III","title":"Site Assessment","desc":"Qualified commissions receive a 30–45 minute on-site visit. You receive a written scope and estimate — hand-finished protocol, no shortcut contractors."}],"discoveryQuestions":["What surfaces need restoration? (countertop, vanity, floor, shower, monument, exterior)","Stone type — marble, granite, limestone, travertine, or unknown?","Primary concerns — etching, stains, scratches, dullness, cracks, lippage?","Approximate square footage or dimensions?","Property city and access notes?","Desired timeline or hard deadline?","Budget range (optional — helps scope correctly)?","Can you provide photos? (wide shot + worst-area close-up)"],"ctaIntake":"Download Intake Questionnaire","ctaQuote":"Request Site Assessment"},"faqs":[{"question":"What is the client intake questionnaire?","answer":"A downloadable form that captures stone type, location, damage, dimensions, timeline, and photos — so we can assess your project before any tool touches stone. Access it at /intake or from the quote section."},{"question":"How do I schedule a site assessment?","answer":"Submit the intake questionnaire or request a quote with project details. The Gatekeeper confirms qualified leads and schedules a 30–45 minute on-site assessment. You'll receive a calendar confirmation and written scope after the visit."},{"question":"What types of stone do you restore?","answer":"Marble, limestone, granite, travertine, and architectural heritage stone — vanities, floors, monuments, cladding, and countertops."},{"question":"Do you serve areas outside Florida?","answer":"Yes. We are based in Florida and accept select commissions nationwide for conservation-grade restoration projects."},{"question":"How is a conservation quote prepared?","answer":"Every project begins with an on-site or detailed assessment. We document condition, scope, and protocol before providing a written estimate."},{"question":"What is your satisfaction guarantee?","answer":"We stand behind our hand-finished work with documented protocols, impregnating sealers, and a satisfaction commitment on every commission."},{"question":"How long does a typical restoration take?","answer":"Timelines vary by stone type and scope. Vanity and countertop work is often completed in days; larger architectural commissions are scheduled by phase."}],"sliders":[{"id":"vanity","title":"Marble Vanity","before":"assets/gallery/restoration-09.jpg","after":"assets/gallery/restoration-01.jpg","caption":"Staining and surface fatigue reversed — honed, sealed, returned to original depth."},{"id":"monument","title":"Memorial Stone","before":"assets/gallery/restoration-06.jpg","after":"assets/gallery/restoration-08.jpg","caption":"Monument conserved — cleaned, sealed, and protected for long-term exposure."},{"id":"interior","title":"Kitchen Marble","before":"assets/gallery/restoration-09.jpg","after":"assets/gallery/restoration-04.jpg","caption":"Etch removal, edge refinement, and polish restored to conservation standard."},{"id":"exterior","title":"Exterior Bench","before":"assets/gallery/restoration-06.jpg","after":"assets/gallery/restoration-02.jpg","caption":"Weather damage reversed with matched finish and protective sealing."},{"id":"flooring","title":"Marble Flooring","before":"assets/gallery/restoration-09.jpg","after":"assets/gallery/restoration-07.jpg","caption":"Scratch, wear, and lippage corrected to a unified plane."}]},"gallery":[{"src":"assets/gallery/restoration-09.jpg","alt":"Bathroom marble before restoration","title":"Marble Shower – Pre-Restoration","label":"Before","pair":"before","category":"showers","caption":"Intake — staining and surface fatigue documented before intervention.","group":"vanity"},{"src":"assets/gallery/restoration-01.jpg","alt":"Marble vanity — honed and sealed","title":"Marble Vanity – Honed & Restored","label":"After","pair":"after","category":"countertops","caption":"Complete — honed, sealed, returned to original depth.","group":"vanity"},{"src":"assets/gallery/restoration-06.jpg","alt":"Monument stone before work","title":"Memorial Stone – Intake","label":"Before","pair":"before","category":"historical","caption":"Monument at intake — condition recorded, substrate assessed.","group":"monument"},{"src":"assets/gallery/restoration-08.jpg","alt":"Memorial stone conserved","title":"Heritage Limestone – Veining Stabilized","label":"After","pair":"after","category":"historical","caption":"Memorial conserved — cleaned, sealed, protected for exposure.","group":"monument"},{"src":"assets/gallery/restoration-02.jpg","alt":"Exterior stone bench restored","title":"Exterior Bench – Weather Damage Reversed","label":"After","pair":"after","category":"historical","caption":"Exterior bench — weather damage reversed with matched finish.","group":"exterior"},{"src":"assets/gallery/restoration-03.jpg","alt":"Heritage limestone detail","title":"Heritage Limestone – Detail Match","label":"Detail","pair":"detail","category":"historical","caption":"Heritage limestone — veining matched under magnification.","group":"detail"},{"src":"assets/gallery/restoration-04.jpg","alt":"Kitchen marble countertop","title":"Kitchen Marble – Etch Removal","label":"After","pair":"after","category":"countertops","caption":"Kitchen marble — etch removed, edges refined, polish restored.","group":"interior"},{"src":"assets/gallery/restoration-05.jpg","alt":"Precision honing in progress","title":"Controlled Honing – In Progress","label":"Process","pair":"process","category":"floors","caption":"Controlled grit progression — every pass under conservation protocol.","group":"process"},{"src":"assets/gallery/restoration-07.jpg","alt":"Marble floor after restoration","title":"Marble Flooring – Lippage Corrected","label":"After","pair":"after","category":"floors","caption":"Flooring — scratch, wear, and lippage corrected to a unified plane.","group":"interior"},{"src":"assets/gallery/restoration-10.jpg","alt":"Exterior cladding restored","title":"Exterior Cladding – Protected Finish","label":"After","pair":"after","category":"historical","caption":"Cladding — environmental damage repaired and protected.","group":"exterior"},{"src":"assets/gallery/restoration-11.jpg","alt":"Column capital detail","title":"Column Capital – Carved Detail Preserved","label":"Detail","pair":"detail","category":"historical","caption":"Column capital — carved detail preserved, not replaced.","group":"detail"},{"src":"assets/gallery/restoration-12.jpg","alt":"Commission complete","title":"Marble Countertop – Sealed & Complete","label":"After","pair":"after","category":"countertops","caption":"Commission sealed — ready to endure generations of use.","group":"interior"}],"links":{"_meta":{"site":"Master Sanctum Restoration","tagline":"Protecting What Endures","updated":"2026-06-19"},"home":"https://mastersanctumrestoration.com","quote":"https://mastersanctumrestoration.com/contact","portfolio":"https://sanctum-shortener.is-a.dev/#sliders","book":"https://mastersanctumrestoration.com/contact","contact":"https://mastersanctumrestoration.com/contact","memoir":"https://rbly8.github.io/OdysseusOCRAT/","marmorax":"#warden","intake":"https://sanctum-shortener.is-a.dev/intake.html"}};window.__MSR_STANDALONE__=true;</script>
+<script>
+(function () {
+  "use strict";
+
+  var siteData = null;
+  var galleryItems = [];
+  var activeFilter = "all";
+  var activeSlide = 0;
+
+  function getPathSegmentsToSkip() {
+    var s = window.location.pathname.split("/").filter(Boolean);
+    return window.location.hostname.endsWith("github.io") && s.length > 1 ? 1 : 0;
+  }
+  function getBasePath() {
+    var skip = getPathSegmentsToSkip();
+    if (!skip) return "/";
+    var s = window.location.pathname.split("/").filter(Boolean);
+    return "/" + s.slice(0, skip).join("/") + "/";
+  }
+  function esc(s) {
+    return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/"/g, "&quot;");
+  }
+  function stars(n) {
+    var h = "";
+    for (var i = 0; i < 5; i++) h += '<span class="' + (i < n ? "text-gold-light" : "text-stone-dim") + '" aria-hidden="true">★</span>';
+    return h;
+  }
+
+  function callHref() {
+    if (siteData && siteData.business && siteData.business.phone) return "tel:" + siteData.business.phone.replace(/[^\d+]/g, "");
+    return getBasePath() + "quote";
+  }
+  function callLabel() {
+    if (siteData && siteData.business && siteData.business.phoneDisplay) return "Call " + siteData.business.phoneDisplay;
+    if (siteData && siteData.business && siteData.business.phone) return "Call Now";
+    return "Request Callback";
+  }
+  function applyCallLinks() {
+    var href = callHref();
+    var label = callLabel();
+    document.querySelectorAll("[data-action='call']").forEach(function (el) {
+      el.href = href;
+      var lbl = el.querySelector(".call-label");
+      if (lbl) lbl.textContent = label;
+      else if (el.classList.contains("call-text-only")) el.textContent = label;
+    });
+  }
+  function externalQuoteUrl() {
+    if (window.__MSR_STANDALONE__ && window.__MSR_INLINE__ && window.__MSR_INLINE__.links && window.__MSR_INLINE__.links.quote) {
+      return window.__MSR_INLINE__.links.quote;
+    }
+    return getBasePath() + "quote";
+  }
+  function applyQuoteLinks() {
+    var href = externalQuoteUrl();
+    document.querySelectorAll("[data-action='quote']").forEach(function (el) {
+      el.href = href;
+    });
+  }
+  function resolveSlugHref(slug) {
+    if (window.__MSR_STANDALONE__ && window.__MSR_INLINE__ && window.__MSR_INLINE__.links) {
+      var L = window.__MSR_INLINE__.links;
+      if (L[slug]) {
+        var u = L[slug];
+        if (u.indexOf("#") !== -1 && u.indexOf("http") !== 0) return u;
+        if (slug === "portfolio" && u.indexOf("#") !== -1) return u.split("#")[1] ? "#" + u.split("#")[1] : "#sliders";
+        return u;
+      }
+    }
+    if (slug === "marmorax") return "#warden";
+    if (slug === "intake") return getBasePath() + "intake.html";
+    return getBasePath() + slug.replace(/^\//, "");
+  }
+
+  function injectSchema(data) {
+    var b = data.business;
+    var ar = data.aggregateRating;
+    var ld = {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "LocalBusiness",
+          "@id": b.url + "#business",
+          name: b.name,
+          description: b.description,
+          url: b.url,
+          image: b.image,
+          logo: b.logo,
+          priceRange: b.priceRange,
+          areaServed: b.serviceAreas,
+          address: b.address,
+          aggregateRating: {
+            "@type": "AggregateRating",
+            ratingValue: ar.ratingValue,
+            reviewCount: ar.reviewCount,
+            bestRating: ar.bestRating,
+            worstRating: ar.worstRating
+          }
+        },
+        {
+          "@type": "FAQPage",
+          mainEntity: data.faqs.map(function (f) {
+            return { "@type": "Question", name: f.question, acceptedAnswer: { "@type": "Answer", text: f.answer } };
+          })
+        }
+      ]
+    };
+    if (b.phone) ld["@graph"][0].telephone = b.phone;
+    if (b.email) ld["@graph"][0].email = b.email;
+    data.reviews.forEach(function (r) {
+      ld["@graph"].push({
+        "@type": "Review",
+        author: { "@type": "Person", name: r.author },
+        reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
+        reviewBody: r.text,
+        datePublished: r.date,
+        itemReviewed: { "@id": b.url + "#business" }
+      });
+    });
+    var s = document.createElement("script");
+    s.type = "application/ld+json";
+    s.id = "msr-schema";
+    s.textContent = JSON.stringify(ld);
+    var old = document.getElementById("msr-schema");
+    if (old) old.remove();
+    document.head.appendChild(s);
+  }
+
+  function renderTrustBar(data) {
+    var el = document.getElementById("trust-bar");
+    if (!el) return;
+    el.innerHTML = data.trustStats.map(function (t, i) {
+      var sep = i > 0 ? '<span class="hidden sm:inline text-gold/20">·</span>' : "";
+      return sep + '<div class="text-center"><p class="font-display text-2xl sm:text-3xl text-gold-light font-semibold">' + esc(t.value) + '</p><p class="text-[10px] tracking-luxury uppercase text-stone-muted mt-1">' + esc(t.label) + '</p></div>';
+    }).join("");
+  }
+
+  var shieldSvg = '<img src="assets/logo-msr.png" alt="" class="pillar-shield" width="24" height="24" aria-hidden="true" />';
+  var crestSvg = '<img src="assets/logo-msr.png" alt="" class="gallery-crest" width="28" height="28" aria-hidden="true" />';
+
+  function pillarIcon(numeral) {
+    if (numeral === "I") return '<svg class="pillar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>';
+    if (numeral === "II") return '<svg class="pillar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/></svg>';
+    return '<svg class="pillar-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>';
+  }
+
+  function renderPillars(data) {
+    var el = document.getElementById("pillars-grid");
+    if (!el || !data.pillars) return;
+    el.innerHTML = data.pillars.map(function (p, i) {
+      var feat = p.featured ? " pillar-featured" : "";
+      return '<article class="reveal reveal-d' + (i + 1) + ' pillar-card rounded-sm p-7 sm:p-8' + feat + '" data-numeral="' + esc(p.numeral) + '">' +
+        shieldSvg +
+        '<div class="pillar-icon-wrap">' + pillarIcon(p.numeral) + '</div>' +
+        '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">' + esc(p.numeral) + ' · ' + esc(p.title) + '</p>' +
+        '<h3 class="font-display text-2xl text-gold-light font-semibold mb-2">' + esc(p.subtitle) + '</h3>' +
+        '<p class="text-stone-soft text-sm leading-relaxed">' + esc(p.desc) + '</p></article>';
+    }).join("");
+  }
+
+  function renderMarmorax(data) {
+    var m = data.marmorax;
+    if (!m) return;
+    var heroTeaser = document.getElementById("hero-marmorax-teaser");
+    if (heroTeaser) heroTeaser.textContent = m.heroTeaser;
+    var wardenTeaser = document.getElementById("warden-teaser");
+    if (wardenTeaser) wardenTeaser.textContent = m.wardenTeaser;
+    var wardenImg = document.getElementById("warden-image");
+    if (wardenImg) {
+      wardenImg.src = m.image.replace(".webp", ".png");
+      wardenImg.alt = m.imageAlt || (m.name + ", " + m.epithet);
+    }
+    renderLegend(m);
+    renderLegendModal(m);
+    var voiceList = document.getElementById("legend-voice-list");
+    if (voiceList && m.brandVoice) {
+      voiceList.innerHTML = m.brandVoice.map(function (v) {
+        return '<li class="flex gap-2"><span class="text-gold shrink-0">◆</span><span>' + esc(v) + '</span></li>';
+      }).join("");
+    }
+    var florida = document.getElementById("warden-florida");
+    if (florida && m.floridaHeritage) florida.textContent = m.floridaHeritage;
+  }
+
+  function renderLegend(m) {
+    var timeline = document.getElementById("legend-timeline");
+    if (timeline && m.timeline) {
+      timeline.innerHTML = m.timeline.map(function (t, i) {
+        return '<div class="reveal reveal-d' + (i % 4 + 1) + ' timeline-node">' +
+          '<p class="text-[9px] tracking-luxury uppercase text-gold/60">' + esc(t.era) + ' · ' + esc(t.period) + '</p>' +
+          '<h3 class="font-display text-xl text-gold-light font-semibold mt-1">' + esc(t.title) + '</h3>' +
+          '<p class="text-stone-soft text-sm mt-2 leading-relaxed max-w-2xl">' + esc(t.desc) + '</p></div>';
+      }).join("");
+    }
+    var body = document.getElementById("legend-body");
+    if (body && m.legend) {
+      body.innerHTML = m.legend.map(function (sec, i) {
+        var paras = sec.paragraphs.map(function (p) {
+          return '<p class="text-stone-soft text-sm sm:text-base leading-[1.85]">' + esc(p) + '</p>';
+        }).join("");
+        return '<article class="reveal reveal-d' + (i % 3 + 1) + ' legend-block">' +
+          '<h3 class="font-display text-2xl text-gold-light font-semibold mb-4">' + esc(sec.title) + '</h3>' +
+          '<div class="space-y-4">' + paras + '</div></article>';
+      }).join("");
+    }
+  }
+
+  function renderLegendModal(m) {
+    var modalBody = document.getElementById("legend-modal-body");
+    if (!modalBody || !m.legend) return;
+    modalBody.innerHTML = m.legend.map(function (sec) {
+      var paras = sec.paragraphs.map(function (p) {
+        return '<p>' + esc(p) + '</p>';
+      }).join("");
+      return '<div><h3 class="font-display text-xl text-gold-light font-semibold mb-3">' + esc(sec.title) + '</h3>' +
+        '<div class="space-y-3">' + paras + '</div></div>';
+    }).join("");
+  }
+
+  function openLegendModal() {
+    var modal = document.getElementById("legend-modal");
+    if (!modal) return;
+    modal.classList.remove("hidden");
+    modal.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeLegendModal() {
+    var modal = document.getElementById("legend-modal");
+    if (!modal) return;
+    modal.classList.add("hidden");
+    modal.classList.remove("open");
+    if (!document.getElementById("lightbox").classList.contains("open")) {
+      document.body.style.overflow = "";
+    }
+  }
+
+  function renderWhyChoose(data) {
+    var wc = data.whyChoose;
+    if (!wc) return;
+    var headline = document.getElementById("why-headline");
+    if (headline) headline.textContent = wc.headline;
+    var phil = document.getElementById("why-philosophy");
+    if (phil) phil.textContent = wc.philosophy;
+    var highlights = document.getElementById("why-highlights");
+    if (highlights) {
+      highlights.innerHTML = wc.highlights.map(function (h, i) {
+        return '<div class="reveal reveal-d' + (i % 3 + 1) + ' why-card rounded-sm p-6 sm:p-7">' +
+          '<h3 class="font-display text-xl text-gold-light font-semibold mb-2">' + esc(h.title) + '</h3>' +
+          '<p class="text-stone-soft text-sm leading-relaxed">' + esc(h.desc) + '</p></div>';
+      }).join("");
+    }
+    var tech = document.getElementById("why-techniques");
+    if (tech) {
+      tech.innerHTML = wc.techniques.map(function (t) {
+        return '<li class="flex gap-2 text-stone-soft text-sm"><span class="text-gold shrink-0">◆</span><span>' + esc(t) + '</span></li>';
+      }).join("");
+    }
+  }
+
+  function renderSliders(data) {
+    var root = document.getElementById("slider-root");
+    if (!root || !data.sliders.length) return;
+    var slides = data.sliders;
+    var html = '<div class="slider-stage relative">';
+    slides.forEach(function (sl, i) {
+      var hid = i === activeSlide ? "" : " hidden";
+      html +=
+        '<div class="slider-panel' + hid + '" data-slide="' + i + '" role="tabpanel"' + (i === activeSlide ? ' aria-hidden="false"' : ' aria-hidden="true"') + '>' +
+        '<div class="ba-slider relative aspect-[16/10] sm:aspect-[16/9] rounded-sm overflow-hidden border border-gold/20 shadow-card" id="ba-' + i + '">' +
+        '<img src="' + esc(sl.after) + '" alt="' + esc(sl.title) + ' after restoration" class="absolute inset-0 w-full h-full object-cover" loading="' + (i === 0 ? "eager" : "lazy") + '" />' +
+        '<div class="ba-before absolute inset-y-0 left-0 overflow-hidden border-r-2 border-gold-light/80" style="width:50%">' +
+        '<img src="' + esc(sl.before) + '" alt="' + esc(sl.title) + ' before restoration" class="absolute inset-0 h-full max-w-none object-cover ba-before-img" loading="' + (i === 0 ? "eager" : "lazy") + '" />' +
+        '</div>' +
+        '<div class="ba-handle absolute top-0 bottom-0 w-1 bg-gold-light shadow-[0_0_12px_rgba(232,197,71,0.8)] pointer-events-none" style="left:50%"></div>' +
+        '<span class="absolute top-3 left-3 z-20 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm label-before">Before</span>' +
+        '<span class="absolute top-3 right-3 z-20 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm label-after">After</span>' +
+        '<input type="range" min="0" max="100" value="50" class="ba-range absolute inset-0 w-full h-full opacity-0 cursor-ew-resize z-30" aria-label="Drag to compare before and after: ' + esc(sl.title) + '" />' +
+        '</div>' +
+        '<div class="mt-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">' +
+        '<div><h3 class="font-display text-2xl text-gold-light font-semibold">' + esc(sl.title) + '</h3>' +
+        '<p class="text-stone-soft text-sm mt-2 max-w-xl leading-relaxed">' + esc(sl.caption) + '</p></div>' +
+        '<a href="' + getBasePath() + 'quote" data-action="quote" class="cta-primary shrink-0 inline-flex items-center justify-center min-h-[48px] px-6 border border-gold/50 text-gold-light font-display tracking-wide text-sm sm:text-base">Request a Quote</a>' +
+        '</div></div>';
+    });
+    html += '</div><div class="flex flex-wrap items-center justify-center gap-2 mt-8" role="tablist" aria-label="Restoration projects">';
+    slides.forEach(function (sl, i) {
+      html += '<button type="button" class="slider-dot px-3 py-1.5 text-[9px] tracking-luxury uppercase border rounded-sm transition-all' + (i === activeSlide ? " is-active" : "") + '" data-slide-to="' + i + '" role="tab" aria-selected="' + (i === activeSlide ? "true" : "false") + '">' + esc(sl.title) + '</button>';
+    });
+    html += '</div>';
+    root.innerHTML = html;
+    initBaSliders();
+    root.querySelectorAll(".slider-dot").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        activeSlide = +btn.getAttribute("data-slide-to");
+        renderSliders(data);
+      });
+    });
+    applyQuoteLinks();
+  }
+
+  function initBaSliders() {
+    document.querySelectorAll(".ba-slider").forEach(function (slider) {
+      var input = slider.querySelector(".ba-range");
+      var before = slider.querySelector(".ba-before");
+      var handle = slider.querySelector(".ba-handle");
+      var img = slider.querySelector(".ba-before-img");
+      if (!input || !before) return;
+      function sync() {
+        var v = +input.value;
+        before.style.width = v + "%";
+        if (handle) handle.style.left = v + "%";
+        if (img && slider.offsetWidth) img.style.width = slider.offsetWidth + "px";
+        input.setAttribute("aria-valuenow", v);
+      }
+      input.addEventListener("input", sync);
+      window.addEventListener("resize", sync);
+      sync();
+    });
+  }
+
+  function renderReviews(data) {
+    var el = document.getElementById("reviews-grid");
+    if (!el) return;
+    el.innerHTML = data.reviews.map(function (r, i) {
+      var proj = r.project ? '<p class="text-[9px] tracking-luxury uppercase text-gold/60 mb-3">' + esc(r.project) + '</p>' : "";
+      return '<article class="reveal reveal-d' + (i % 3 + 1) + ' review-card rounded-sm p-6 sm:p-7">' +
+        proj +
+        '<div class="flex gap-0.5 text-sm mb-3" aria-label="' + r.rating + ' out of 5 stars">' + stars(r.rating) + '</div>' +
+        '<p class="text-stone-soft text-sm leading-relaxed italic">"' + esc(r.text) + '"</p>' +
+        '<p class="mt-4 text-xs text-stone-muted"><span class="text-gold-light/90 font-medium">' + esc(r.author) + '</span> · ' + esc(r.location) + '</p></article>';
+    }).join("");
+  }
+
+  function renderFaqs(data) {
+    var el = document.getElementById("faq-list");
+    if (!el) return;
+    el.innerHTML = data.faqs.map(function (f, i) {
+      return '<div class="faq-item border border-gold/12 rounded-sm overflow-hidden">' +
+        '<button type="button" class="faq-trigger w-full flex items-center justify-between gap-4 px-5 py-4 text-left font-display text-lg text-gold-light hover:bg-gold/5 transition-colors" aria-expanded="false" id="faq-btn-' + i + '" aria-controls="faq-panel-' + i + '">' +
+        esc(f.question) + '<svg class="faq-chevron w-4 h-4 shrink-0 text-gold/60 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M6 9l6 6 6-6"/></svg></button>' +
+        '<div id="faq-panel-' + i + '" class="faq-panel hidden px-5 pb-4 text-stone-soft text-sm leading-relaxed" role="region" aria-labelledby="faq-btn-' + i + '">' + esc(f.answer) + '</div></div>';
+    }).join("");
+    el.querySelectorAll(".faq-trigger").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        var open = btn.getAttribute("aria-expanded") === "true";
+        el.querySelectorAll(".faq-trigger").forEach(function (b) {
+          b.setAttribute("aria-expanded", "false");
+          b.querySelector(".faq-chevron").classList.remove("rotate-180");
+        });
+        el.querySelectorAll(".faq-panel").forEach(function (p) { p.classList.add("hidden"); });
+        if (!open) {
+          btn.setAttribute("aria-expanded", "true");
+          btn.querySelector(".faq-chevron").classList.add("rotate-180");
+          document.getElementById(btn.getAttribute("aria-controls")).classList.remove("hidden");
+        }
+      });
+    });
+  }
+
+  function renderGuarantees(data) {
+    var el = document.getElementById("guarantee-list");
+    if (!el) return;
+    el.innerHTML = data.guarantees.map(function (g) {
+      return '<li class="flex gap-3 text-stone-soft text-sm"><span class="text-gold shrink-0">✓</span><span>' + esc(g) + '</span></li>';
+    }).join("");
+  }
+
+  function renderGatekeeper(data) {
+    var gk = data.gatekeeper;
+    if (!gk) return;
+    var headline = document.getElementById("gatekeeper-headline");
+    if (headline && gk.headline) headline.textContent = gk.headline;
+    var sub = document.getElementById("gatekeeper-subheadline");
+    if (sub && gk.subheadline) sub.textContent = gk.subheadline;
+    var teaser = document.getElementById("gatekeeper-teaser");
+    if (teaser && gk.teaser) teaser.textContent = gk.teaser;
+    var steps = document.getElementById("gatekeeper-steps");
+    if (steps && gk.steps) {
+      steps.innerHTML = gk.steps.map(function (s, i) {
+        return '<article class="reveal reveal-d' + (i + 1) + ' gatekeeper-step rounded-sm p-6 sm:p-7">' +
+          '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">' + esc(s.numeral) + ' · ' + esc(s.title) + '</p>' +
+          '<h3 class="font-display text-xl text-gold-light font-semibold mb-2">' + esc(s.title) + '</h3>' +
+          '<p class="text-stone-soft text-sm leading-relaxed">' + esc(s.desc) + '</p></article>';
+      }).join("");
+    }
+    var questions = document.getElementById("gatekeeper-questions");
+    if (questions && gk.discoveryQuestions) {
+      questions.innerHTML = gk.discoveryQuestions.map(function (q, i) {
+        return '<li class="discovery-item flex gap-3 py-3 text-stone-soft">' +
+          '<span class="text-gold/70 font-mono text-xs shrink-0 pt-0.5">' + String(i + 1).padStart(2, "0") + '</span>' +
+          '<span>' + esc(q) + '</span></li>';
+      }).join("");
+    }
+    var ctaIntake = document.getElementById("gatekeeper-cta-intake");
+    if (ctaIntake && gk.ctaIntake) ctaIntake.textContent = gk.ctaIntake;
+    var ctaQuote = document.getElementById("gatekeeper-cta-quote");
+    if (ctaQuote && gk.ctaQuote) ctaQuote.textContent = gk.ctaQuote;
+  }
+
+  /* --- gallery --- */
+  function isSlugEntry(k, v) {
+    if (k.charAt(0) === "_") return false;
+    if (typeof v === "string") return /^https?:\/\//.test(v);
+    return typeof v === "object" && v && v.url && /^https?:\/\//.test(v.url);
+  }
+  function getLinkMeta(v) {
+    return typeof v === "string" ? { url: v, title: null, description: null } : { url: v.url, title: v.title || null, description: v.description || null };
+  }
+  function labelClass(l) {
+    l = (l || "").toLowerCase();
+    if (l === "after") return "label-after";
+    if (l === "before") return "label-before";
+    return "label-detail";
+  }
+  function matchesFilter(item) {
+    if (activeFilter === "all") return true;
+    return item.category === activeFilter;
+  }
+  function bindGallery(el, items) {
+    el.querySelectorAll("[data-idx]").forEach(function (node) {
+      var i = +node.getAttribute("data-idx");
+      function go() { openLightbox(items[i]); }
+      node.addEventListener("click", go);
+      node.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); go(); } });
+    });
+  }
+  function renderGalleryGrid(items) {
+    var grid = document.getElementById("gallery-grid");
+    if (!grid) return;
+    var visible = items.filter(matchesFilter);
+    var countEl = document.getElementById("gallery-count");
+    if (countEl) countEl.textContent = items.length + " documented images · " + visible.length + " in current view";
+    if (!visible.length) {
+      grid.innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-14">No images in this category.</p>';
+      return;
+    }
+    grid.innerHTML = items.map(function (item, i) {
+      var hid = matchesFilter(item) ? "" : " is-hidden";
+      var feat = i === 0 && activeFilter === "all" ? " is-featured" : "";
+      var lbl = item.label ? '<span class="absolute top-2 left-2 z-10 px-2 py-0.5 text-[8px] tracking-luxury uppercase rounded-sm ' + labelClass(item.label) + '">' + item.label + '</span>' : "";
+      var title = item.title ? '<div class="gallery-hover-caption"><p class="font-display text-sm text-gold-light font-semibold">' + esc(item.title) + '</p>' +
+        (item.caption ? '<p class="text-stone-muted text-xs mt-1 leading-snug">' + esc(item.caption) + '</p>' : '') + '</div>' : "";
+      var aspect = feat ? "" : " aspect-[4/5]";
+      return '<figure class="gallery-card relative rounded-sm shadow-card' + hid + feat + aspect + '" data-idx="' + i + '" tabindex="0" role="button">' + lbl + title + crestSvg +
+        '<img src="' + item.src + '" alt="' + esc(item.alt) + '" loading="lazy" class="w-full h-full object-cover" /></figure>';
+    }).join("");
+    bindGallery(grid, items);
+  }
+  function renderLinks(links) {
+    var grid = document.getElementById("links-grid");
+    if (!grid) return;
+    var featured = ["quote", "book", "portfolio", "contact", "memoir", "marmorax", "intake"];
+    var keys = Object.keys(links).filter(function (k) { return isSlugEntry(k, links[k]) && featured.indexOf(k) === -1; });
+    var base = getBasePath();
+    grid.innerHTML = keys.map(function (key) {
+      var m = getLinkMeta(links[key]);
+      return '<a href="' + base + key + '" class="link-card block px-5 py-4 rounded-sm group">' +
+        '<div class="flex justify-between gap-4 items-center"><div class="min-w-0">' +
+        '<p class="font-mono text-gold-light text-base group-hover:text-gold transition-colors">/' + key + '</p>' +
+        (m.title ? '<p class="font-display text-stone-soft text-sm mt-1">' + esc(m.title) + '</p>' : '') +
+        (m.description ? '<p class="text-stone-muted text-xs mt-1 leading-relaxed">' + esc(m.description) + '</p>' : '') +
+        '</div><span class="text-gold/30 group-hover:text-gold shrink-0 text-lg transition-colors">→</span></div></a>';
+    }).join("");
+  }
+  function openLightbox(item) {
+    document.getElementById("lightbox-img").src = item.src;
+    document.getElementById("lightbox-img").alt = item.alt;
+    document.getElementById("lightbox-caption").textContent = (item.title ? item.title + " — " : "") + (item.caption || item.alt);
+    var lb = document.getElementById("lightbox");
+    lb.classList.remove("hidden"); lb.classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+  function closeLightbox() {
+    var lb = document.getElementById("lightbox");
+    lb.classList.add("hidden"); lb.classList.remove("open");
+    document.body.style.overflow = "";
+  }
+  function setFilter(f) {
+    activeFilter = f;
+    document.querySelectorAll(".filter-btn").forEach(function (b) {
+      var on = b.getAttribute("data-filter") === f;
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+    });
+    renderGalleryGrid(galleryItems);
+  }
+
+  function initReveal() {
+    var els = document.querySelectorAll(".reveal");
+    if (!("IntersectionObserver" in window)) { els.forEach(function (e) { e.classList.add("is-visible"); }); return; }
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("is-visible"); obs.unobserve(e.target); } });
+    }, { threshold: 0.08, rootMargin: "0px 0px -40px 0px" });
+    els.forEach(function (e) { obs.observe(e); });
+  }
+  function initNavSpy() {
+    if (!("IntersectionObserver" in window)) return;
+    var links = document.querySelectorAll(".nav-link[data-section]");
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) links.forEach(function (l) {
+          l.classList.toggle("is-active", l.getAttribute("data-section") === e.target.getAttribute("data-section"));
+        });
+      });
+    }, { threshold: 0.15, rootMargin: "-12% 0px -55% 0px" });
+    document.querySelectorAll("[data-section]").forEach(function (s) { obs.observe(s); });
+  }
+
+  function initSite(data) {
+    siteData = data;
+    injectSchema(data);
+    renderTrustBar(data);
+    renderMarmorax(data);
+    renderPillars(data);
+    renderWhyChoose(data);
+    renderSliders(data);
+    renderReviews(data);
+    renderFaqs(data);
+    renderGuarantees(data);
+    renderGatekeeper(data);
+    applyCallLinks();
+    applyQuoteLinks();
+    initReveal();
+  }
+
+  function initQuoteForm() {
+    var form = document.getElementById("quote-form");
+    if (!form) return;
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      var fd = new FormData(form);
+      var q = [];
+      fd.forEach(function (v, k) { if (v) q.push(encodeURIComponent(k) + "=" + encodeURIComponent(v)); });
+      window.location.href = externalQuoteUrl() + (q.length ? (externalQuoteUrl().indexOf("?") >= 0 ? "&" : "?") + q.join("&") : "");
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var base = getBasePath();
+    var hostEl = document.getElementById("domain-host");
+    if (hostEl) hostEl.textContent = window.location.hostname;
+
+    document.querySelectorAll(".slug-link, .slug-footer").forEach(function (a) {
+      var slug = a.getAttribute("data-slug") || a.getAttribute("href");
+      if (slug && slug.indexOf("http") !== 0) a.href = resolveSlugHref(slug.replace(/^\//, ""));
+    });
+
+    var bar = document.querySelector(".domain-bar .slug");
+    document.querySelectorAll(".slug-link").forEach(function (a) {
+      a.addEventListener("mouseenter", function () {
+        var slug = a.getAttribute("data-slug");
+        if (bar && slug) bar.textContent = "/" + slug;
+      });
+    });
+
+    document.getElementById("site-header").classList.toggle("is-scrolled", false);
+    window.addEventListener("scroll", function () {
+      document.getElementById("site-header").classList.toggle("is-scrolled", window.scrollY > 24);
+    }, { passive: true });
+
+    document.getElementById("menu-toggle").addEventListener("click", function () {
+      var open = document.body.classList.toggle("nav-open");
+      this.setAttribute("aria-expanded", open);
+      this.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    });
+    document.querySelectorAll(".nav-mobile-link").forEach(function (l) {
+      l.addEventListener("click", function () { document.body.classList.remove("nav-open"); });
+    });
+    document.querySelectorAll(".filter-btn").forEach(function (b) {
+      b.addEventListener("click", function () { setFilter(b.getAttribute("data-filter")); });
+    });
+    document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+    document.getElementById("lightbox").addEventListener("click", function (e) { if (e.target === this) closeLightbox(); });
+    var legendOpen = document.getElementById("legend-open");
+    var legendClose = document.getElementById("legend-modal-close");
+    var legendModal = document.getElementById("legend-modal");
+    if (legendOpen) legendOpen.addEventListener("click", openLegendModal);
+    if (legendClose) legendClose.addEventListener("click", closeLegendModal);
+    if (legendModal) legendModal.addEventListener("click", function (e) { if (e.target === legendModal) closeLegendModal(); });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") { closeLightbox(); closeLegendModal(); }
+    });
+    if (location.hash === "#gallery" || location.hash === "#sliders" || location.hash === "#warden" || location.hash === "#legend" || location.hash === "#gatekeeper") {
+      setTimeout(function () {
+        var t = document.querySelector(location.hash);
+        if (t) t.scrollIntoView({ behavior: "smooth" });
+      }, 400);
+    }
+
+    initQuoteForm();
+    initNavSpy();
+
+    if (window.__MSR_INLINE__) {
+      try {
+        initSite(window.__MSR_INLINE__.site);
+        galleryItems = window.__MSR_INLINE__.gallery || [];
+        renderGalleryGrid(galleryItems);
+        if (window.__MSR_INLINE__.links) renderLinks(window.__MSR_INLINE__.links);
+      } catch (err) { console.error(err); }
+      return;
+    }
+
+    var sx = new XMLHttpRequest();
+    sx.onload = function () {
+      try { initSite(JSON.parse(sx.response)); } catch (err) { console.error(err); }
+    };
+    sx.open("GET", base + "site.json");
+    sx.send();
+
+    var lx = new XMLHttpRequest();
+    lx.onload = function () { try { renderLinks(jsyaml.load(lx.response)); } catch (e) {} };
+    lx.open("GET", base + "links.yml");
+    lx.send();
+
+    var gx = new XMLHttpRequest();
+    gx.onload = function () {
+      try { galleryItems = JSON.parse(gx.response); renderGalleryGrid(galleryItems); }
+      catch (e) { var g = document.getElementById("gallery-grid"); if (g) g.innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-14">Gallery unavailable</p>'; }
+    };
+    gx.open("GET", base + "gallery.json");
+    gx.send();
+  });
+})();
+</script>
+  </body>
+</html>
