@@ -51,6 +51,43 @@
       else if (el.classList.contains("call-text-only")) el.textContent = label;
     });
   }
+
+  function renderFooterContact(data) {
+    var el = document.getElementById("footer-direct-contact");
+    if (!el || !data || !data.business) return;
+    var b = data.business;
+    var parts = [];
+    if (b.phone && b.phoneDisplay) {
+      parts.push('<a href="' + esc(callHref()) + '" class="hover:text-gold-light transition-colors">' + esc(b.phoneDisplay) + '</a>');
+    } else if (b.phone) {
+      parts.push('<a href="' + esc(callHref()) + '" class="hover:text-gold-light transition-colors">' + esc(b.phone) + '</a>');
+    }
+    if (b.email) {
+      parts.push('<a href="mailto:' + esc(b.email) + '" class="hover:text-gold-light transition-colors">' + esc(b.email) + '</a>');
+    }
+    if (parts.length) {
+      el.innerHTML = parts.join(' <span class="text-stone-dim">·</span> ');
+      return;
+    }
+    var locality = b.address && b.address.addressLocality ? b.address.addressLocality + ", FL" : "SWFL";
+    el.textContent = locality + " · Request callback via quote form";
+  }
+
+  function formatLeadSummary(lead) {
+    var root = canonicalSiteRoot();
+    return [
+      "Master Sanctum Restoration — Gatekeeper Lead",
+      "----------------------------------------",
+      "Name: " + (lead.name || ""),
+      lead.phone ? "Phone: " + lead.phone : "",
+      lead.email ? "Email: " + lead.email : "",
+      lead.message ? "Project: " + lead.message : "",
+      "Source: " + root + "/#quote",
+      "Submitted: " + (lead.ts ? new Date(lead.ts).toLocaleString() : "recent"),
+      "",
+      "Next: Site assessment + intake (" + root + "/intake)"
+    ].filter(Boolean).join("\n");
+  }
   function externalQuoteUrl() {
     var map = (window.__MSR_INLINE__ && window.__MSR_INLINE__.links) || linksData;
     var url = map ? getLinkUrlFromMap(map, "quote") : null;
@@ -484,6 +521,7 @@
       return;
     }
     mount.classList.remove("hidden");
+    var summary = formatLeadSummary(lead);
     mount.innerHTML =
       '<div class="gatekeeper-panel rounded-sm p-5 sm:p-6 text-left border border-gold/30">' +
       '<p class="text-[10px] tracking-luxury uppercase text-gold/70 mb-2 font-medium">Pending Lead — Gatekeeper Queue</p>' +
@@ -493,8 +531,36 @@
       (lead.email ? '<li>Email: ' + esc(lead.email) + '</li>' : '') +
       (lead.message ? '<li class="pt-2 text-stone-muted leading-relaxed">' + esc(lead.message) + '</li>' : '') +
       '</ul>' +
-      '<p class="text-stone-muted text-xs mt-4 italic">Next: download the intake questionnaire. When phone/email are configured, this lead routes to outbound follow-up automatically.</p>' +
+      '<p class="text-stone-muted text-xs mt-4 italic">Copy the lead summary for Gatekeeper follow-up, or dismiss when handled.</p>' +
+      '<div class="flex flex-wrap gap-2 mt-4">' +
+      '<button type="button" id="gk-copy-lead" class="btn-call min-h-[40px] px-5 text-sm text-gold-light font-display tracking-wide">Copy Lead Summary</button>' +
+      '<button type="button" id="gk-dismiss-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Dismiss</button>' +
+      '</div>' +
+      '<p id="gk-copy-status" class="text-gold-light/80 text-xs mt-2 hidden" role="status"></p>' +
       '</div>';
+    var copyBtn = document.getElementById("gk-copy-lead");
+    var dismissBtn = document.getElementById("gk-dismiss-lead");
+    var statusEl = document.getElementById("gk-copy-status");
+    if (copyBtn) {
+      copyBtn.addEventListener("click", function () {
+        function done(ok) {
+          if (!statusEl) return;
+          statusEl.classList.remove("hidden");
+          statusEl.textContent = ok ? "Lead summary copied — paste into email or CRM." : "Copy failed — select text manually.";
+        }
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(summary).then(function () { done(true); }).catch(function () { done(false); });
+        } else {
+          done(false);
+        }
+      });
+    }
+    if (dismissBtn) {
+      dismissBtn.addEventListener("click", function () {
+        try { sessionStorage.removeItem("msr-quote-pending"); } catch (err) {}
+        mount.classList.add("hidden");
+      });
+    }
   }
 
   /* --- gallery --- */
@@ -622,6 +688,7 @@
     renderGatekeeper(data);
     applyCallLinks();
     applyQuoteLinks();
+    renderFooterContact(data);
     initReveal();
   }
 

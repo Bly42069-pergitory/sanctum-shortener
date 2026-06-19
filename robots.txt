@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bly42069-pergitory.github.io/sanctum-shortener/
