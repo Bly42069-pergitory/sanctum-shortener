@@ -74,6 +74,12 @@
         return base === "/" ? "/" + LINKS_YML_PATH : base + LINKS_YML_PATH;
       }
 
+      function resolveRelativeUrl(url) {
+        if (!url || url.charAt(0) === "#" || isUrl(url)) return url;
+        var base = getSiteBasePath();
+        return (base === "/" ? "/" : base) + url.replace(/^\//, "");
+      }
+
       function resolveDestination(links, slug) {
         if (!slug || !links) return null;
         var value = links[slug];
@@ -81,9 +87,8 @@
         var url = typeof value === "string" ? value : (value && value.url);
         if (!url) return null;
         if (url.charAt(0) === "#") return getHomepage().replace(/\/$/, "") + url;
-        if (typeof value === "string" && isUrl(value)) return value;
-        if (typeof value === "object" && value.url && isUrl(value.url)) return value.url;
-        return null;
+        if (!isUrl(url)) return resolveRelativeUrl(url);
+        return url;
       }
 
       function showMiss(slug) {

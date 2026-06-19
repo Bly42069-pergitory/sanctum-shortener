@@ -38,7 +38,12 @@ marmorax:
   title: Meet Marmorax
   description: The Eternal Warden of Sanctum — lore and legend
 
+gatekeeper:
+  url: "#gatekeeper"
+  title: Get Started — Gatekeeper Intake
+  description: Begin under protocol — intake, discovery, site assessment
+
 intake:
-  url: https://sanctum-shortener.is-a.dev/intake.html
+  url: intake.html
   title: Client Intake Questionnaire
   description: Gatekeeper intake — download the form and start your restoration project

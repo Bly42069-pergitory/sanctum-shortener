@@ -1,0 +1,62 @@
+{
+  "_meta": {
+    "agent": "Master-Sanctum-Gatekeeper",
+    "scenario": "North Port FL — marble kitchen countertop restoration",
+    "leadType": "hot-lead",
+    "updated": "2026-06-19"
+  },
+  "lead": {
+    "name": "Karen M.",
+    "city": "North Port",
+    "state": "FL",
+    "surface": "Kitchen countertop — L-shaped run with island return",
+    "stoneType": "Carrara marble (white/grey veining)",
+    "primaryIssue": "Etching, dullness, and ring marks from acidic cleaners; minor staining near cooktop",
+    "squareFootage": "~42 sq ft",
+    "timeline": "Within 3–4 weeks — hosting family in July",
+    "goal": "Restore depth and polish without replacing the slab",
+    "budgetNote": "Mid-range; compared one contractor quote already",
+    "accessNotes": "Single-story home, gated community — call at gate"
+  },
+  "qualification": {
+    "score": "qualified",
+    "routing": "Site assessment → Architect agent after written scope",
+    "reason": "Clear stone type, defined damage, FL service area, realistic timeline, ready to schedule"
+  },
+  "conversation": [
+    {
+      "role": "customer",
+      "channel": "website-form",
+      "text": "Hi — I need my marble kitchen counters restored. We're in North Port. Lots of etch marks and they look dull. Can someone come out?"
+    },
+    {
+      "role": "gatekeeper",
+      "text": "Hi Karen — thanks for reaching out to Master Sanctum Restoration. Marble kitchen counters in North Port are a strong fit for our conservation protocol.\n\nTo route this correctly before we schedule a visit, can you confirm:\n1. Carrara or another marble? (vein color helps)\n2. Approximate counter length / island size?\n3. Worst areas — cooktop, sink, or bar seating?\n4. Any cracks or chips, or mainly etching/dullness?\n5. Your target timeline?\n\nIf you have photos (wide shot + close-up of worst etching), that speeds things up. No obligation — I want to make sure assessment is the right next step."
+    },
+    {
+      "role": "customer",
+      "text": "It's Carrara, L-shape with a small island. About 42 sq ft total I think. Main issues are etch rings and dull spots by the cooktop and where we cut lemons. No cracks. We'd like it done before July — family visiting. I can send photos tomorrow."
+    },
+    {
+      "role": "gatekeeper",
+      "text": "Perfect — that's exactly the detail we need. Etch and dullness on Carrara is often reversible with proper honing and sealing; cooktop and citrus exposure are common failure points in Florida humidity.\n\n**Recommended next step:** 30–45 minute on-site assessment in North Port. We document finish level, prior products used, and substrate before quoting.\n\n**Please send when ready:**\n• 2–3 photos (wide + worst etch areas)\n• Property address and gate/access notes\n• 2–3 date/time windows that work for you\n\nI'll attach our intake questionnaire at confirmation — you can also download it at sanctum-shortener.is-a.dev/intake\n\nWould Thursday 10:00 AM or Friday 2:00 PM work for a first visit?"
+    },
+    {
+      "role": "customer",
+      "text": "Friday at 2 works. Address is [redacted — North Port]. Gate code at arrival. I'll email photos tonight."
+    },
+    {
+      "role": "gatekeeper",
+      "text": "Confirmed — I'll send a calendar invite and intake questionnaire shortly. After the visit you'll receive a written scope and estimate under our hand-finish protocol. Looking forward to assessing what the stone remembers."
+    }
+  ],
+  "outputs": {
+    "templateUsed": "hotLead",
+    "emailSubject": "Your marble restoration — next step: site assessment in North Port",
+    "emailBody": "Hi Karen,\n\nThank you for reaching out to Master Sanctum Restoration. From what you've described — Carrara marble, etching and dullness near the cooktop, and your July timeline — this is exactly the kind of commission we assess and restore under conservation protocol.\n\nWhat I understood:\n• Surface: Kitchen countertop — L-shaped run with island (~42 sq ft)\n• Location: North Port, FL (gated community — call at gate)\n• Main concern: Etch rings, dullness, minor cooktop staining\n• Your goal: Restore depth and polish without slab replacement\n\nRecommended next step: a brief on-site assessment (typically 30–45 minutes). We document substrate, veining, prior repairs, and exposure before any tool touches stone.\n\nTo confirm your visit, I need:\n1. Best date/time windows (2–3 options)\n2. Property address and access notes\n3. Photos of the surface if you have them (wide + close-up of worst areas)\n\nOnce confirmed, you'll receive a calendar invite and our intake questionnaire. After the visit, you'll get a written scope and estimate — no surprise shortcuts, no haste.\n\nWould Friday, June 27 at 2:00 PM or Thursday, June 26 at 10:00 AM work for you?\n\nProtecting What Endures,\nMaster-Sanctum-Gatekeeper\nMaster Sanctum Restoration",
+    "siteVisitConfirmation": {
+      "subject": "Confirmed — Master Sanctum site assessment · Friday, June 27 at 2:00 PM",
+      "body": "Hi Karen,\n\nYour on-site stone assessment is confirmed.\n\nDate: Friday, June 27, 2026\nTime: 2:00 PM ET\nDuration: ~30–45 minutes\nAddress: North Port, FL (gate — call on arrival)\nAssessor: Master Sanctum conservation team\n\nWhat we'll do on site:\n• Document Carrara finish, etching, and cooktop-adjacent staining\n• Note prior cleaners/sealers and realistic restoration outcomes\n• Discuss timeline before your July family visit\n• Outline written scope and estimate next steps\n\nPlease before we arrive:\n• Clear cooktop and counter work zone as practical\n• Have tonight's photos handy on your phone\n• Note any HOA or pet access requirements\n\nAttached: Client Intake Questionnaire (if not yet returned)\n\nWe look forward to meeting you and assessing what the stone remembers.\n\nProtecting What Endures,\nMaster-Sanctum-Gatekeeper\nMaster Sanctum Restoration\nGuarded by Marmorax"
+    }
+  }
+}

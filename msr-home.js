@@ -61,7 +61,8 @@
       var L = window.__MSR_INLINE__.links;
       if (L[slug]) {
         var u = L[slug];
-        if (u.indexOf("#") !== -1 && u.indexOf("http") !== 0) return u;
+        if (u.indexOf("#") === 0) return u;
+        if (u.indexOf("http") !== 0) return getBasePath() + u.replace(/^\//, "");
         if (slug === "portfolio" && u.indexOf("#") !== -1) return u.split("#")[1] ? "#" + u.split("#")[1] : "#sliders";
         return u;
       }
