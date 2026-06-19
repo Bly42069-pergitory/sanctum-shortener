@@ -78,7 +78,10 @@
         if (!slug || !links) return null;
         var value = links[slug];
         if (!value) return null;
-        if (typeof value === "string") return isUrl(value) ? value : null;
+        var url = typeof value === "string" ? value : (value && value.url);
+        if (!url) return null;
+        if (url.charAt(0) === "#") return getHomepage().replace(/\/$/, "") + url;
+        if (typeof value === "string" && isUrl(value)) return value;
         if (typeof value === "object" && value.url && isUrl(value.url)) return value.url;
         return null;
       }
