@@ -32,6 +32,8 @@ if (!cfg.phone && !cfg.email) {
 site.business.phone = cfg.phone || "";
 site.business.phoneDisplay = cfg.phoneDisplay || cfg.phone || "";
 site.business.email = cfg.email || "";
+if (!site.integrations) site.integrations = {};
+site.integrations.quoteWebhook = cfg.quoteWebhook || "";
 if (site._meta) {
   delete site._meta.contactPending;
   site._meta.contactUpdated = new Date().toISOString().slice(0, 10);
@@ -63,6 +65,7 @@ console.log(JSON.stringify({
   ok: true,
   phone: site.business.phoneDisplay || site.business.phone,
   email: site.business.email,
+  quoteWebhook: site.integrations.quoteWebhook || null,
   deployPayload: deployPath,
   next: "node push-deploy-with-cred.mjs _deploy_contact.json  (or: node deploy-contact.mjs --push)",
 }));

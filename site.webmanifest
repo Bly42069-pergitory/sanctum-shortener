@@ -1,0 +1,24 @@
+{
+  "name": "Master Sanctum Restoration",
+  "short_name": "MSR",
+  "description": "Protecting What Endures — luxury natural stone and marble restoration",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070709",
+  "theme_color": "#070709",
+  "icons": [
+    {
+      "src": "assets/logo-msr.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/logo-msr.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -32,9 +32,20 @@
     return h;
   }
 
+  function phoneDigits() {
+    if (!siteData || !siteData.business || !siteData.business.phone) return "";
+    return siteData.business.phone.replace(/[^\d+]/g, "");
+  }
+
   function callHref() {
-    if (siteData && siteData.business && siteData.business.phone) return "tel:" + siteData.business.phone.replace(/[^\d+]/g, "");
+    var digits = phoneDigits();
+    if (digits) return "tel:" + digits;
     return getBasePath() + "quote";
+  }
+
+  function smsHref() {
+    var digits = phoneDigits();
+    return digits ? "sms:" + digits : null;
   }
   function callLabel() {
     if (siteData && siteData.business && siteData.business.phoneDisplay) return "Call " + siteData.business.phoneDisplay;
@@ -50,6 +61,12 @@
       if (lbl) lbl.textContent = label;
       else if (el.classList.contains("call-text-only")) el.textContent = label;
     });
+    var sms = smsHref();
+    var smsEl = document.getElementById("footer-sms");
+    if (smsEl) smsEl.classList.toggle("hidden", !sms);
+    document.querySelectorAll("[data-action='sms']").forEach(function (el) {
+      if (sms) el.href = sms;
+    });
   }
 
   function renderFooterContact(data) {
@@ -61,6 +78,9 @@
       parts.push('<a href="' + esc(callHref()) + '" class="hover:text-gold-light transition-colors">' + esc(b.phoneDisplay) + '</a>');
     } else if (b.phone) {
       parts.push('<a href="' + esc(callHref()) + '" class="hover:text-gold-light transition-colors">' + esc(b.phone) + '</a>');
+    }
+    if (smsHref()) {
+      parts.push('<a href="' + esc(smsHref()) + '" class="hover:text-gold-light transition-colors">Text</a>');
     }
     if (b.email) {
       parts.push('<a href="mailto:' + esc(b.email) + '" class="hover:text-gold-light transition-colors">' + esc(b.email) + '</a>');
@@ -1100,6 +1120,23 @@
     initReveal();
   }
 
+  function postQuoteWebhook(payload) {
+    var url = siteData && siteData.integrations && siteData.integrations.quoteWebhook;
+    if (!url || typeof fetch !== "function") return;
+    var body = {
+      source: "msr-quote-form",
+      site: canonicalSiteRoot(),
+      submittedAt: new Date(payload.ts || Date.now()).toISOString(),
+      lead: payload
+    };
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      keepalive: true
+    }).catch(function () {});
+  }
+
   function showQuoteConfirmation(form) {
     var el = document.getElementById("quote-confirm");
     if (!el) {
@@ -1163,6 +1200,7 @@
 
       if (b && b.email) {
         archiveLead(payload);
+        postQuoteWebhook(payload);
         var subject = encodeURIComponent("MSR Quote Request — " + payload.name);
         var body = encodeURIComponent(
           "Name: " + payload.name + "\nPhone: " + payload.phone + "\nEmail: " + payload.email + "\n\nProject:\n" + payload.message
@@ -1173,6 +1211,7 @@
 
       if (dest.charAt(0) === "#") {
         archiveLead(payload);
+        postQuoteWebhook(payload);
         setPendingLead(payload);
         var target = document.querySelector(dest) || document.getElementById("gatekeeper");
         if (target) target.scrollIntoView({ behavior: "smooth" });
