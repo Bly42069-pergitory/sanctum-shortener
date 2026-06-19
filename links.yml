@@ -1,9 +1,24 @@
 _meta:
   site: Master Sanctum Restoration
   tagline: Protecting What Endures
-  updated: "2026-06-18"
+  updated: "2026-06-19"
 
-home: https://mastersanctumrestoration.com
-quote: https://mastersanctumrestoration.com/contact
-book: https://www.amazon.com/dp/9780563656357
-memoir: https://rbly8.github.io/OdysseusOCRAT/
+home:
+  url: https://mastersanctumrestoration.com
+  title: Main Website
+  description: Full portfolio, services, and conservation philosophy
+
+quote:
+  url: https://mastersanctumrestoration.com/contact
+  title: Request a Conservation Quote
+  description: Surface assessment and restoration estimate
+
+book:
+  url: https://www.amazon.com/dp/9780563656357
+  title: Featured Publication
+  description: Related reading and reference material
+
+memoir:
+  url: https://rbly8.github.io/OdysseusOCRAT/
+  title: Author & Craft Narrative
+  description: Memoir and creative work by Robert Bly

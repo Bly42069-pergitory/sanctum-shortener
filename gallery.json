@@ -1,14 +1,14 @@
 [
-  { "src": "assets/gallery/restoration-01.jpg", "alt": "Marble vanity restoration — finished surface", "label": "After", "caption": "Marble vanity — honed, sealed, and restored to original luster" },
-  { "src": "assets/gallery/restoration-02.jpg", "alt": "Stone bench restoration", "label": "After", "caption": "Exterior stone bench — weather damage reversed" },
-  { "src": "assets/gallery/restoration-03.jpg", "alt": "Architectural stone detail", "label": "Detail", "caption": "Heritage limestone — veining matched and stabilized" },
-  { "src": "assets/gallery/restoration-04.jpg", "alt": "Marble countertop restoration", "label": "After", "caption": "Kitchen marble — etch removal and polish" },
-  { "src": "assets/gallery/restoration-05.jpg", "alt": "Natural stone polishing", "label": "Process", "caption": "Precision honing — controlled grit progression" },
-  { "src": "assets/gallery/restoration-06.jpg", "alt": "Heritage stone conservation", "label": "Before", "caption": "Monument stone — pre-restoration assessment" },
-  { "src": "assets/gallery/restoration-07.jpg", "alt": "Marble floor restoration", "label": "After", "caption": "Marble flooring — scratch and wear correction" },
-  { "src": "assets/gallery/restoration-08.jpg", "alt": "Stone monument care", "label": "After", "caption": "Memorial stone — cleaned and conserved" },
-  { "src": "assets/gallery/restoration-09.jpg", "alt": "Marble vanity restoration", "label": "Before", "caption": "Bathroom marble — staining and surface fatigue" },
-  { "src": "assets/gallery/restoration-10.jpg", "alt": "Exterior stone restoration", "label": "After", "caption": "Exterior cladding — environmental damage repaired" },
-  { "src": "assets/gallery/restoration-11.jpg", "alt": "Marble column detail", "label": "Detail", "caption": "Column capital — carved stone detail preserved" },
-  { "src": "assets/gallery/restoration-12.jpg", "alt": "Finished stone restoration", "label": "After", "caption": "Completed restoration — ready for decades of use" }
+  { "src": "assets/gallery/restoration-01.jpg", "alt": "Marble vanity restoration — finished surface", "label": "After", "pair": "after", "caption": "Marble vanity — honed, sealed, and returned to its original luster" },
+  { "src": "assets/gallery/restoration-02.jpg", "alt": "Stone bench restoration", "label": "After", "pair": "after", "caption": "Exterior stone bench — weather damage reversed with matched finish" },
+  { "src": "assets/gallery/restoration-03.jpg", "alt": "Architectural stone detail", "label": "Detail", "pair": "detail", "caption": "Heritage limestone — veining matched and substrate stabilized" },
+  { "src": "assets/gallery/restoration-04.jpg", "alt": "Marble countertop restoration", "label": "After", "pair": "after", "caption": "Kitchen marble — etch removal, polish, and edge refinement" },
+  { "src": "assets/gallery/restoration-05.jpg", "alt": "Natural stone polishing in progress", "label": "Process", "pair": "process", "caption": "Precision honing — controlled grit progression under conservation protocol" },
+  { "src": "assets/gallery/restoration-06.jpg", "alt": "Heritage stone before restoration", "label": "Before", "pair": "before", "caption": "Monument stone — condition documented prior to intervention" },
+  { "src": "assets/gallery/restoration-07.jpg", "alt": "Marble floor restoration", "label": "After", "pair": "after", "caption": "Marble flooring — scratch, wear, and lippage corrected" },
+  { "src": "assets/gallery/restoration-08.jpg", "alt": "Stone monument care", "label": "After", "pair": "after", "caption": "Memorial stone — cleaned, conserved, and sealed for exposure" },
+  { "src": "assets/gallery/restoration-09.jpg", "alt": "Marble vanity before restoration", "label": "Before", "pair": "before", "caption": "Bathroom marble — staining and surface fatigue at intake" },
+  { "src": "assets/gallery/restoration-10.jpg", "alt": "Exterior stone restoration", "label": "After", "pair": "after", "caption": "Exterior cladding — environmental damage repaired and protected" },
+  { "src": "assets/gallery/restoration-11.jpg", "alt": "Marble column detail", "label": "Detail", "pair": "detail", "caption": "Column capital — carved stone detail preserved under magnification" },
+  { "src": "assets/gallery/restoration-12.jpg", "alt": "Completed stone restoration", "label": "After", "pair": "after", "caption": "Commission complete — surface ready for decades of use" }
 ]
