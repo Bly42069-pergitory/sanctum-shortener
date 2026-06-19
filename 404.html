@@ -106,6 +106,10 @@
               var destHost = document.createElement("a");
               destHost.href = destination;
               if (destHost.hostname === window.location.hostname) {
+                if (destHost.hash) {
+                  window.location.replace(destHost.pathname + destHost.search + destHost.hash);
+                  return;
+                }
                 showMiss(slug);
                 return;
               }
