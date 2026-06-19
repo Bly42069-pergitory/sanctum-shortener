@@ -782,6 +782,8 @@
             <div id="gatekeeper-templates-grid" class="grid sm:grid-cols-2 gap-4"></div>
           </div>
 
+          <div id="gatekeeper-archive" class="hidden reveal max-w-2xl mx-auto mt-8"></div>
+
           <details id="gatekeeper-example" class="gk-example-details reveal reveal-d4 mt-8 max-w-3xl mx-auto hidden">
             <summary class="gatekeeper-panel rounded-sm p-4 sm:p-5 flex items-center justify-between gap-4 text-left">
               <div>
@@ -811,7 +813,7 @@
               </div>
             </div>
             <div class="reveal reveal-d1">
-              <form id="quote-form" class="rounded-sm border border-gold/18 p-6 sm:p-8 bg-marble-mid/20 space-y-4" aria-label="Request a free quote">
+              <form id="quote-form" class="relative rounded-sm border border-gold/18 p-6 sm:p-8 bg-marble-mid/20 space-y-4" aria-label="Request a free quote">
                 <h3 class="font-display text-2xl text-gold-light font-semibold mb-2">Request a Free Estimate</h3>
                 <p class="text-stone-muted text-xs mb-4">Tell us about your stone — we respond with assessment scope and estimate. <a href="intake" data-slug="intake" class="text-gold-light/80 hover:text-gold-light transition-colors">Download intake questionnaire →</a></p>
                 <div>
@@ -831,6 +833,10 @@
                 <div>
                   <label for="qf-message" class="block text-[10px] tracking-luxury uppercase text-stone-muted mb-1.5">Project Details</label>
                   <textarea class="form-input min-h-[100px] resize-y" id="qf-message" name="message" placeholder="Stone type, location, condition…"></textarea>
+                </div>
+                <div class="absolute -left-[9999px] w-px h-px overflow-hidden" aria-hidden="true">
+                  <label for="qf-website">Website</label>
+                  <input class="form-input" id="qf-website" name="website" type="text" tabindex="-1" autocomplete="off" />
                 </div>
                 <button type="submit" class="cta-primary w-full min-h-[48px] border border-gold/50 text-gold-light font-display text-lg tracking-wide">Submit Quote Request</button>
               </form>

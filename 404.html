@@ -96,6 +96,56 @@
         document.getElementById("miss-state").classList.remove("hidden");
         var slugEl = document.getElementById("miss-slug");
         if (slugEl) slugEl.textContent = slug ? "/" + slug : "(empty)";
+        renderMissLinks();
+      }
+
+      function missLinkHref(url) {
+        if (!url) return getHomepage();
+        if (url.charAt(0) === "#") return getHomepage().replace(/\/$/, "") + url;
+        if (isUrl(url)) return url;
+        return resolveRelativeUrl(url);
+      }
+
+      function renderMissLinksFromMap(links) {
+        var el = document.getElementById("miss-links");
+        if (!el || !links) return;
+        var featured = ["quote", "book", "gatekeeper", "intake", "portfolio", "contact", "marmorax"];
+        var html = featured.map(function (key) {
+          var value = links[key];
+          if (!value) return "";
+          var url = typeof value === "string" ? value : (value && value.url);
+          var title = typeof value === "object" && value && value.title ? value.title : key;
+          if (!url) return "";
+          return '<a href="' + missLinkHref(url) + '" class="block px-3 py-2.5 rounded-sm border border-gold/18 text-gold-light/90 hover:border-gold/35 hover:text-gold-light transition-colors">' +
+            '<span class="font-mono text-xs">/' + key + '</span>' +
+            '<span class="block text-stone-muted text-[11px] mt-0.5 leading-snug">' + title + '</span></a>';
+        }).filter(Boolean).join("");
+        el.innerHTML = html || '<p class="col-span-2 text-center text-stone-muted text-xs">No shortcuts loaded.</p>';
+      }
+
+      function renderMissLinks() {
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          try { renderMissLinksFromMap(JSON.parse(xhr.response)); }
+          catch (e) {
+            var yx = new XMLHttpRequest();
+            yx.onload = function () {
+              try { renderMissLinksFromMap(jsyaml.load(yx.response)); } catch (err) {}
+            };
+            yx.open("GET", getLinksYamlUrl());
+            yx.send();
+          }
+        };
+        xhr.onerror = function () {
+          var yx = new XMLHttpRequest();
+          yx.onload = function () {
+            try { renderMissLinksFromMap(jsyaml.load(yx.response)); } catch (err) {}
+          };
+          yx.open("GET", getLinksYamlUrl());
+          yx.send();
+        };
+        xhr.open("GET", getLinksJsonUrl());
+        xhr.send();
       }
 
       function getLinksJsonUrl() {
@@ -187,9 +237,10 @@
         <div class="gold-line w-32 mx-auto my-5"></div>
         <p class="text-stone-soft text-sm mb-1">No destination configured for</p>
         <p id="miss-slug" class="font-mono text-gold-light text-lg mb-6">/…</p>
-        <p class="text-stone-muted text-sm leading-relaxed mb-8">
-          This short link is not listed in <code class="text-gold-light/80">links.yml</code>. Check the slug or return to the homepage.
+        <p class="text-stone-muted text-sm leading-relaxed mb-6">
+          This short link is not listed in <code class="text-gold-light/80">links.yml</code>. Try a known slug below or return home.
         </p>
+        <div id="miss-links" class="grid grid-cols-2 gap-2 mb-8 text-left text-sm"></div>
         <a id="home-link" href="/" class="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-gold/45 text-gold-light font-display text-lg tracking-wider hover:bg-gold/12 hover:border-gold transition-colors duration-300">
           Return Home
         </a>

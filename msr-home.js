@@ -130,6 +130,10 @@
     onDone(false);
   }
 
+  var LEAD_ARCHIVE_KEY = "msr-quote-archive";
+  var LEAD_ARCHIVE_MAX = 20;
+  var LEAD_ARCHIVE_TTL = 2592000000;
+
   function getPendingLead() {
     var raw;
     try { raw = sessionStorage.getItem("msr-quote-pending"); } catch (e) { return null; }
@@ -142,6 +146,43 @@
       return null;
     }
     return lead;
+  }
+
+  function getLeadArchive() {
+    try {
+      var raw = localStorage.getItem(LEAD_ARCHIVE_KEY);
+      if (!raw) return [];
+      var list = JSON.parse(raw);
+      if (!Array.isArray(list)) return [];
+      var now = Date.now();
+      return list.filter(function (l) {
+        return l && l.name && (!l.ts || now - l.ts < LEAD_ARCHIVE_TTL);
+      });
+    } catch (e) { return []; }
+  }
+
+  function saveLeadArchive(list) {
+    try {
+      localStorage.setItem(LEAD_ARCHIVE_KEY, JSON.stringify(list.slice(0, LEAD_ARCHIVE_MAX)));
+    } catch (e) {}
+  }
+
+  function archiveLead(lead) {
+    if (!lead || !lead.name) return;
+    var list = getLeadArchive().filter(function (l) { return l.ts !== lead.ts; });
+    list.unshift(lead);
+    saveLeadArchive(list);
+  }
+
+  function removeFromArchive(ts) {
+    saveLeadArchive(getLeadArchive().filter(function (l) { return l.ts !== ts; }));
+  }
+
+  function setPendingLead(lead) {
+    try { sessionStorage.setItem("msr-quote-pending", JSON.stringify(lead)); } catch (e) {}
+    updatePendingLeadBadge();
+    renderPendingQuoteLead();
+    renderLeadArchive();
   }
 
   function updatePendingLeadBadge() {
@@ -660,7 +701,67 @@
       if (swflNote && gk.serviceAreaNote) swflNote.textContent = gk.serviceAreaNote;
     }
     renderPendingQuoteLead();
+    renderLeadArchive();
     loadGatekeeperAssets();
+  }
+
+  function renderLeadArchive() {
+    var wrap = document.getElementById("gatekeeper-archive");
+    if (!wrap) return;
+    var list = getLeadArchive();
+    var pending = getPendingLead();
+    var visible = list.filter(function (l) { return !pending || l.ts !== pending.ts; });
+    if (!visible.length) {
+      wrap.classList.add("hidden");
+      wrap.innerHTML = "";
+      return;
+    }
+    wrap.classList.remove("hidden");
+    wrap.innerHTML =
+      '<details class="gatekeeper-panel rounded-sm p-5 sm:p-6 text-left">' +
+      '<summary class="cursor-pointer list-none flex items-center justify-between gap-3">' +
+      '<div><p class="text-[10px] tracking-luxury uppercase text-gold/65 mb-1 font-medium">Lead Archive</p>' +
+      '<p class="font-display text-lg text-gold-light font-semibold">' + visible.length + ' saved lead' + (visible.length === 1 ? "" : "s") + '</p></div>' +
+      '<span class="text-gold/50 text-xs shrink-0">▼</span></summary>' +
+      '<ul class="mt-4 space-y-3 border-t border-gold/10 pt-4">' +
+      visible.map(function (l) {
+        var when = l.ts ? new Date(l.ts).toLocaleString() : "recent";
+        return '<li class="border border-gold/12 rounded-sm p-4" data-archive-ts="' + l.ts + '">' +
+          '<p class="font-display text-gold-light font-semibold">' + esc(l.name) + '</p>' +
+          '<p class="text-stone-muted text-xs mt-1">' + esc(when) + (l.phone ? " · " + esc(l.phone) : "") + '</p>' +
+          (l.message ? '<p class="text-stone-soft text-xs mt-2 leading-relaxed line-clamp-2">' + esc(l.message) + '</p>' : '') +
+          '<div class="flex flex-wrap gap-2 mt-3">' +
+          '<button type="button" class="gk-arch-restore btn-call min-h-[32px] px-3 text-xs text-gold-light font-display tracking-wide">Restore to Queue</button>' +
+          '<button type="button" class="gk-arch-copy btn-legend min-h-[32px] px-3 text-xs text-stone-soft font-display tracking-wide">Copy</button>' +
+          '<button type="button" class="gk-arch-remove btn-legend min-h-[32px] px-3 text-xs text-stone-soft font-display tracking-wide">Remove</button>' +
+          '</div></li>';
+      }).join("") +
+      '</ul></details>';
+    wrap.querySelectorAll("[data-archive-ts]").forEach(function (row) {
+      var ts = +row.getAttribute("data-archive-ts");
+      var lead = visible.find(function (l) { return l.ts === ts; });
+      if (!lead) return;
+      var restore = row.querySelector(".gk-arch-restore");
+      var copy = row.querySelector(".gk-arch-copy");
+      var remove = row.querySelector(".gk-arch-remove");
+      if (restore) {
+        restore.addEventListener("click", function () {
+          setPendingLead(lead);
+          document.getElementById("gatekeeper").scrollIntoView({ behavior: "smooth" });
+        });
+      }
+      if (copy) {
+        copy.addEventListener("click", function () {
+          copyToClipboard(formatLeadSummary(lead), function () {});
+        });
+      }
+      if (remove) {
+        remove.addEventListener("click", function () {
+          removeFromArchive(ts);
+          renderLeadArchive();
+        });
+      }
+    });
   }
 
   function renderPendingQuoteLead() {
@@ -697,6 +798,7 @@
       '<button type="button" id="gk-copy-lead" class="btn-call min-h-[40px] px-5 text-sm text-gold-light font-display tracking-wide">Copy Lead Summary</button>' +
       '<button type="button" id="gk-download-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Download .txt</button>' +
       '<button type="button" id="gk-draft-hot" class="btn-call min-h-[40px] px-5 text-sm text-gold-light font-display tracking-wide">Draft Hot Lead Reply</button>' +
+      (navigator.share ? '<button type="button" id="gk-share-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Share</button>' : '') +
       '<button type="button" id="gk-dismiss-lead" class="btn-legend min-h-[40px] px-5 text-sm text-stone-soft font-display tracking-wide">Dismiss</button>' +
       '</div>' +
       '<p id="gk-copy-status" class="text-gold-light/80 text-xs mt-2 hidden" role="status"></p>' +
@@ -704,6 +806,7 @@
     var copyBtn = document.getElementById("gk-copy-lead");
     var downloadBtn = document.getElementById("gk-download-lead");
     var draftBtn = document.getElementById("gk-draft-hot");
+    var shareBtn = document.getElementById("gk-share-lead");
     var dismissBtn = document.getElementById("gk-dismiss-lead");
     var statusEl = document.getElementById("gk-copy-status");
     function showStatus(msg) {
@@ -751,11 +854,22 @@
         dx.send();
       });
     }
+    if (shareBtn && navigator.share) {
+      shareBtn.addEventListener("click", function () {
+        navigator.share({
+          title: "MSR Lead — " + lead.name,
+          text: summary
+        }).then(function () {
+          showStatus("Lead shared.");
+        }).catch(function () {});
+      });
+    }
     if (dismissBtn) {
       dismissBtn.addEventListener("click", function () {
         try { sessionStorage.removeItem("msr-quote-pending"); } catch (err) {}
         mount.classList.add("hidden");
         updatePendingLeadBadge();
+        renderLeadArchive();
       });
     }
   }
@@ -892,22 +1006,49 @@
   function showQuoteConfirmation(form) {
     var el = document.getElementById("quote-confirm");
     if (!el) {
-      el = document.createElement("p");
+      el = document.createElement("div");
       el.id = "quote-confirm";
       el.className = "text-gold-light text-sm mt-4 leading-relaxed border border-gold/25 rounded-sm p-4 bg-marble-dark/40";
       form.appendChild(el);
     }
-    el.textContent = "Thank you — your request is logged under Gatekeeper protocol. We'll follow up to schedule your site assessment. Download the intake questionnaire from Get Started when you're ready.";
+    var intake = getBasePath() + "intake.html";
+    el.innerHTML = 'Thank you — your request is logged under <a href="#gatekeeper" class="text-gold-light underline underline-offset-2 hover:text-gold transition-colors">Gatekeeper protocol</a>. ' +
+      'We\'ll follow up to schedule your site assessment. ' +
+      '<a href="' + esc(intake) + '" class="text-gold-light underline underline-offset-2 hover:text-gold transition-colors">Download the intake questionnaire</a> when you\'re ready.';
     el.scrollIntoView({ behavior: "smooth", block: "nearest" });
     form.reset();
+    prefillQuoteFormFromQuery(true);
+  }
+
+  function prefillQuoteFormFromQuery(reapplyOnly) {
+    var params = new URLSearchParams(window.location.search);
+    var fields = [
+      ["qf-name", "name"],
+      ["qf-phone", "phone"],
+      ["qf-email", "email"],
+      ["qf-message", "message"]
+    ];
+    var hasQuery = false;
+    fields.forEach(function (pair) {
+      var el = document.getElementById(pair[0]);
+      if (!el || !params.has(pair[1])) return;
+      el.value = params.get(pair[1]);
+      hasQuery = true;
+    });
+    if (!reapplyOnly && hasQuery) {
+      var quote = document.getElementById("quote");
+      if (quote && !location.hash) quote.scrollIntoView({ behavior: "smooth" });
+    }
   }
 
   function initQuoteForm() {
     var form = document.getElementById("quote-form");
     if (!form) return;
+    prefillQuoteFormFromQuery(false);
     form.addEventListener("submit", function (e) {
       e.preventDefault();
       var fd = new FormData(form);
+      if ((fd.get("website") || "").trim()) return;
       var payload = {
         name: fd.get("name") || "",
         phone: fd.get("phone") || "",
@@ -919,6 +1060,7 @@
       var b = siteData && siteData.business;
 
       if (b && b.email) {
+        archiveLead(payload);
         var subject = encodeURIComponent("MSR Quote Request — " + payload.name);
         var body = encodeURIComponent(
           "Name: " + payload.name + "\nPhone: " + payload.phone + "\nEmail: " + payload.email + "\n\nProject:\n" + payload.message
@@ -928,11 +1070,11 @@
       }
 
       if (dest.charAt(0) === "#") {
-        try { sessionStorage.setItem("msr-quote-pending", JSON.stringify(payload)); } catch (err) {}
+        archiveLead(payload);
+        setPendingLead(payload);
         var target = document.querySelector(dest) || document.getElementById("gatekeeper");
         if (target) target.scrollIntoView({ behavior: "smooth" });
         showQuoteConfirmation(form);
-        renderPendingQuoteLead();
         return;
       }
 
@@ -997,6 +1139,7 @@
     initQuoteForm();
     initNavSpy();
     updatePendingLeadBadge();
+    renderLeadArchive();
 
     if (window.__MSR_INLINE__) {
       try {
