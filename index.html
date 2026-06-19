@@ -4,16 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Master Sanctum Restoration · Protecting What Endures</title>
-    <meta name="description" content="Master Sanctum Restoration — luxury natural stone and marble restoration. Protecting what endures through precision craft and conservation." />
+    <meta name="description" content="Master Sanctum Restoration — luxury natural stone and marble restoration. Precision conservation craft for surfaces that carry memory." />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Master Sanctum Restoration · Protecting What Endures" />
     <meta property="og:description" content="Luxury natural stone and marble restoration. Precision craft, conservation, permanence." />
-    <meta property="og:image" content="https://sanctum-shortener.is-a.dev/assets/logo-msr.png" />
+    <meta property="og:image" content="https://sanctum-shortener.is-a.dev/assets/guardian-marble.webp" />
     <meta property="og:url" content="https://sanctum-shortener.is-a.dev/" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Master Sanctum Restoration" />
     <meta name="twitter:description" content="Protecting What Endures — luxury stone & marble restoration." />
-    <meta name="twitter:image" content="https://sanctum-shortener.is-a.dev/assets/logo-msr.png" />
+    <meta name="twitter:image" content="https://sanctum-shortener.is-a.dev/assets/guardian-marble.webp" />
     <link rel="icon" href="favicon.svg" type="image/svg+xml" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -23,16 +23,18 @@
             colors: {
               marble: { dark: "#141416", mid: "#1c1c1e", light: "#2c2c2e", vein: "#3a3a3c" },
               gold: { DEFAULT: "#c9a227", light: "#e8d48b", dark: "#8b6914", brass: "#b5a642" },
-              stone: { DEFAULT: "#e8e6e3", muted: "#9a9690" },
+              stone: { DEFAULT: "#f0eeeb", soft: "#d4d0c8", muted: "#a8a39a", dim: "#7a756c" },
             },
             fontFamily: {
               display: ["Cormorant Garamond", "Georgia", "serif"],
               sans: ["Inter", "system-ui", "sans-serif"],
             },
             boxShadow: {
-              gold: "0 0 40px rgba(201, 162, 39, 0.15)",
-              card: "0 8px 32px rgba(0, 0, 0, 0.4)",
+              gold: "0 0 48px rgba(201, 162, 39, 0.2)",
+              card: "0 12px 40px rgba(0, 0, 0, 0.45)",
+              guardian: "0 0 100px rgba(201, 162, 39, 0.28), 0 0 160px rgba(201, 162, 39, 0.12), 0 24px 64px rgba(0,0,0,0.55)",
             },
+            letterSpacing: { luxury: "0.22em" },
           },
         },
       };
@@ -41,137 +43,193 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
     <style>
-      body { background: radial-gradient(ellipse 120% 80% at 50% -10%, #3a3a3c 0%, #1c1c1e 45%, #0e0e10 100%); }
-      .marble-grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E"); }
+      body { background: radial-gradient(ellipse 130% 90% at 50% -15%, #3a3a3c 0%, #1c1c1e 42%, #0e0e10 100%); color: #f0eeeb; }
+      .marble-grain { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"); }
       .gold-line { background: linear-gradient(90deg, transparent, #8b6914, #e8d48b, #c9a227, #e8d48b, #8b6914, transparent); height: 1px; }
-      .glass-panel { background: linear-gradient(145deg, rgba(44,44,46,0.55) 0%, rgba(20,20,22,0.85) 100%); backdrop-filter: blur(12px); border: 1px solid rgba(201,162,39,0.15); }
-      .link-card { background: linear-gradient(135deg, rgba(44,44,46,0.75) 0%, rgba(20,20,22,0.92) 100%); border: 1px solid rgba(201,162,39,0.18); }
-      .link-card:hover { border-color: rgba(201,162,39,0.45); box-shadow: 0 0 24px rgba(201,162,39,0.12); transform: translateY(-1px); }
-      .gallery-card { overflow: hidden; }
-      .gallery-card img { transition: transform 0.6s ease, filter 0.4s ease; }
-      .gallery-card:hover img { transform: scale(1.05); filter: brightness(1.08); }
-      .guardian-glow { box-shadow: 0 0 80px rgba(201,162,39,0.18), 0 0 120px rgba(201,162,39,0.08); border-radius: 50%; }
-      .guardian-float { animation: guardian-drift 8s ease-in-out infinite; }
-      .cta-primary { background: linear-gradient(135deg, rgba(201,162,39,0.15) 0%, rgba(139,105,20,0.25) 100%); }
-      @keyframes guardian-drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-      .fade-up { animation: fade-up 0.8s ease-out both; }
-      @keyframes fade-up { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+      .glass-panel { background: linear-gradient(145deg, rgba(44,44,46,0.62) 0%, rgba(14,14,16,0.9) 100%); backdrop-filter: blur(14px); border: 1px solid rgba(201,162,39,0.18); }
+      .link-card { background: linear-gradient(135deg, rgba(44,44,46,0.82) 0%, rgba(14,14,16,0.95) 100%); border: 1px solid rgba(201,162,39,0.22); }
+      .link-card:hover { border-color: rgba(232,212,139,0.55); box-shadow: 0 0 32px rgba(201,162,39,0.14); transform: translateY(-2px); }
+      .gallery-card { overflow: hidden; cursor: zoom-in; }
+      .gallery-card img { transition: transform 0.7s cubic-bezier(0.22,1,0.36,1), filter 0.4s ease; }
+      .gallery-card:hover img { transform: scale(1.06); filter: brightness(1.1) contrast(1.02); }
+      .guardian-ring { position: relative; }
+      .guardian-ring::before { content: ""; position: absolute; inset: -12%; border-radius: 50%; border: 1px solid rgba(201,162,39,0.25); animation: ring-pulse 4s ease-in-out infinite; }
+      .guardian-ring::after { content: ""; position: absolute; inset: -22%; border-radius: 50%; background: radial-gradient(circle, rgba(201,162,39,0.14) 0%, transparent 70%); }
+      .guardian-float { animation: guardian-drift 9s ease-in-out infinite; }
+      .cta-primary { background: linear-gradient(135deg, rgba(201,162,39,0.22) 0%, rgba(139,105,20,0.32) 100%); }
+      .label-after { background: rgba(201,162,39,0.18); border-color: rgba(232,212,139,0.45); color: #e8d48b; }
+      .label-before { background: rgba(20,20,22,0.85); border-color: rgba(168,163,154,0.35); color: #d4d0c8; }
+      .label-detail, .label-process { background: rgba(44,44,46,0.9); border-color: rgba(201,162,39,0.28); color: #c9a227; }
+      .nav-open #mobile-menu { display: block; }
+      .nav-open #menu-icon-open { display: none; }
+      .nav-open #menu-icon-close { display: block; }
+      #lightbox.open { display: flex; }
+      @keyframes guardian-drift { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+      @keyframes ring-pulse { 0%, 100% { opacity: 0.5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.03); } }
+      @keyframes fade-up { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+      .fade-up { animation: fade-up 0.9s ease-out both; }
+      @media (prefers-reduced-motion: reduce) {
+        .guardian-float, .guardian-ring::before { animation: none; }
+        .gallery-card img { transition: none; }
+      }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/js-yaml@4/dist/js-yaml.min.js"></script>
   </head>
-  <body class="min-h-screen text-stone font-sans antialiased marble-grain">
-    <header class="sticky top-0 z-50 border-b border-gold/10 glass-panel">
-      <div class="max-w-6xl mx-auto px-5 py-4 flex items-center justify-between gap-4">
-        <a href="/" class="flex items-center gap-3 group">
-          <picture><source srcset="assets/logo-msr.webp" type="image/webp" /><img src="assets/logo-msr.png" alt="MSR Shield" width="48" height="48" class="drop-shadow-gold group-hover:scale-105 transition-transform duration-300" /></picture>
-          <div class="hidden sm:block">
-            <p class="font-display text-lg text-gold-light leading-tight">Master Sanctum</p>
-            <p class="text-[10px] tracking-[0.25em] uppercase text-stone-muted">Restoration</p>
+  <body class="min-h-screen font-sans antialiased marble-grain">
+    <a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-marble-dark focus:text-gold-light focus:border focus:border-gold/40">Skip to content</a>
+
+    <header class="sticky top-0 z-50 border-b border-gold/15 glass-panel">
+      <div class="max-w-6xl mx-auto px-5 sm:px-6 py-4 flex items-center justify-between gap-4">
+        <a href="/" class="flex items-center gap-3 group min-w-0">
+          <picture>
+            <source srcset="assets/logo-msr.webp" type="image/webp" />
+            <img src="assets/logo-msr.png" alt="MSR Shield" width="48" height="48" class="shrink-0 drop-shadow-gold group-hover:scale-105 transition-transform duration-300" />
+          </picture>
+          <div class="min-w-0 hidden xs:block sm:block">
+            <p class="font-display text-lg text-gold-light leading-tight truncate">Master Sanctum</p>
+            <p class="text-[10px] tracking-luxury uppercase text-stone-muted">Restoration</p>
           </div>
         </a>
-        <nav class="flex items-center gap-6 text-sm">
-          <a href="#about" class="text-stone-muted hover:text-gold-light transition-colors">About</a>
-          <a href="#gallery" class="text-stone-muted hover:text-gold-light transition-colors">Work</a>
-          <a href="#links" class="text-stone-muted hover:text-gold-light transition-colors">Links</a>
-          <a href="#links" class="hidden md:inline-block px-4 py-2 border border-gold/30 text-gold-light font-display tracking-wide text-sm hover:bg-gold/10 transition-colors">Short URLs</a>
+
+        <nav class="hidden md:flex items-center gap-8 text-sm font-medium" aria-label="Primary">
+          <a href="#about" class="text-stone-soft hover:text-gold-light transition-colors">About</a>
+          <a href="#gallery" class="text-stone-soft hover:text-gold-light transition-colors">Work</a>
+          <a href="#links" class="text-stone-soft hover:text-gold-light transition-colors">Links</a>
+          <a href="#links" class="px-5 py-2.5 border border-gold/35 text-gold-light font-display tracking-wide hover:bg-gold/12 hover:border-gold/55 transition-all">Short URLs</a>
         </nav>
+
+        <button id="menu-toggle" type="button" class="md:hidden p-2 -mr-2 text-gold-light border border-gold/25 rounded-sm hover:bg-gold/10 transition-colors" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+          <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16"/></svg>
+          <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18"/></svg>
+        </button>
       </div>
+
+      <nav id="mobile-menu" class="hidden md:hidden border-t border-gold/10 glass-panel" aria-label="Mobile">
+        <div class="max-w-6xl mx-auto px-5 py-4 flex flex-col gap-1">
+          <a href="#about" class="nav-mobile-link px-4 py-3 text-stone-soft hover:text-gold-light hover:bg-gold/5 rounded-sm transition-colors">About</a>
+          <a href="#gallery" class="nav-mobile-link px-4 py-3 text-stone-soft hover:text-gold-light hover:bg-gold/5 rounded-sm transition-colors">Restoration Work</a>
+          <a href="#links" class="nav-mobile-link px-4 py-3 text-stone-soft hover:text-gold-light hover:bg-gold/5 rounded-sm transition-colors">Short Links</a>
+          <a id="mobile-quote" href="quote" class="mt-2 px-4 py-3 text-center border border-gold/40 text-gold-light font-display tracking-wide cta-primary">Request a Quote</a>
+        </div>
+      </nav>
     </header>
 
-    <main>
+    <main id="main">
       <section class="relative overflow-hidden">
-        <div class="max-w-6xl mx-auto px-5 pt-16 pb-20 sm:pt-24 sm:pb-28">
-          <div class="grid lg:grid-cols-2 gap-12 items-center">
-            <div class="fade-up text-center lg:text-left">
-              <picture><source srcset="assets/logo-msr.webp" type="image/webp" /><img src="assets/logo-msr.png" alt="Master Sanctum Restoration shield" width="112" height="112" class="mx-auto lg:mx-0 mb-8 drop-shadow-gold" /></picture>
-              <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl text-gold-light font-semibold tracking-wide leading-[1.1]">
-                Master Sanctum Restoration
+        <div class="max-w-6xl mx-auto px-5 sm:px-6 pt-14 pb-20 sm:pt-20 sm:pb-28 lg:pt-24">
+          <div class="grid lg:grid-cols-[1fr_1.05fr] gap-10 lg:gap-14 items-center">
+            <div class="fade-up text-center lg:text-left order-2 lg:order-1">
+              <p class="text-[11px] tracking-luxury uppercase text-gold/80 mb-4">Luxury Stone Conservation</p>
+              <h1 class="font-display text-[2.35rem] sm:text-5xl lg:text-[3.35rem] text-stone font-semibold tracking-wide leading-[1.08]">
+                Master Sanctum<br class="hidden sm:block" /> Restoration
               </h1>
-              <div class="gold-line w-40 mx-auto lg:mx-0 my-6"></div>
-              <p class="font-display text-xl sm:text-2xl text-stone-muted tracking-[0.18em] uppercase mb-6">
+              <div class="gold-line w-44 mx-auto lg:mx-0 my-6 sm:my-7"></div>
+              <p class="font-display text-xl sm:text-2xl text-gold-light tracking-luxury uppercase mb-5 sm:mb-6">
                 Protecting What Endures
               </p>
-              <p class="text-stone-muted leading-relaxed max-w-xl mx-auto lg:mx-0 text-sm sm:text-base mb-8">
-                Luxury natural stone and marble restoration for surfaces that carry memory —
-                architectural marble, heritage stone, countertops, monuments, and sanctuaries
-                of craft. We restore with permanence, not patches.
+              <p class="text-stone-soft leading-[1.75] max-w-xl mx-auto lg:mx-0 text-[15px] sm:text-base mb-4">
+                We restore architectural marble, heritage limestone, and fine stone surfaces with the patience of conservation — not the haste of contractors.
               </p>
-              <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start">
-                <a id="hero-quote" href="quote" class="cta-primary inline-block px-8 py-3 border border-gold/50 text-gold-light font-display text-lg tracking-wider hover:bg-gold/20 hover:border-gold transition-colors duration-300 text-center">Request a Quote</a>
-                <a href="#gallery" class="inline-block px-8 py-3 border border-gold/20 text-stone-muted font-display text-lg tracking-wider hover:text-gold-light hover:border-gold/40 transition-colors duration-300 text-center">View Our Work</a>
+              <p class="text-stone-muted leading-[1.7] max-w-xl mx-auto lg:mx-0 text-sm sm:text-[15px] mb-8 sm:mb-10">
+                Every commission is assessed, hand-finished, and sealed for permanence. Countertops, monuments, vanities, and sanctuaries of craft — restored to endure generations.
+              </p>
+              <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                <a id="hero-quote" href="quote" class="cta-primary inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-gold/55 text-gold-light font-display text-lg tracking-wider hover:bg-gold/25 hover:border-gold transition-all duration-300">Request a Quote</a>
+                <a href="#gallery" class="inline-flex items-center justify-center min-h-[48px] px-8 py-3 border border-gold/25 text-stone-soft font-display text-lg tracking-wider hover:text-gold-light hover:border-gold/45 transition-all duration-300">View Restoration Work</a>
               </div>
             </div>
-            <div class="relative flex justify-center lg:justify-end fade-up" style="animation-delay: 0.15s">
-              <div class="absolute inset-0 bg-gradient-radial from-gold/10 via-transparent to-transparent rounded-full blur-3xl scale-75"></div>
-              <div class="guardian-glow guardian-float relative">
-                <picture><source srcset="assets/guardian-marble.webp" type="image/webp" /><img src="assets/guardian-marble.png" alt="Marble guardian mascot" width="340" height="340" class="relative max-w-[280px] sm:max-w-[340px] w-full drop-shadow-[0_20px_60px_rgba(0,0,0,0.5)]" loading="eager" /></picture>
+
+            <div class="relative flex justify-center lg:justify-end order-1 lg:order-2 fade-up" style="animation-delay: 0.12s">
+              <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(201,162,39,0.16),transparent_65%)] pointer-events-none"></div>
+              <div class="guardian-ring guardian-float relative shadow-guardian">
+                <picture>
+                  <source srcset="assets/guardian-marble.webp" type="image/webp" />
+                  <img src="assets/guardian-marble.png" alt="Marble guardian — emblem of Master Sanctum Restoration" width="400" height="400" class="relative max-w-[min(92vw,380px)] sm:max-w-[400px] w-full drop-shadow-[0_24px_72px_rgba(0,0,0,0.55)]" loading="eager" fetchpriority="high" />
+                </picture>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <section id="about" class="py-16 sm:py-20 border-t border-gold/10">
-        <div class="max-w-6xl mx-auto px-5">
-          <div class="text-center mb-12">
-            <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold tracking-wide">Stone · Memory · Permanence</h2>
-            <div class="gold-line w-24 mx-auto mt-4"></div>
+      <section id="about" class="py-18 sm:py-24 border-t border-gold/12">
+        <div class="max-w-6xl mx-auto px-5 sm:px-6">
+          <div class="text-center mb-14 sm:mb-16 max-w-2xl mx-auto">
+            <p class="text-[11px] tracking-luxury uppercase text-gold/70 mb-3">Our Method</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-[2.6rem] text-gold-light font-semibold tracking-wide leading-tight">Stone · Memory · Permanence</h2>
+            <div class="gold-line w-28 mx-auto mt-5 mb-5"></div>
+            <p class="text-stone-soft text-sm sm:text-[15px] leading-relaxed">Three disciplines. One standard: surfaces restored with integrity, documented with care, and protected for the long horizon.</p>
           </div>
-          <div class="grid md:grid-cols-3 gap-6">
-            <article class="glass-panel rounded-sm p-6 text-center">
-              <p class="font-display text-5xl text-gold/30 mb-3">I</p>
-              <h3 class="font-display text-xl text-gold-light mb-2">Assessment</h3>
-              <p class="text-stone-muted text-sm leading-relaxed">Every surface tells a story. We diagnose damage, veining, and substrate before a single tool touches the stone.</p>
+          <div class="grid md:grid-cols-3 gap-5 sm:gap-6">
+            <article class="glass-panel rounded-sm p-7 sm:p-8 text-center">
+              <p class="font-display text-5xl text-gold/35 mb-4">I</p>
+              <h3 class="font-display text-xl sm:text-2xl text-gold-light mb-3">Assessment</h3>
+              <p class="text-stone-soft text-sm leading-[1.75]">We read the stone first — substrate, veining, prior repairs, and environmental exposure — before any tool meets the surface.</p>
             </article>
-            <article class="glass-panel rounded-sm p-6 text-center">
-              <p class="font-display text-5xl text-gold/30 mb-3">II</p>
-              <h3 class="font-display text-xl text-gold-light mb-2">Restoration</h3>
-              <p class="text-stone-muted text-sm leading-relaxed">Hand-finished techniques — honing, polishing, crack stabilization, and color-matched repair — built for decades, not seasons.</p>
+            <article class="glass-panel rounded-sm p-7 sm:p-8 text-center md:-translate-y-1 border-gold/25">
+              <p class="font-display text-5xl text-gold/35 mb-4">II</p>
+              <h3 class="font-display text-xl sm:text-2xl text-gold-light mb-3">Restoration</h3>
+              <p class="text-stone-soft text-sm leading-[1.75]">Controlled honing, polish, crack stabilization, and color-matched infill — executed by hand for surfaces meant to outlast trends.</p>
             </article>
-            <article class="glass-panel rounded-sm p-6 text-center">
-              <p class="font-display text-5xl text-gold/30 mb-3">III</p>
-              <h3 class="font-display text-xl text-gold-light mb-2">Protection</h3>
-              <p class="text-stone-muted text-sm leading-relaxed">Sealing, maintenance guidance, and conservation-minded care so what we restore stays restored.</p>
+            <article class="glass-panel rounded-sm p-7 sm:p-8 text-center">
+              <p class="font-display text-5xl text-gold/35 mb-4">III</p>
+              <h3 class="font-display text-xl sm:text-2xl text-gold-light mb-3">Protection</h3>
+              <p class="text-stone-soft text-sm leading-[1.75]">Impregnating sealers, maintenance protocols, and conservation-minded guidance so the work holds its finish year after year.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section id="gallery" class="py-16 sm:py-20 border-t border-gold/10">
-        <div class="max-w-6xl mx-auto px-5">
-          <div class="text-center mb-12">
-            <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold tracking-wide">Restoration Gallery</h2>
-            <div class="gold-line w-24 mx-auto mt-4"></div>
-            <p class="text-stone-muted text-sm mt-4 max-w-lg mx-auto">Before-and-after craftsmanship across marble, granite, and architectural stone.</p>
+      <section id="gallery" class="py-18 sm:py-24 border-t border-gold/12">
+        <div class="max-w-6xl mx-auto px-5 sm:px-6">
+          <div class="text-center mb-12 sm:mb-14 max-w-2xl mx-auto">
+            <p class="text-[11px] tracking-luxury uppercase text-gold/70 mb-3">Selected Work</p>
+            <h2 class="font-display text-3xl sm:text-4xl lg:text-[2.6rem] text-gold-light font-semibold tracking-wide">Restoration Gallery</h2>
+            <div class="gold-line w-28 mx-auto mt-5 mb-5"></div>
+            <p class="text-stone-soft text-sm sm:text-[15px] leading-relaxed">Documented transformations across marble, granite, limestone, and architectural stone. Tap any image to view full detail.</p>
           </div>
-          <div id="gallery-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
-            <p class="col-span-full text-center text-stone-muted/60 text-sm animate-pulse">Loading gallery…</p>
+          <div id="gallery-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            <p class="col-span-full text-center text-stone-muted text-sm animate-pulse py-12">Loading gallery…</p>
           </div>
         </div>
       </section>
 
-      <section id="links" class="py-16 sm:py-20 border-t border-gold/10">
-        <div class="max-w-xl mx-auto px-5">
-          <div class="text-center mb-10">
-            <h2 class="font-display text-3xl text-gold-light font-semibold tracking-wide">Short Links</h2>
-            <div class="gold-line w-20 mx-auto mt-4"></div>
-            <p class="text-stone-muted text-sm mt-4">Append any slug below to this domain — e.g. <code class="text-gold/70">/quote</code></p>
+      <section id="links" class="py-18 sm:py-24 border-t border-gold/12">
+        <div class="max-w-lg mx-auto px-5 sm:px-6">
+          <div class="text-center mb-10 sm:mb-12">
+            <p class="text-[11px] tracking-luxury uppercase text-gold/70 mb-3">Quick Access</p>
+            <h2 class="font-display text-3xl sm:text-4xl text-gold-light font-semibold tracking-wide">Short Links</h2>
+            <div class="gold-line w-24 mx-auto mt-5 mb-5"></div>
+            <p class="text-stone-soft text-sm leading-relaxed">Append any slug to this domain — e.g. <code class="text-gold-light/90 bg-marble-mid/60 px-1.5 py-0.5 rounded-sm text-xs">/quote</code> for a conservation estimate.</p>
           </div>
           <div id="links-grid" class="space-y-3">
-            <p class="text-center text-stone-muted/60 text-sm animate-pulse">Loading links…</p>
+            <p class="text-center text-stone-muted text-sm animate-pulse py-6">Loading links…</p>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="border-t border-gold/10 py-10">
-      <div class="max-w-6xl mx-auto px-5 text-center">
-        <img src="assets/logo-msr.png" alt="" width="40" height="40" class="mx-auto mb-4 opacity-70" />
-        <p class="font-display text-stone-muted tracking-[0.2em] uppercase text-sm">Protecting What Endures</p>
-        <p class="text-stone-muted/50 text-xs tracking-widest uppercase mt-3">Craft · Conservation · Continuity</p>
-        <p class="text-stone-muted/40 text-xs mt-6">© Master Sanctum Restoration</p>
+    <footer class="border-t border-gold/12 py-12 sm:py-14">
+      <div class="max-w-6xl mx-auto px-5 sm:px-6 text-center">
+        <picture>
+          <source srcset="assets/logo-msr.webp" type="image/webp" />
+          <img src="assets/logo-msr.png" alt="" width="44" height="44" class="mx-auto mb-5 opacity-80" />
+        </picture>
+        <p class="font-display text-stone-soft tracking-luxury uppercase text-sm sm:text-base">Protecting What Endures</p>
+        <p class="text-stone-muted text-xs tracking-luxury uppercase mt-3">Craft · Conservation · Continuity</p>
+        <p class="text-stone-dim text-xs mt-8">© Master Sanctum Restoration</p>
       </div>
     </footer>
+
+    <div id="lightbox" class="hidden fixed inset-0 z-[200] items-center justify-center bg-marble-dark/95 p-4 sm:p-8" role="dialog" aria-modal="true" aria-label="Gallery image">
+      <button type="button" id="lightbox-close" class="absolute top-4 right-4 sm:top-6 sm:right-6 p-2 text-gold-light border border-gold/30 hover:bg-gold/10 rounded-sm transition-colors" aria-label="Close">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-width="1.5" d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+      <figure class="max-w-4xl w-full text-center">
+        <img id="lightbox-img" src="" alt="" class="max-h-[75vh] w-auto mx-auto rounded-sm border border-gold/20 shadow-card" />
+        <figcaption id="lightbox-caption" class="mt-4 text-stone-soft text-sm sm:text-[15px] max-w-xl mx-auto leading-relaxed"></figcaption>
+      </figure>
+    </div>
 
     <script>
       (function () {
@@ -195,43 +253,110 @@
           return false;
         }
 
-        function getUrl(value) {
-          return typeof value === "string" ? value : value.url;
+        function getLinkMeta(value) {
+          if (typeof value === "string") return { url: value, title: null, description: null };
+          return { url: value.url, title: value.title || null, description: value.description || null };
+        }
+
+        function labelClass(label) {
+          var key = (label || "").toLowerCase();
+          if (key === "after") return "label-after";
+          if (key === "before") return "label-before";
+          return "label-detail";
         }
 
         function renderLinks(links) {
           var grid = document.getElementById("links-grid");
           var entries = Object.keys(links).filter(function (k) { return isSlugEntry(k, links[k]); });
           if (!entries.length) {
-            grid.innerHTML = '<p class="text-center text-stone-muted text-sm">No links in <code class="text-gold/80">links.yml</code>.</p>';
+            grid.innerHTML = '<p class="text-center text-stone-muted text-sm">No links in <code class="text-gold-light/80">links.yml</code>.</p>';
             return;
           }
           var base = getBasePath();
           grid.innerHTML = entries.map(function (key) {
-            var dest = getUrl(links[key]);
+            var meta = getLinkMeta(links[key]);
+            var title = meta.title ? '<p class="text-stone-soft text-sm mt-1">' + meta.title + '</p>' : '';
+            var desc = meta.description ? '<p class="text-stone-muted text-xs mt-1 leading-relaxed">' + meta.description + '</p>' : '';
             return (
-              '<a href="' + base + key + '" class="link-card block px-5 py-4 rounded-sm transition-all duration-300 group">' +
+              '<a href="' + base + key + '" class="link-card block px-5 py-4 sm:py-5 rounded-sm transition-all duration-300 group">' +
               '<div class="flex items-center justify-between gap-4">' +
-              '<div class="min-w-0"><p class="font-display text-lg text-gold-light group-hover:text-gold transition-colors">/' + key + '</p>' +
-              '<p class="text-stone-muted text-xs truncate mt-0.5">' + dest + '</p></div>' +
-              '<span class="text-gold/40 group-hover:text-gold text-xl shrink-0" aria-hidden="true">→</span></div></a>'
+              '<div class="min-w-0"><p class="font-display text-lg sm:text-xl text-gold-light group-hover:text-gold transition-colors">/' + key + '</p>' +
+              title + desc +
+              '<p class="text-stone-dim text-xs truncate mt-2 font-mono">' + meta.url + '</p></div>' +
+              '<span class="text-gold/50 group-hover:text-gold text-xl shrink-0" aria-hidden="true">→</span></div></a>'
             );
           }).join("");
+        }
+
+        function openLightbox(item) {
+          var lb = document.getElementById("lightbox");
+          document.getElementById("lightbox-img").src = item.src;
+          document.getElementById("lightbox-img").alt = item.alt;
+          document.getElementById("lightbox-caption").textContent = item.caption || item.alt;
+          lb.classList.remove("hidden");
+          lb.classList.add("open");
+          document.body.style.overflow = "hidden";
+        }
+
+        function closeLightbox() {
+          var lb = document.getElementById("lightbox");
+          lb.classList.add("hidden");
+          lb.classList.remove("open");
+          document.body.style.overflow = "";
         }
 
         function renderGallery(items) {
           var grid = document.getElementById("gallery-grid");
           grid.innerHTML = items.map(function (item, i) {
-            var label = item.label ? '<span class="absolute top-2 left-2 px-2 py-0.5 text-[10px] tracking-widest uppercase bg-marble-dark/80 border border-gold/30 text-gold-light">' + item.label + '</span>' : '';
-            var caption = item.caption ? '<figcaption class="absolute bottom-0 inset-x-0 px-3 py-2 bg-gradient-to-t from-marble-dark/95 to-transparent text-xs text-stone-muted">' + item.caption + '</figcaption>' : '';
+            var label = item.label
+              ? '<span class="absolute top-2.5 left-2.5 z-10 px-2.5 py-1 text-[10px] font-medium tracking-luxury uppercase border rounded-sm ' + labelClass(item.label) + '">' + item.label + '</span>'
+              : "";
+            var caption = item.caption
+              ? '<figcaption class="absolute bottom-0 inset-x-0 z-10 px-3 sm:px-4 py-3 bg-gradient-to-t from-marble-dark via-marble-dark/90 to-transparent text-xs sm:text-[13px] text-stone-soft leading-snug">' + item.caption + '</figcaption>'
+              : "";
+            var featured = i === 0 ? " col-span-2 row-span-2 min-h-[280px] sm:min-h-[360px] lg:min-h-[420px]" : " aspect-[4/5]";
             return (
-              '<figure class="gallery-card relative rounded-sm border border-gold/10 shadow-card aspect-[4/5] bg-marble-mid ' + (i === 0 ? 'md:col-span-2 md:row-span-2 md:aspect-auto' : '') + '">' +
-              label + '<img src="' + item.src + '" alt="' + item.alt + '" loading="lazy" class="w-full h-full object-cover" />' + caption + '</figure>'
+              '<figure class="gallery-card relative rounded-sm border border-gold/15 shadow-card bg-marble-mid' + featured + '" data-index="' + i + '" tabindex="0" role="button" aria-label="View ' + item.alt + '">' +
+              label +
+              '<img src="' + item.src + '" alt="' + item.alt + '" loading="lazy" class="w-full h-full object-cover" />' +
+              caption +
+              "</figure>"
             );
           }).join("");
+
+          grid.querySelectorAll(".gallery-card").forEach(function (card, i) {
+            function activate() { openLightbox(items[i]); }
+            card.addEventListener("click", activate);
+            card.addEventListener("keydown", function (e) {
+              if (e.key === "Enter" || e.key === " ") { e.preventDefault(); activate(); }
+            });
+          });
         }
 
-        document.getElementById("hero-quote").href = getBasePath() + "quote";
+        var base = getBasePath();
+        document.getElementById("hero-quote").href = base + "quote";
+        document.getElementById("mobile-quote").href = base + "quote";
+
+        var menuToggle = document.getElementById("menu-toggle");
+        menuToggle.addEventListener("click", function () {
+          var open = document.body.classList.toggle("nav-open");
+          menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+          menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        });
+        document.querySelectorAll(".nav-mobile-link").forEach(function (link) {
+          link.addEventListener("click", function () {
+            document.body.classList.remove("nav-open");
+            menuToggle.setAttribute("aria-expanded", "false");
+          });
+        });
+
+        document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+        document.getElementById("lightbox").addEventListener("click", function (e) {
+          if (e.target === e.currentTarget) closeLightbox();
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape") closeLightbox();
+        });
 
         var linksXhr = new XMLHttpRequest();
         linksXhr.onload = function () {
@@ -241,18 +366,18 @@
         linksXhr.onerror = function () {
           document.getElementById("links-grid").innerHTML = '<p class="text-center text-stone-muted text-sm">Could not load links.yml</p>';
         };
-        linksXhr.open("GET", getBasePath() + "links.yml");
+        linksXhr.open("GET", base + "links.yml");
         linksXhr.send();
 
         var galleryXhr = new XMLHttpRequest();
         galleryXhr.onload = function () {
           try { renderGallery(JSON.parse(galleryXhr.response)); }
-          catch (e) { document.getElementById("gallery-grid").innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm">Gallery unavailable</p>'; }
+          catch (e) { document.getElementById("gallery-grid").innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-12">Gallery unavailable</p>'; }
         };
         galleryXhr.onerror = function () {
-          document.getElementById("gallery-grid").innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm">Gallery unavailable</p>';
+          document.getElementById("gallery-grid").innerHTML = '<p class="col-span-full text-center text-stone-muted text-sm py-12">Gallery unavailable</p>';
         };
-        galleryXhr.open("GET", getBasePath() + "gallery.json");
+        galleryXhr.open("GET", base + "gallery.json");
         galleryXhr.send();
       })();
     </script>
