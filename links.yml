@@ -6,7 +6,7 @@ _meta:
 home:
   url: https://mastersanctumrestoration.com
   title: Main Website
-  description: Portfolio, services, conservation philosophy
+  description: Full portfolio, services, and conservation philosophy
 
 quote:
   url: https://mastersanctumrestoration.com/contact
@@ -16,12 +16,12 @@ quote:
 portfolio:
   url: https://sanctum-shortener.is-a.dev/#gallery
   title: Restoration Portfolio
-  description: Before & after commissions
+  description: Before & after documented commissions
 
 book:
   url: https://www.amazon.com/dp/9780563656357
   title: Featured Publication
-  description: Reference reading
+  description: Curated reference reading
 
 contact:
   url: https://mastersanctumrestoration.com/contact
