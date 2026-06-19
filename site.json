@@ -204,7 +204,50 @@
       "project": "Kitchen Marble"
     }
   ],
+  "gatekeeper": {
+    "headline": "Begin Under Protocol",
+    "subheadline": "Every commission starts with assessment — not haste.",
+    "teaser": "The Gatekeeper reviews your inquiry, asks the questions that matter, and routes qualified projects to an on-site conservation assessment.",
+    "persona": "Master-Sanctum-Gatekeeper",
+    "steps": [
+      {
+        "numeral": "I",
+        "title": "Intake",
+        "desc": "Download the client questionnaire or submit your project details — stone type, location, primary concerns, and photos if available."
+      },
+      {
+        "numeral": "II",
+        "title": "Discovery",
+        "desc": "We clarify substrate, exposure, timeline, and realistic outcomes. No pressure — useful guidance even if you're still researching."
+      },
+      {
+        "numeral": "III",
+        "title": "Site Assessment",
+        "desc": "Qualified commissions receive a 30–45 minute on-site visit. You receive a written scope and estimate — hand-finished protocol, no shortcut contractors."
+      }
+    ],
+    "discoveryQuestions": [
+      "What surfaces need restoration? (countertop, vanity, floor, shower, monument, exterior)",
+      "Stone type — marble, granite, limestone, travertine, or unknown?",
+      "Primary concerns — etching, stains, scratches, dullness, cracks, lippage?",
+      "Approximate square footage or dimensions?",
+      "Property city and access notes?",
+      "Desired timeline or hard deadline?",
+      "Budget range (optional — helps scope correctly)?",
+      "Can you provide photos? (wide shot + worst-area close-up)"
+    ],
+    "ctaIntake": "Download Intake Questionnaire",
+    "ctaQuote": "Request Site Assessment"
+  },
   "faqs": [
+    {
+      "question": "What is the client intake questionnaire?",
+      "answer": "A downloadable form that captures stone type, location, damage, dimensions, timeline, and photos — so we can assess your project before any tool touches stone. Access it at /intake or from the quote section."
+    },
+    {
+      "question": "How do I schedule a site assessment?",
+      "answer": "Submit the intake questionnaire or request a quote with project details. The Gatekeeper confirms qualified leads and schedules a 30–45 minute on-site assessment. You'll receive a calendar confirmation and written scope after the visit."
+    },
     {
       "question": "What types of stone do you restore?",
       "answer": "Marble, limestone, granite, travertine, and architectural heritage stone — vanities, floors, monuments, cladding, and countertops."
