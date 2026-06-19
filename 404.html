@@ -98,6 +98,49 @@
         if (slugEl) slugEl.textContent = slug ? "/" + slug : "(empty)";
       }
 
+      function getLinksJsonUrl() {
+        var base = getSiteBasePath();
+        return base === "/" ? "/links.json" : base + "links.json";
+      }
+
+      function followDestination(slug, destination) {
+        if (!destination) {
+          showMiss(slug);
+          return;
+        }
+        var destHost = document.createElement("a");
+        destHost.href = destination;
+        if (destHost.hostname === window.location.hostname) {
+          var target = destHost.pathname + destHost.search + destHost.hash;
+          if (destHost.hash && (destHost.pathname === "/" || destHost.pathname === getSiteBasePath().replace(/\/$/, ""))) {
+            window.location.replace(getHomepage().replace(/\/$/, "") + destHost.hash);
+            return;
+          }
+          if (target && target !== "/" && target !== getSiteBasePath().replace(/\/$/, "")) {
+            window.location.replace(target);
+            return;
+          }
+          showMiss(slug);
+          return;
+        }
+        window.location.replace(destination);
+      }
+
+      function loadLinksJson(slug, onFail) {
+        var jx = new XMLHttpRequest();
+        jx.onload = function () {
+          try {
+            var links = JSON.parse(jx.response);
+            followDestination(slug, resolveDestination(links, slug));
+          } catch (e) {
+            onFail();
+          }
+        };
+        jx.onerror = onFail;
+        jx.open("GET", getLinksJsonUrl());
+        jx.send();
+      }
+
       function redirect() {
         var slug = getSlug();
         if (!slug) {
@@ -109,32 +152,12 @@
         xhr.onload = function () {
           try {
             var links = jsyaml.load(xhr.response);
-            var destination = resolveDestination(links, slug);
-            if (destination) {
-              var destHost = document.createElement("a");
-              destHost.href = destination;
-              if (destHost.hostname === window.location.hostname) {
-                var target = destHost.pathname + destHost.search + destHost.hash;
-                if (destHost.hash && (destHost.pathname === "/" || destHost.pathname === getSiteBasePath().replace(/\/$/, ""))) {
-                  window.location.replace(getHomepage().replace(/\/$/, "") + destHost.hash);
-                  return;
-                }
-                if (target && target !== "/" && target !== getSiteBasePath().replace(/\/$/, "")) {
-                  window.location.replace(target);
-                  return;
-                }
-                showMiss(slug);
-                return;
-              }
-              window.location.replace(destination);
-            } else {
-              showMiss(slug);
-            }
+            followDestination(slug, resolveDestination(links, slug));
           } catch (e) {
-            showMiss(slug);
+            loadLinksJson(slug, function () { showMiss(slug); });
           }
         };
-        xhr.onerror = function () { showMiss(slug); };
+        xhr.onerror = function () { loadLinksJson(slug, function () { showMiss(slug); }); };
         xhr.open("GET", getLinksYamlUrl());
         xhr.send();
       }

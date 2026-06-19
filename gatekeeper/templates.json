@@ -2,7 +2,13 @@
   "_meta": {
     "agent": "Master-Sanctum-Gatekeeper",
     "version": "1.0",
-    "updated": "2026-06-19"
+    "updated": "2026-06-20",
+    "defaults": {
+      "gatekeeperName": "Master-Sanctum-Gatekeeper",
+      "intakeUrl": "{{siteUrl}}/intake",
+      "phone": "{{phone}}",
+      "email": "{{email}}"
+    }
   },
   "hotLead": {
     "id": "hot-lead",
